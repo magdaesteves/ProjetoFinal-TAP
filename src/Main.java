@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        tap.ProjetoFinal.GestorPassageiro g = new tap.ProjetoFinal.GestorPassageiro();
+        GestorPassageiro g = new GestorPassageiro();
         Scanner sc = new Scanner(System.in);
         String op, nif, curso, ficheiro;
         int tipo;
