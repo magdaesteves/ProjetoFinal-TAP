@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class GestorPassageiro {
     private Map<String,String> Dicifinal;
     public GestorPassageiro() {
-
         Dicifinal= new HashMap<>();
     }
 
@@ -55,6 +54,9 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
+        for(Map.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
+            System.out.println(passageiro.getKey() + ": " + passageiro.getValue());
+        }
     }
     public void lerRotaTxt(String nf) throws IOException {
         Map<Integer, Rota> dicRota = new HashMap<>();

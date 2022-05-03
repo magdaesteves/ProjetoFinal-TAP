@@ -1,0 +1,5 @@
+Value of each kilometer: 1
+Lower limit: 300
+Lower limit Discount: 25
+Upper limit: 1000
+Upper limit Discount: 50
