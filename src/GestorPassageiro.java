@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<Integer, Voo> diciVoo;
-
+    private Map<String,String> Dicifinal;
     public GestorPassageiro() {
-        diciVoo = new HashMap<>();
+
+        Dicifinal= new HashMap<>();
     }
 
     public void lerVooTxt(String nf) throws IOException {
@@ -39,7 +39,7 @@ public class GestorPassageiro {
         Map<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
         String idPassageiro, nome, profissao, morada;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File("passageiros.txt")));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -55,12 +55,7 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
-
-        for(Map.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
-            System.out.println(passageiro.getKey() + ": " + passageiro.getValue());
-        }
     }
-
     public void lerRotaTxt(String nf) throws IOException {
         Map<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
@@ -80,7 +75,6 @@ public class GestorPassageiro {
         }
         f.close();
     }
-
     public void lerBilheteTxt(String nf) throws IOException {
         Map<Integer, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
@@ -112,17 +106,17 @@ public class GestorPassageiro {
         }
         f.close();
     }
-
     public void addPassageiro(int tipo) {
-        String idPassgeiro, nome, profissao, morada, op;
-        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;
+        String idPassageiro, nome, profissao, morada, op;
+        int anoNascimento = 0, mesNascimento, diaNascimento, quanVoo, destVoo;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         System.out.println("1-Criar Novo  2-Existe");
         tipo = sc.nextInt();
         if (tipo == 1) {
+
             System.out.println("Qual é idPassageiro?");
-            idPassgeiro = sc.next();
+            idPassageiro = sc.next();
             System.out.println("Qual o nome?");
             nome = sc.next();
             System.out.println("Qual é a profissao?");
@@ -135,6 +129,11 @@ public class GestorPassageiro {
             mesNascimento = sc1.nextInt();
             System.out.println("Qual é a diaNascimento?");
             diaNascimento = sc1.nextInt();
+
+            Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
+            Dicifinal.put(idPassageiro,String.valueOf(A));
+
+
             op = menu();
             while (op.equals("0") == false) {
                 switch (op) {
@@ -147,12 +146,13 @@ public class GestorPassageiro {
                         }
                         System.out.println("Informação do voo");
                         System.out.println("Informação do bilhete");
+
                 }
                 break;
             }
         } else {
             System.out.println("Insira um id");
-            idPassgeiro = sc.next();
+            idPassageiro = sc.next();
             op = menuexistente();
             while (op.equals("0") == false) {
                 switch (op) {
@@ -174,8 +174,9 @@ public class GestorPassageiro {
                         break;
                 }
                 break;
+
             }
-        }
+        } menuexistente();
     }
     private String menuexistente() {
         String op;
