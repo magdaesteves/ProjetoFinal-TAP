@@ -7,9 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<Integer, Voo> diciVoo;
+    private Map<String,String> Dicifinal;
     public GestorPassageiro() {
-        diciVoo = new HashMap<>();
+
+        Dicifinal= new HashMap<>();
     }
 
     public void lerVooTxt(String nf) throws IOException {
@@ -106,15 +107,16 @@ public class GestorPassageiro {
         f.close();
     }
     public void addPassageiro(int tipo) {
-        String idPassgeiro, nome, profissao, morada, op;
-        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;
+        String idPassageiro, nome, profissao, morada, op;
+        int anoNascimento = 0, mesNascimento, diaNascimento, quanVoo, destVoo;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         System.out.println("1-Criar Novo  2-Existe");
         tipo = sc.nextInt();
         if (tipo == 1) {
+
             System.out.println("Qual é idPassageiro?");
-            idPassgeiro = sc.next();
+            idPassageiro = sc.next();
             System.out.println("Qual o nome?");
             nome = sc.next();
             System.out.println("Qual é a profissao?");
@@ -127,6 +129,11 @@ public class GestorPassageiro {
             mesNascimento = sc1.nextInt();
             System.out.println("Qual é a diaNascimento?");
             diaNascimento = sc1.nextInt();
+
+            Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
+            Dicifinal.put(idPassageiro,String.valueOf(A));
+
+
             op = menu();
             while (op.equals("0") == false) {
                 switch (op) {
@@ -139,12 +146,13 @@ public class GestorPassageiro {
                         }
                         System.out.println("Informação do voo");
                         System.out.println("Informação do bilhete");
+
                 }
                 break;
             }
         } else {
             System.out.println("Insira um id");
-            idPassgeiro = sc.next();
+            idPassageiro = sc.next();
             op = menuexistente();
             while (op.equals("0") == false) {
                 switch (op) {
@@ -166,8 +174,9 @@ public class GestorPassageiro {
                         break;
                 }
                 break;
+
             }
-        }
+        } menuexistente();
     }
     private String menuexistente() {
         String op;
