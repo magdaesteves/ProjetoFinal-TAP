@@ -55,9 +55,14 @@ public class GestorPassageiro {
         }
         f.close();
         for(Map.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
-            System.out.println(passageiro.getKey() + ": " + passageiro.getValue());
+            System.out.println(passageiro.getKey() + ": " + toString(passageiro.getValue()));
         }
     }
+
+    private String toString(Passageiro value) {
+        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\nProfissao: " + value.getProfissao() + "\nMorada: " + value.getMorada() + "\nAno Nascimento: " + value.getAno() + "\nMes Nascimento: " + value.getMes() + "\nDia Nascimento: " + value.getDia() +"\n";
+    }
+
     public void lerRotaTxt(String nf) throws IOException {
         Map<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
