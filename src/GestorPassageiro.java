@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class GestorPassageiro {
     private Map<Integer, Voo> diciVoo;
+
     public GestorPassageiro() {
         diciVoo = new HashMap<>();
     }
@@ -38,7 +39,7 @@ public class GestorPassageiro {
         Map<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
         String idPassageiro, nome, profissao, morada;
-        BufferedReader f = new BufferedReader(new FileReader(new File("passageiros.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -54,7 +55,12 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
+
+        for(Map.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
+            System.out.println(passageiro.getKey() + ": " + passageiro.getValue());
+        }
     }
+
     public void lerRotaTxt(String nf) throws IOException {
         Map<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
@@ -74,6 +80,7 @@ public class GestorPassageiro {
         }
         f.close();
     }
+
     public void lerBilheteTxt(String nf) throws IOException {
         Map<Integer, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
@@ -105,6 +112,7 @@ public class GestorPassageiro {
         }
         f.close();
     }
+
     public void addPassageiro(int tipo) {
         String idPassgeiro, nome, profissao, morada, op;
         int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;

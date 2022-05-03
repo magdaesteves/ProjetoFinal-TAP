@@ -1,3 +1,4 @@
+import java.awt.dnd.DragGestureRecognizer;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -18,6 +19,8 @@ public class Main {
                     } else {
 
                     }
+                case "2":
+                    g.lerPassageiroTxt("passageiros.txt");
             }
             break;
         }
@@ -27,6 +30,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nEscolha opção\n");
         System.out.println("1-Bemvindo ao Aeroporto mosquito deseja continuar? 1-Sim 0-Não\n");
+        System.out.println("2-Ler ficheiro do passageiro\n");
         System.out.println("0-Sair");
         op=sc.next();
         return op;
