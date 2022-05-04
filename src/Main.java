@@ -28,10 +28,13 @@ public class Main {
     private static String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nEscolha opção\n");
-        System.out.println("1-Bemvindo ao Aeroporto mosquito deseja continuar? 1-Sim 0-Não\n");
-        System.out.println("2-Ler ficheiro do passageiro\n");
-        System.out.println("0-Sair");
+        System.out.println("\n#---MENU PRINCIPAL-----------------------------------------------------#");
+        System.out.println("|  (1) - Bem vindo ao Aeroporto mosquito deseja continuar? 1-Sim 0-Não |");
+        System.out.println("|  (2) - Ler ficheiro do passageiro                                    |");
+        System.out.println("|  (0) - Sair                                                          |");
+        System.out.println("#----------------------------------------------------------------------#");
+        System.out.print("\nEscolha uma opção: ");
+
         op=sc.next();
         return op;
     }
