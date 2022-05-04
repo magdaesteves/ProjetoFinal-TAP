@@ -28,11 +28,11 @@ public class Main {
     private static String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PRINCIPAL-----------------------------------------------------#");
-        System.out.println("|  (1) - Bem vindo à companhia DWDM AirViseu deseja continuar? 1-Sim 0-Não |");
-        System.out.println("|  (2) - Ler ficheiro do passageiro                                    |");
-        System.out.println("|  (0) - Sair                                                          |");
-        System.out.println("#----------------------------------------------------------------------#");
+        System.out.println("\n#---MENU PRINCIPAL---------------------------------------------------------------#");
+        System.out.println("|  (1) - Bem vindo à companhia aérea DWDM AirViseu deseja continuar? 1-Sim 0-Não |");
+        System.out.println("|  (2) - Ler ficheiro do passageiro                                              |");
+        System.out.println("|  (0) - Sair                                                                    |");
+        System.out.println("#--------------------------------------------------------------------------------#");
         System.out.print("\nEscolha uma opção: ");
 
         op=sc.next();
