@@ -13,7 +13,7 @@ public class GestorAssistente {
         Map<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(("voos.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -36,7 +36,7 @@ public class GestorAssistente {
         Map<Integer, Voo> dicVoo = new HashMap<>();
         int idRota = 0, idVoo, hora, minuto, segundo,cont=0;
         String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(("voos.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -108,7 +108,7 @@ public class GestorAssistente {
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
-        BufferedReader f = new BufferedReader(new FileReader((nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -135,7 +135,7 @@ public class GestorAssistente {
         HashMap<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
         String idPassageiro, nome, profissao, morada;
-        BufferedReader f = new BufferedReader(new FileReader((nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -159,7 +159,7 @@ public class GestorAssistente {
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
         String idPassageiro;
         double preco;
-        BufferedReader f = new BufferedReader(new FileReader(("bilhetes.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File("bilhetes.txt")));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
