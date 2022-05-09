@@ -17,6 +17,11 @@ public class Passageiro {
         this.diaNascimento = diaNascimento;
     }
 
+    public Passageiro(String idPassageiro, String nome) {
+        this.idPassageiro = idPassageiro;
+        this.nome = nome;
+    }
+
     public String getIdPassageiro() {return idPassageiro;}
 
     public String getNome() {return nome;}
