@@ -8,7 +8,7 @@ public class Main {
         GestorAssistente gA = new GestorAssistente();
         Scanner sc = new Scanner(System.in);
         String op, nif, curso, ficheiro;
-        int tipo, idRota;
+        int tipo, idRota,idVoo;
         op = menu();
         while (op.equals("0") == false) {
             switch (op) {
@@ -24,17 +24,22 @@ public class Main {
                             switch (op) {
                                 case "1":
                                     gA.lerRotaTxt("rotas.txt");
-                                break;
+                                    break;
                                 case "2":
                                     System.out.println("Qual o id da Rota que pretende listar os voos:");
                                     idRota = sc.nextInt();
                                     gA.listarVoosPorRota("voos.txt", idRota);
-                                 break;
+                                    break;
                                 case "3":
                                     gA.lerPassageiroNomeIdTxt("passageiros.txt");
-
+                                    break;
+                                case "4":
+                                    System.out.println("Qual o id do Voo que pretende listar todos os passageiros:");
+                                    idVoo = sc.nextInt();
+                                    gA.lerPassageiroNomeIdTxtPorVoo("passageiros.txt",idVoo);
+                                    break;
                             }
-break;
+                            break;
                         }
                     }
                     break;
@@ -47,11 +52,11 @@ break;
     private static String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PRINCIPAL-----------------------------------------------------#");
-        System.out.println("|  (1) - Bem vindo ao Aeroporto mosquito deseja continuar? 1-Sim 0-Não |");
-        System.out.println("|  (2) - Ler ficheiro do passageiro                                    |");
-        System.out.println("|  (0) - Sair                                                          |");
-        System.out.println("#----------------------------------------------------------------------#");
+        System.out.println("\n#---MENU PRINCIPAL---------------------------------------------------------------#");
+        System.out.println("|  (1) - Bem vindo à companhia aérea DWDM AirViseu deseja continuar? 1-Sim 0-Não |");
+        System.out.println("|  (2) - Ler ficheiro do passageiro                                              |");
+        System.out.println("|  (0) - Sair                                                                    |");
+        System.out.println("#--------------------------------------------------------------------------------#");
         System.out.print("\nEscolha uma opção: ");
 
         op=sc.next();

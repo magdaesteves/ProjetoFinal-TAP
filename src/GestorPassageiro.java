@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<String,String> Dicifinal;
+    private Map<String, Passageiro> Dicifinal;
+
+
     public GestorPassageiro() {
         Dicifinal= new HashMap<>();
     }
@@ -116,7 +118,7 @@ public class GestorPassageiro {
 
     public void addPassageiro(int tipo) {
         String idPassageiro, nome, profissao, morada, op;
-        int anoNascimento = 0, mesNascimento, diaNascimento, quanVoo, destVoo;
+        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         System.out.println("1-Criar Novo  2-Existe");
@@ -139,8 +141,10 @@ public class GestorPassageiro {
             diaNascimento = sc1.nextInt();
 
             Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
-            Dicifinal.put(idPassageiro,String.valueOf(A));
-
+            Dicifinal.put(idPassageiro, A);
+            for(Map.Entry<String, Passageiro> passageiro : Dicifinal.entrySet()){
+                System.out.println(passageiro.getKey() + ": " + toString(passageiro.getValue()));
+            }
 
             op = menu();
             while (op.equals("0") == false) {
@@ -186,6 +190,10 @@ public class GestorPassageiro {
             }
         } menuexistente();
     }
+
+
+
+
     private String menuexistente() {
         String op;
         Scanner sc = new Scanner(System.in);
