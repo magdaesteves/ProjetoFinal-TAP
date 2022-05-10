@@ -6,7 +6,7 @@ public class Main {
         GestorPassageiro g = new GestorPassageiro();
         GestorAssistente gA = new GestorAssistente();
         Scanner sc = new Scanner(System.in);
-        String op, nif, curso, ficheiro;
+        String op, nif, curso, ficheiro, idPassageiro;
         int tipo, idRota,idVoo;
         op = menu();
         while (op.equals("0") == false) {
@@ -36,6 +36,13 @@ public class Main {
                                     System.out.println("Qual o id do Voo que pretende listar todos os passageiros:");
                                     idVoo = sc.nextInt();
                                     gA.lerPassageiroNomeIdTxtPorVoo("passageiros.txt",idVoo);
+                                    break;
+                                case "5":
+                                    break;
+                                case "6":
+                                    System.out.println("Qual o id do Passageiro que pretende listar os bilhetes:");
+                                    idPassageiro = sc.next();
+                                    gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                                     break;
                             }
                             break;
