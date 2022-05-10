@@ -7,11 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<String, Passageiro> Dicifinal;
-
+    private Map<String, Passageiro> dicFinal;
 
     public GestorPassageiro() {
-        Dicifinal= new HashMap<>();
+        dicFinal= new HashMap<>();
     }
 
     public void lerVooTxt(String nf) throws IOException {
@@ -191,8 +190,8 @@ public class GestorPassageiro {
             diaNascimento = sc1.nextInt();
 
             Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
-            Dicifinal.put(idPassageiro, A);
-            for(Map.Entry<String, Passageiro> passageiro : Dicifinal.entrySet()){
+            dicFinal.put(idPassageiro, A);
+            for(Map.Entry<String, Passageiro> passageiro : dicFinal.entrySet()){
                 System.out.println(passageiro.getKey() + ": " + toString(passageiro.getValue()));
             }
             op = menu();
@@ -201,11 +200,11 @@ public class GestorPassageiro {
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("Quantidade de Voos");
+                        System.out.println("Quantidade de voos");
                         quanVoo = sc.nextInt();
                         int idRotas = 0;
                         for (int i = 0; i < quanVoo; i++) {
-                            System.out.println("Destino a Selecionar 1-viseu 2-suica");
+                            System.out.println("Destino a selecionar 1-Viseu 2-Porto");
                             idRotas = sc.nextInt();
                             System.out.println("Informação do voo");
                             selecionarVoosIdPorRotas("voos.txt", idRotas);
