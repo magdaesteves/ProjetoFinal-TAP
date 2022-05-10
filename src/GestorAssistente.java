@@ -3,13 +3,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class GestorAssistente {
 
     //1
     public void lerVooTxt(String nf) throws IOException {
-        Map<Integer, Voo> dicVoo = new HashMap<>();
+        HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
         BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
@@ -32,7 +31,7 @@ public class GestorAssistente {
 
     //2
     public void listarVoosPorRota (String nf, int idRotas) throws IOException {
-        Map<Integer, Voo> dicVoo = new HashMap<>();
+        HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota = 0, idVoo, hora, minuto, segundo,cont=0;
         String diaSemana, marcadoAviao;
         BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
@@ -58,7 +57,7 @@ public class GestorAssistente {
         if(dicVoo.isEmpty()){
             System.out.println("Erro! Não existem voos nesta rota.");
         }else {
-            for (Map.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
+            for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
                 System.out.println(toStringV(voo.getValue()));
             }
             System.out.println("Existem " + cont + " voos com a rota " + idRota + ".");
@@ -103,7 +102,7 @@ public class GestorAssistente {
     }
 
     public void lerRotaTxt(String nf) throws IOException {
-        Map<Integer,Rota> dicRota = new HashMap<>();
+        HashMap<Integer,Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
@@ -121,7 +120,7 @@ public class GestorAssistente {
         }
         f.close();
 
-        for(Map.Entry<Integer, Rota> rotas : dicRota.entrySet()){
+        for(HashMap.Entry<Integer, Rota> rotas : dicRota.entrySet()){
             System.out.println(rotas.getKey() + ": " + toStringR(rotas.getValue()));
         }
     }
