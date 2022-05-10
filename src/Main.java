@@ -18,7 +18,6 @@ public class Main {
                     if (tipo == 1) {
                         g.addPassageiro(tipo);
                     } else {
-
                         op = menuAssistente();
                         while (op.equals("0") == false) {
                             switch (op) {
@@ -56,6 +55,7 @@ public class Main {
             break;
         }
     }
+
     private static String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
