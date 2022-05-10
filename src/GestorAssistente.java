@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class GestorAssistente {
-
     //1 - Listar Rotas
     public void lerRotaTxt(String nf) throws IOException {
         HashMap<Integer,Rota> dicRota = new HashMap<>();
@@ -44,7 +43,6 @@ public class GestorAssistente {
         BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
         String linha = f.readLine();
         while (linha != null) {
-
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
             if(Integer.parseInt(campos[0]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
                 idRota = Integer.parseInt(campos[0]);

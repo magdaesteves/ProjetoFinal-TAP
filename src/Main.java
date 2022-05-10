@@ -63,7 +63,7 @@ public class Main {
         System.out.println("|  (2) - Ler ficheiro do passageiro                                              |");
         System.out.println("|  (0) - Sair                                                                    |");
         System.out.println("#--------------------------------------------------------------------------------#");
-        System.out.print("\nEscolha uma opção: ");
+        System.out.print("Escolha uma opção: ");
 
         op=sc.next();
         return op;
@@ -72,7 +72,7 @@ public class Main {
     private static String menuAssistente() {
          String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU ASSISTENTE----------------------------------------------------------------#");
+        System.out.println("\n#---MENU ASSISTENTE DE BORDO-------------------------------------------------------#");
         System.out.println("|  (1) - Listar Rotas                                                              |");
         System.out.println("|  (2) - Listar os voos de uma rota                                                |");
         System.out.println("|  (3) - Listar todos os passageiros (o nome e o ID do passageiro)                 |");
@@ -82,7 +82,7 @@ public class Main {
         System.out.println("|  (7) - Listar os bilhetes efetivos de um passageiro (lista de voos a realizar)   |");
         System.out.println("|  (8) - Listar os bilhetes suplentes de um passageiro (lista de voos em espera)   |");
         System.out.println("#----------------------------------------------------------------------------------#");
-        System.out.print("\nEscolha uma opção: ");
+        System.out.print("Escolha uma opção: ");
 
         op=sc.next();
         return op;
