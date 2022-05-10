@@ -12,7 +12,8 @@ public class Main {
         while (op.equals("0") == false) {
             switch (op) {
                 case "1":
-                    System.out.println("Escolha o tipo de pessoa 1-Passageiro 2-Assistente de Bordo");
+                    System.out.println("\nEscolha o tipo de pessoa: 1-Passageiro 2-Assistente de Bordo");
+                    System.out.print("Escolha uma opção: ");
                     tipo = sc.nextInt();
                     if (tipo == 1) {
                         g.addPassageiro(tipo);
@@ -25,7 +26,7 @@ public class Main {
                                     gA.lerRotaTxt("rotas.txt");
                                     break;
                                 case "2":
-                                    System.out.println("Qual o id da rota que pretende listar os voos:");
+                                    System.out.print("\nQual o id da rota que pretende listar os voos: ");
                                     idRota = sc.nextInt();
                                     gA.listarVoosPorRota("voos.txt", idRota);
                                     break;
@@ -33,14 +34,14 @@ public class Main {
                                     gA.lerPassageiroNomeIdTxt("passageiros.txt");
                                     break;
                                 case "4":
-                                    System.out.println("Qual o id do voo que pretende listar todos os passageiros:");
+                                    System.out.print("\nQual o id do voo que pretende listar todos os passageiros: ");
                                     idVoo = sc.nextInt();
                                     gA.lerPassageiroNomeIdTxtPorVoo("passageiros.txt",idVoo);
                                     break;
                                 case "5":
                                     break;
                                 case "6":
-                                    System.out.println("Qual o id do passageiro que pretende listar os bilhetes:");
+                                    System.out.print("\nQual o id do passageiro que pretende listar os bilhetes: ");
                                     idPassageiro = sc.next();
                                     gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                                     break;

@@ -171,10 +171,11 @@ public class GestorPassageiro {
         int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
-        System.out.println("1-Criar Novo  2-Existe");
+        System.out.println("\n1-Criar novo  2-Existe");
+        System.out.print("Escolha uma opção: ");
         tipo = sc.nextInt();
         if (tipo == 1) {
-            System.out.println("Qual é idPassageiro?");
+            System.out.println("\nQual é idPassageiro?");
             idPassageiro = sc.next();
             System.out.println("Qual o nome?");
             nome = sc.next();
@@ -200,7 +201,7 @@ public class GestorPassageiro {
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("Quantidade de voos");
+                        System.out.println("\nQuantidade de voos");
                         quanVoo = sc.nextInt();
                         int idRotas = 0;
                         for (int i = 0; i < quanVoo; i++) {
@@ -221,7 +222,7 @@ public class GestorPassageiro {
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("Quantidade de Voos");
+                        System.out.println("\nQuantidade de Voos");
                         quanVoo = sc.nextInt();
                         for (int i = 0; i < quanVoo; i++) {
                             System.out.println("Destino a Selecionar");
