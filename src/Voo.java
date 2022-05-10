@@ -1,15 +1,15 @@
 public class Voo {
-    private int idVoo;
     private int idRota;
-    private String diaSemana;
+    private int idVoo;
+       private String diaSemana;
     private int horaVoo;
     private int minutoVoo;
     private int segundoVoo;
     private String marcaAviao;
 
-    public Voo(int idVoo, int idRota, String diaSemana, int horaVoo, int minutoVoo, int segundoVoo, String marcaAviao) {
-        this.idVoo = idVoo;
+    public Voo(int idRota,int idVoo,String diaSemana, int horaVoo, int minutoVoo, int segundoVoo, String marcaAviao) {
         this.idRota = idRota;
+        this.idVoo = idVoo;
         this.diaSemana = diaSemana;
         this.horaVoo = horaVoo;
         this.minutoVoo = minutoVoo;

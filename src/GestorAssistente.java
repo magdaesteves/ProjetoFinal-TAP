@@ -37,16 +37,17 @@ public class GestorAssistente {
         BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
         String linha = f.readLine();
         while (linha != null) {
+
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            if(Integer.parseInt(campos[1]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
-                idVoo = Integer.parseInt(campos[0]);
-                idRota = Integer.parseInt(campos[1]);
+            if(Integer.parseInt(campos[0]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
+                idRota = Integer.parseInt(campos[0]);
+                idVoo = Integer.parseInt(campos[1]);
                 diaSemana = campos[2];
                 hora = Integer.parseInt(campos[3]);
                 minuto = Integer.parseInt(campos[4]);
                 segundo = Integer.parseInt(campos[5]);
                 marcadoAviao = campos[6];
-                Voo v = new Voo(idVoo, idRota, diaSemana, hora, minuto, segundo, marcadoAviao);
+                Voo v = new Voo(idRota,idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
                 dicVoo.put(idVoo, v);
                 cont++;
             }
@@ -59,6 +60,8 @@ public class GestorAssistente {
         }else {
             for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
                 System.out.println(toStringV(voo.getValue()));
+                System.out.println("Selecione o Voo?");
+
             }
             System.out.println("Existem " + cont + " voos com a rota " + idRota + ".");
         }
