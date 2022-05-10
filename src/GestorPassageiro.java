@@ -189,15 +189,15 @@ public class GestorPassageiro {
             idPassageiro = sc.next();
             System.out.println("Qual o nome?");
             nome = sc.next();
-            System.out.println("Qual é a profissao?");
+            System.out.println("Qual é a profissão?");
             profissao = sc.next();
             System.out.println("Qual é a morada?");
             morada = sc.next();
-            System.out.println("Qual é o anoNascimento?");
+            System.out.println("Qual é o ano de nascimento?");
             anoNascimento = sc1.nextInt();
-            System.out.println("Qual é a mesNascimento?");
+            System.out.println("Qual é a mês de nscimento?");
             mesNascimento = sc1.nextInt();
-            System.out.println("Qual é a diaNascimento?");
+            System.out.println("Qual é a dia de nascimento?");
             diaNascimento = sc1.nextInt();
 
             Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
@@ -267,11 +267,11 @@ Integer idvoo=0;
     private String menuexistente() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nEscolha opção\n");
-        System.out.println("1-Selecionar rotas ? \n");
-        System.out.println("2-Ver rotas ? \n");
-        System.out.println("3-Ver Voos ? \n");
-        System.out.println("4-Selecionar Bilhetes ? \n");
+        System.out.println("\nEscolha opção");
+        System.out.println("1-Selecionar rotas ?");
+        System.out.println("2-Ver rotas ?");
+        System.out.println("3-Ver Voos ?");
+        System.out.println("4-Selecionar Bilhetes ?");
         System.out.println("0-Sair");
         op=sc.next();
         return op;
@@ -279,8 +279,8 @@ Integer idvoo=0;
     private String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nEscolha opção\n");
-        System.out.println("1-Selecionar rotas ? 1-Sim 2-Não\n");
+        System.out.println("\nEscolha opção");
+        System.out.println("1-Selecionar rotas ? 1-Sim 2-Não");
         System.out.println("0-Sair");
         op=sc.next();
         return op;
