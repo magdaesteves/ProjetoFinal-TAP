@@ -32,7 +32,7 @@ public class GestorAssistente {
     }
 
     private String toStringR(Rota value) {
-        return "\nId: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
+        return "Id: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
     }
 
 
@@ -72,7 +72,7 @@ public class GestorAssistente {
     }
 
     private String toStringV(Voo value) {
-        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
 
     /*Usado no 2
@@ -130,7 +130,7 @@ public class GestorAssistente {
     }
 
     private String toStringP(Passageiro value) {
-        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome();
+        return "Id: " + value.getIdPassageiro() + "\nNome: " + value.getNome()+"\n";
     }
 
     //Usado no 4
@@ -213,7 +213,7 @@ public class GestorAssistente {
     }
 
     private String toStringB(Bilhete value) {
-        return "\nId: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo();
+        return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo()+"\n";
     }
 
     //Usado no 6

@@ -4,11 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<String, Passageiro> dicFinal;
+    private HashMap<String, Passageiro> dicFinal;
 
     public GestorPassageiro() {
         dicFinal= new HashMap<>();
@@ -41,7 +40,7 @@ public class GestorPassageiro {
 
             Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
             dicFinal.put(idPassageiro, A);
-            for(Map.Entry<String, Passageiro> passageiro : dicFinal.entrySet()){
+            for(HashMap.Entry<String, Passageiro> passageiro : dicFinal.entrySet()){
                 System.out.println(passageiro.getKey() + ": " + toStringP(passageiro.getValue()));
             }
             op = menu();
@@ -65,20 +64,20 @@ public class GestorPassageiro {
                 break;
             }
         } else {
-            System.out.println("Insira um id");
+            System.out.print("\nInsira um id: ");
             idPassageiro = sc.next();
             op = menuExistente();
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("\nQuantidade de Voos");
+                        System.out.println("\nQuantidade de Voos: ");
                         quanVoo = sc.nextInt();
                         for (int i = 0; i < quanVoo; i++) {
-                            System.out.println("Destino a Selecionar");
+                            System.out.print("Destino a Selecionar: ");
                             destVoo = sc.nextInt();
                         }
-                        System.out.println("Informação do voo");
-                        System.out.println("Informação do bilhete");
+                        System.out.println("Informação do voo: ");
+                        System.out.println("Informação do bilhete: ");
                         break;
                     case"2":
                         System.out.println("blabla");
@@ -89,6 +88,7 @@ public class GestorPassageiro {
                     case"4":
                         break;
                     case"5":
+                        System.out.println("\nRotas: ");
                         lerRotaTxt("rotas.txt");
                         break;
                     case "6":
@@ -97,8 +97,7 @@ public class GestorPassageiro {
                         listarVoosPorRota("voos.txt", idRota);
                         break;
                     case"7":
-                        System.out.print("\nQual o id do passageiro que pretende listar os bilhetes: ");
-                        idPassageiro = sc.next();
+                        System.out.println("\nHistorial: ");
                         lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                         break;
                     case"8":
@@ -153,7 +152,7 @@ public class GestorPassageiro {
         }
     }
     private String toStringV(Voo value) {
-        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
 
     //5 - Listar as rotas
@@ -182,7 +181,7 @@ public class GestorPassageiro {
     }
 
     private String toStringR(Rota value) {
-        return "\nId: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
+        return "Id: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
     }
     //FIM DO 5
 
@@ -226,18 +225,17 @@ public class GestorPassageiro {
     //7 - Listar o historial do passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro (String nomeFich, String idPassageiro) throws IOException {
         HashMap<Integer,Bilhete> dicBilhete = lerBilheteDePassageiro (nomeFich, idPassageiro);
-        /*if(dicBilhete.isEmpty()) {
+        if(dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
-        }else{*/
-        //if(idPassageiro={
+        }else{
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringB(dicBilhete.get(bilhete.getKey())));
             }
-        //}
+        }
     }
 
     private String toStringB(Bilhete value) {
-        return "\nId: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo();
+        return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() +"\n";
     }
 
     //Usado no 7
@@ -283,7 +281,7 @@ public class GestorPassageiro {
     //FIM DO 7
 /*
     public void lerRotaTxt(String nf) throws IOException {
-        Map<Integer, Rota> dicRota = new HashMap<>();
+        HashMap<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
@@ -303,7 +301,7 @@ public class GestorPassageiro {
     }
 */
     public void lerVooTxt(String nf) throws IOException {
-        Map<Integer, Voo> dicVoo = new HashMap<>();
+        HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
         BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
@@ -325,7 +323,7 @@ public class GestorPassageiro {
     }
 
     public void lerPassageiroTxt(String nf) throws IOException {
-        Map<String, Passageiro> dicPassageiro = new HashMap<>();
+        HashMap<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
         String idPassageiro, nome, profissao, morada;
         BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
@@ -344,13 +342,13 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
-        for(Map.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
+        for(HashMap.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()){
             System.out.println(passageiro.getKey() + ": " + toStringP(passageiro.getValue()));
         }
     }
 
     private String toStringP(Passageiro value) {
-        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\nProfissao: " + value.getProfissao() + "\nMorada: " + value.getMorada() + "\nAno Nascimento: " + value.getAno() + "\nMes Nascimento: " + value.getMes() + "\nDia Nascimento: " + value.getDia() +"\n";
+        return "Id: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\nProfissao: " + value.getProfissao() + "\nMorada: " + value.getMorada() + "\nAno Nascimento: " + value.getAno() + "\nMes Nascimento: " + value.getMes() + "\nDia Nascimento: " + value.getDia() +"\n";
     }
 
 
@@ -394,14 +392,18 @@ public class GestorPassageiro {
     private String menuExistente() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PASSAGEIRO--------------------#");
-        System.out.println("|  (1) - Selecionar rotas              |");
-        System.out.println("|  (2) - Ver rotas                     |");
-        System.out.println("|  (3) - Ver Voos                      |");
-        System.out.println("|  (4) - Selecionar Bilhetes           |");
-        System.out.println("|  (5) - Listar Rotas                  |");
-        System.out.println("|  (0) - Sair                          |");
-        System.out.println("#--------------------------------------#");
+        System.out.println("\n#---MENU PASSAGEIRO------------------------#");
+        System.out.println("|  (1) - Selecionar rotas                    |");
+        System.out.println("|  (2) -                                     |");
+        System.out.println("|  (3) -                                     |");
+        System.out.println("|  (4) -                                     |");
+        System.out.println("|  (5) - Listar rotas                        |");
+        System.out.println("|  (6) - Listar os voos de uma rota;         |");
+        System.out.println("|  (7) - Listar historial                    |");
+        System.out.println("|  (8) - Listar bilhetes efetivos            |");
+        System.out.println("|  (9) - Listar bilhetes suplentes           |");
+        System.out.println("|  (0) - Sair                                |");
+        System.out.println("#--------------------------------------------#");
         System.out.print("Escolha opção:");
         op=sc.next();
         return op;
