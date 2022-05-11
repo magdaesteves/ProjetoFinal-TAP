@@ -1,4 +1,3 @@
-import java.awt.dnd.DragGestureRecognizer;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,18 +6,18 @@ public class Main {
         GestorPassageiro g = new GestorPassageiro();
         GestorAssistente gA = new GestorAssistente();
         Scanner sc = new Scanner(System.in);
-        String op, nif, curso, ficheiro;
+        String op, nif, curso, ficheiro, idPassageiro;
         int tipo, idRota,idVoo;
         op = menu();
         while (op.equals("0") == false) {
             switch (op) {
                 case "1":
-                    System.out.println("1-Escolha o tipo de Pessoa 1-Passageiro 2-Assistente de Bordo");
+                    System.out.println("\nEscolha o tipo de pessoa: 1-Passageiro 2-Assistente de Bordo");
+                    System.out.print("Escolha uma opção: ");
                     tipo = sc.nextInt();
                     if (tipo == 1) {
                         g.addPassageiro(tipo);
                     } else {
-
                         op = menuAssistente();
                         while (op.equals("0") == false) {
                             switch (op) {
@@ -26,7 +25,7 @@ public class Main {
                                     gA.lerRotaTxt("rotas.txt");
                                     break;
                                 case "2":
-                                    System.out.println("Qual o id da Rota que pretende listar os voos:");
+                                    System.out.print("\nQual o id da rota que pretende listar os voos: ");
                                     idRota = sc.nextInt();
                                     gA.listarVoosPorRota("voos.txt", idRota);
                                     break;
@@ -34,9 +33,16 @@ public class Main {
                                     gA.lerPassageiroNomeIdTxt("passageiros.txt");
                                     break;
                                 case "4":
-                                    System.out.println("Qual o id do Voo que pretende listar todos os passageiros:");
+                                    System.out.print("\nQual o id do voo que pretende listar todos os passageiros: ");
                                     idVoo = sc.nextInt();
                                     gA.lerPassageiroNomeIdTxtPorVoo("passageiros.txt",idVoo);
+                                    break;
+                                case "5":
+                                    break;
+                                case "6":
+                                    System.out.print("\nQual o id do passageiro que pretende listar os bilhetes: ");
+                                    idPassageiro = sc.next();
+                                    gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                                     break;
                             }
                             break;
@@ -49,15 +55,16 @@ public class Main {
             break;
         }
     }
+
     private static String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PRINCIPAL---------------------------------------------------------------#");
-        System.out.println("|  (1) - Bem vindo à companhia aérea DWDM AirViseu deseja continuar? 1-Sim 0-Não |");
-        System.out.println("|  (2) - Ler ficheiro do passageiro                                              |");
-        System.out.println("|  (0) - Sair                                                                    |");
-        System.out.println("#--------------------------------------------------------------------------------#");
-        System.out.print("\nEscolha uma opção: ");
+        System.out.println("\n#---------------------------------------------------------------------#");
+        System.out.println("|  Bem vindo à companhia aérea DWDM AirViseu deseja continuar?        |");
+        System.out.println("|  (1) - Sim                                                          |");
+        System.out.println("|  (0) - Não                                                          |");
+        System.out.println("#---------------------------------------------------------------------#");
+        System.out.print("Escolha uma opção: ");
 
         op=sc.next();
         return op;
@@ -66,7 +73,7 @@ public class Main {
     private static String menuAssistente() {
          String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU ASSISTENTE----------------------------------------------------------------#");
+        System.out.println("\n#---MENU ASSISTENTE DE BORDO-------------------------------------------------------#");
         System.out.println("|  (1) - Listar Rotas                                                              |");
         System.out.println("|  (2) - Listar os voos de uma rota                                                |");
         System.out.println("|  (3) - Listar todos os passageiros (o nome e o ID do passageiro)                 |");
@@ -76,7 +83,7 @@ public class Main {
         System.out.println("|  (7) - Listar os bilhetes efetivos de um passageiro (lista de voos a realizar)   |");
         System.out.println("|  (8) - Listar os bilhetes suplentes de um passageiro (lista de voos em espera)   |");
         System.out.println("#----------------------------------------------------------------------------------#");
-        System.out.print("\nEscolha uma opção: ");
+        System.out.print("Escolha uma opção: ");
 
         op=sc.next();
         return op;

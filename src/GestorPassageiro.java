@@ -7,11 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GestorPassageiro {
-    private Map<String, Passageiro> Dicifinal;
-
+    private Map<String, Passageiro> dicFinal;
 
     public GestorPassageiro() {
-        Dicifinal= new HashMap<>();
+        dicFinal= new HashMap<>();
     }
 
     public void lerVooTxt(String nf) throws IOException {
@@ -85,7 +84,7 @@ public class GestorPassageiro {
         f.close();
     }
     public void lerBilheteTxt(String nf) throws IOException {
-        Map<Integer, Bilhete> dicBilhete = new HashMap<>();
+        HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
         String idPassageiro;
         double preco;
@@ -116,47 +115,101 @@ public class GestorPassageiro {
         f.close();
     }
 
-    public void addPassageiro(int tipo) {
+    public void selecionarVoosIdPorRotas(String nf, int idRotas) throws IOException {
+        Map<Integer, Voo> dicVoo = new HashMap<>();
+        Map<Integer, Voo> dicVoo2 = new HashMap<>();
+        Scanner sc = new Scanner(System.in);
+        int idRota = 0, idVoo = 0, hora, minuto, segundo, cont = 0;
+        String diaSemana, marcadoAviao;
+        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
+        String linha = f.readLine();
+        int idVoos = 0;
+        while (linha != null) {
+            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            if (Integer.parseInt(campos[0]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
+                idRota = Integer.parseInt(campos[0]);
+                idVoo = Integer.parseInt(campos[1]);
+                diaSemana = campos[2];
+                hora = Integer.parseInt(campos[3]);
+                minuto = Integer.parseInt(campos[4]);
+                segundo = Integer.parseInt(campos[5]);
+                marcadoAviao = campos[6];
+                Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
+                dicVoo.put(idVoo, v);
+                cont++;
+            }
+            linha = f.readLine();
+        }
+
+        f.close();
+
+        if (dicVoo.isEmpty()) {
+            System.out.println("Erro! Não existem voos nesta rota.");
+        } else {
+            for (Map.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
+                System.out.println(toStringV(voo.getValue()));
+            }
+            System.out.println("Existem " + cont + " voos com a rota " + idRota + ".");
+            System.out.println("Selecione um voo:");
+            idVoos= sc.nextInt();
+            System.out.println(toString(dicVoo.get(idVoos)));
+        }
+    }
+
+
+    private String toString(Voo value) {
+        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+    }
+
+
+    private String toStringV(Voo value) {
+        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() +  "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+    }
+
+    public void addPassageiro(int tipo) throws IOException {
         String idPassageiro, nome, profissao, morada, op;
         int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
-        System.out.println("1-Criar Novo  2-Existe");
+        System.out.println("\n1-Criar novo  2-Existe");
+        System.out.print("Escolha uma opção: ");
         tipo = sc.nextInt();
         if (tipo == 1) {
-
-            System.out.println("Qual é idPassageiro?");
+            System.out.println("\nQual é idPassageiro?");
             idPassageiro = sc.next();
             System.out.println("Qual o nome?");
             nome = sc.next();
-            System.out.println("Qual é a profissao?");
+            System.out.println("Qual é a profissão?");
             profissao = sc.next();
             System.out.println("Qual é a morada?");
             morada = sc.next();
-            System.out.println("Qual é o anoNascimento?");
+            System.out.println("Qual é o ano de nascimento?");
             anoNascimento = sc1.nextInt();
-            System.out.println("Qual é a mesNascimento?");
+            System.out.println("Qual é a mês de nscimento?");
             mesNascimento = sc1.nextInt();
-            System.out.println("Qual é a diaNascimento?");
+            System.out.println("Qual é a dia de nascimento?");
             diaNascimento = sc1.nextInt();
 
             Passageiro A=new Passageiro(idPassageiro,nome,profissao,morada,anoNascimento,mesNascimento,diaNascimento);
-            Dicifinal.put(idPassageiro, A);
-            for(Map.Entry<String, Passageiro> passageiro : Dicifinal.entrySet()){
+            dicFinal.put(idPassageiro, A);
+            for(Map.Entry<String, Passageiro> passageiro : dicFinal.entrySet()){
                 System.out.println(passageiro.getKey() + ": " + toString(passageiro.getValue()));
             }
-
             op = menu();
+
+            Integer idvoo = 0;
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("Quantidade de Voos");
+                        System.out.println("\nQuantidade de voos");
                         quanVoo = sc.nextInt();
+                        int idRotas = 0;
                         for (int i = 0; i < quanVoo; i++) {
-                            System.out.println("Destino a Selecionar");
-                            destVoo = sc.nextInt();
+                            System.out.println("Destino a selecionar 1-Viseu 2-Porto");
+                            idRotas = sc.nextInt();
+                            System.out.println("Informação do voo");
+                            selecionarVoosIdPorRotas("voos.txt", idRotas);
                         }
-                        System.out.println("Informação do voo");
                         System.out.println("Informação do bilhete");
 
                 }
@@ -165,11 +218,11 @@ public class GestorPassageiro {
         } else {
             System.out.println("Insira um id");
             idPassageiro = sc.next();
-            op = menuexistente();
+            op = menuExistente();
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("Quantidade de Voos");
+                        System.out.println("\nQuantidade de Voos");
                         quanVoo = sc.nextInt();
                         for (int i = 0; i < quanVoo; i++) {
                             System.out.println("Destino a Selecionar");
@@ -188,30 +241,32 @@ public class GestorPassageiro {
                 break;
 
             }
-        } menuexistente();
+        }menuExistente();
     }
 
 
-
-
-    private String menuexistente() {
+    private String menuExistente() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nEscolha opção\n");
-        System.out.println("1-Selecionar rotas ? \n");
-        System.out.println("2-Ver rotas ? \n");
-        System.out.println("3-Ver Voos ? \n");
-        System.out.println("4-Selecionar Bilhetes ? \n");
-        System.out.println("0-Sair");
+        System.out.println("\n#---MENU PASSAGEIRO--------------------#");
+        System.out.println("|  (1) - Selecionar rotas              |");
+        System.out.println("|  (2) - Ver rotas                     |");
+        System.out.println("|  (3) - Ver Voos                      |");
+        System.out.println("|  (4) - Selecionar Bilhetes           |");
+        System.out.println("|  (0) - Sair                          |");
+        System.out.println("#--------------------------------------#");
+        System.out.print("Escolha opção:");
         op=sc.next();
         return op;
     }
     private String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nEscolha opção\n");
-        System.out.println("1-Selecionar rotas ? 1-Sim 2-Não\n");
-        System.out.println("0-Sair");
+        System.out.println("\n#---MENU PASSAGEIRO--------------------------#");
+        System.out.println("|  (1) - Selecionar rotas ? 1-Sim 2-Não      |");
+        System.out.println("|  (0) - Sair                                |");
+        System.out.println("#--------------------------------------------#");
+        System.out.print("Escolha opção:");
         op=sc.next();
         return op;
     }
