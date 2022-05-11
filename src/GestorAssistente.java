@@ -32,12 +32,12 @@ public class GestorAssistente {
 
 
     //Usado no 4
-    public HashMap<String,Bilhete> lerBilheteTxt(String nf,int idVooFiltro) throws IOException {
+    public HashMap<String,Bilhete> lerBilheteTxt(String NomeFich,int idVooFiltro) throws IOException {
         HashMap<String, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
         String idPassageiro;
         double preco;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -70,12 +70,12 @@ public class GestorAssistente {
 
 
     //1 - Listar Rotas
-    public void lerRotaTxt(String nf) throws IOException {
+    public void lerRotaTxt(String NomeFich) throws IOException {
         HashMap<Integer,Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -100,7 +100,7 @@ public class GestorAssistente {
 
 
     //2 - Listar os voos de uma rota
-    public void listarVoosPorRota (String nf, int idRotas) throws IOException {
+    public void listarVoosPorRota (String NomeFich, int idRotas) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota = 0, idVoo, hora, minuto, segundo,cont=0;
         String diaSemana, marcadoAviao;
@@ -139,7 +139,7 @@ public class GestorAssistente {
     }
 
     /*Usado no 2
-    public void lerVooTxt(String nf) throws IOException {
+    public void lerVooTxt(String NomeFich) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
@@ -163,8 +163,8 @@ public class GestorAssistente {
 
 
     //3 - Listar todos os passageiros (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxt(String nf) throws IOException {
-        HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt("passageiros.txt");
+    public void lerPassageiroNomeIdTxt(String NomeFich) throws IOException {
+        HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);
         if(dicPassageiro.isEmpty()) {
             System.out.println("Não existem passageiros.");
         }else {
@@ -176,9 +176,9 @@ public class GestorAssistente {
 
 
     //4 - Listar os passageiros de um voo (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxtPorVoo(String nf,int idVoo) throws IOException {
+    public void lerPassageiroNomeIdTxtPorVoo(String NomeFich,int idVoo) throws IOException {
         HashMap<String,Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt",idVoo); //lê os bilhetes com o filtro do id do voo
-        HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt("passageiros.txt"); //lê os passageiros todos
+        HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich); //lê os passageiros todos
         if(dicBilhete.isEmpty()) { //se não existirem bilhetes diz que o voo não tem passageiros
             System.out.println("O voo " + idVoo + " ainda não têm passageiros.");
         }else{
