@@ -165,13 +165,13 @@ public class GestorAssistente {
     //3 - Listar todos os passageiros (o nome e o ID do passageiro)
     public void lerPassageiroNomeIdTxt(String nf) throws IOException {
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt("passageiros.txt");
-        /*if(dicPassageiro.isEmpty()) {
+        if(dicPassageiro.isEmpty()) {
             System.out.println("Não existem passageiros.");
-        }else {*/
+        }else {
             for (HashMap.Entry<String, Passageiro> passageiro : dicPassageiro.entrySet()) {
                 System.out.println(toStringP(passageiro.getValue()));
             }
-        //}
+        }
     }
 
 
