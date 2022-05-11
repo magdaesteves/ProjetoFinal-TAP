@@ -146,7 +146,7 @@ public class GestorPassageiro {
                 System.out.println(toStringV(voo.getValue()));
             }
             System.out.println("Existem " + cont + " voos com a rota " + idRota + ".");
-            System.out.println("Selecione um voo:");
+            System.out.println("Selecione um voo: ");
             idVoos= sc.nextInt();
             System.out.println(toStringV(dicVoo.get(idVoos)));
         }
