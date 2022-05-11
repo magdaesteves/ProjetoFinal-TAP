@@ -76,7 +76,7 @@
 161688780,FERNANDO ALEXANDRE DA SILVEIRA SANTOS,Projetista Mecanico,96-Porto da Pedra-Alhadas de Baixo-3090,2000,6,7
 155486268,FERNANDO DOS SANTOS BARBOSA,Projetista Orcamentista,27-Pousafoles-Marinha das Ondas-3094,1994,10,11
 132629844,FERNANDO DUARTE CORREIA,Promotor de Credito,82-Povoa da LousA-Alfarelos-3130,1965,3,8
-114714711,FERNANDO DUQUE GARCIA,Promotor de Eventos,94-Ramalhais-Abrunheira-3140, 1983,7,7
+114714711,FERNANDO DUQUE GARCIA,Promotor de Eventos,94-Ramalhais-Abrunheira-3140,1983,7,7
 253000610,FERNANDO PEDRO RIBEIRO FELIX,Promotor de Financiamento,71-Regueiro-Alvogadas-3150,2001,9,16
 192388401,FIRMINO MARQUES DA SILVA,Promotor de Merchandising,37-Reguengo-Casal de Ermio-3200,2004,6,10
 114034281,FRANCISCO CIPRIANO HONRADO,Promotor de Vendas,57-Ribeira-Azenha-3220,1958,8,14
@@ -143,7 +143,7 @@
 162004087,LUIS MANUEL NUNES DA CUNHA ANTAS,Professor de Holandes,74-Rodas-Casal de Ermio-3200,1971,2,24
 171036514,LUIS MANUEL VIEIRA DE ALMEIDA,Professor de Hotelaria,96-Santo Aleixo-Azenha-3220,1971,9,14
 205094180,MADALENA MARIA DE OLIVEIRA MOREIRA MAIA,Professor de Hotelaria e Turismo,49-Santo Ovideo-Bouca-3230,1999,4,9
-210877537,MAMADOU BAH,Professor de Idiomas,72-Serobela-Alagoa-3300, 1959,2,13
+210877537,MAMADOU BAH,Professor de Idiomas,72-Serobela-Alagoa-3300,1959,2,13
 193348713,MAMADU ALIU JALO,Professor de Informatica,33-Silvares-Anceriz-3305,1981,3,11
 200484079,MAMUDO DANSO,Estudante,28-SoutelA-Cabril-3320,2005,1,8
 127634460,MANUEL ALFREDO DIAS SANTOS LEITE,Professor de Ingles e Espanhol,29-Soutelo-Algares-3330,1984,8,12
