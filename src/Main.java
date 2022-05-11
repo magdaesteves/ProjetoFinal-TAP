@@ -40,14 +40,17 @@ public class Main {
                                 case "5":
                                     break;
                                 case "6":
-                                    System.out.print("\nQual o id do passageiro que pretende listar os bilhetes: ");
+                                    System.out.print("\nQual o id do passageiro que pretende listar o historial de viagens: ");
                                     idPassageiro = sc.next();
                                     gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                                     break;
-                                case "6":
-                                    System.out.println("Qual o id do Passageiro que pretende listar o historial de viagens:");
-                                    idPassageiro = sc.next();
-                                    gA.listarHistorialPassageiro("bilhetes.txt", idPassageiro);
+                                case "7":
+
+                                    break;
+                                case"8":
+
+                                    break;
+
                             }
                             break;
                         }

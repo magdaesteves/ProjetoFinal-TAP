@@ -126,97 +126,97 @@
 115691472,JOAO ANTONIO DA ROCHA BARRADAS VARGES,Professor de Fisioterapia,65-Maria Mendes-Botao-3020,1968,10,5
 113924925,JOAO BACHIR AJUN KHAN,Professor de Fotografia,78-Matas-Coimbra-3025,1982,2,16
 157508650,JOAO BARCINIO MORAIS DE CARVALHO PINTO,Professor de Frances,83-Moinho Velho-Coimbra-3030,1987,1,9
-201381150,JOAO CARLOS COUTINHO PINTO,Professor de Futebol,82-Moinhos-Coimbra-3034, 1962, 5,18
-204583098,JOAO DUARTE FROTA BAPTISTA FERREIRA MATEUS,Professor de Gastronomia,87-Outeiro-Abelheira-3040, 2001, 6, 8
-276822641,JOAO FERNANDO VIEIRA FILHO,Professor de Geografia,44-Passal-Cernache-3044, 1981, 4, 2
-195448731,JOAO FILIPE JARDIM LEANDRO,Estudante,12-Pereiro-Ameal-3045, 2013, 10, 8
-138967857,JOAO GUALBERTO SEMEDO,Professor de GestAo da Qualidade,75-Pico-Coimbra-3049, 1954, 10, 9
-114625808,JOAO HILARIO DA TRINDADE,Professor de GestAo de Projetos,33-Ponte-AncA-3060, 1966, 3, 2
-166578967,JOAO MANUEL PEREIRA DE SOUSA,Professor de GestAo Financeira,75-Povoa-Arneiro-3070, 1991, 5, 7
-140770070,JOAO MARQUES BARROSO,Estudante,17-4 aguas-Araujos-3080,2013, 6, 16
-143620754,JOAO MOREIRA DA SILVA GONcALVES,Professor de Ginastica,35-Quinta-Figueira da Foz-3084, 1980, 4, 6
-179344684,JULIO MANUEL DE SOUSA CUNHA,Professor de Ginastica Laboral,92-Redoica-Alhadas de Baixo-3090, 1995, 3, 26
-267771746,KAIYAN WAN,Professor de Grego,74-Relvas-Marinha das Ondas-3094, 1970, 4, 27
-209208325,LASSANA DJALO,Professor de Hebraico,17-Ribeira Cimeira-Alfarelos-3130, 2004, 10, 14
-133604934,LEOPOLDO GUERRA MENDES,Professor de Hidroginastica,30-Ribeira do Conde-Abrunheira-3140, 2004, 5, 4
-146893476,LIDIA MANUELA DOS SANTOS TEIXEIRA MOREIRA,Estudante,36-Ribeira Fundeira-Alvogadas-3150, 2007, 4, 4
-162004087,LUIS MANUEL NUNES DA CUNHA ANTAS,Professor de Holandes,74-Rodas-Casal de Ermio-3200, 1971, 2, 24
-171036514,LUIS MANUEL VIEIRA DE ALMEIDA,Professor de Hotelaria,96-Santo Aleixo-Azenha-3220, 1971, 9, 14
-205094180,MADALENA MARIA DE OLIVEIRA MOREIRA MAIA,Professor de Hotelaria e Turismo, 49-Santo Ovideo-Bouca-3230, 1999, 4, 9
-210877537,MAMADOU BAH,Professor de Idiomas, 72-Serobela-Alagoa-3300, 1959, 2, 13
-193348713,MAMADU ALIU JALO, Professor de Informatica, 33-Silvares-Anceriz-3305, 1981, 3, 11
-200484079,MAMUDO DANSO, Estudante, 28-SoutelA-Cabril-3320, 2005, 1, 8
-127634460,MANUEL ALFREDO DIAS SANTOS LEITE, Professor de Ingles e Espanhol, 29-Soutelo-Algares-3330, 1984, 8, 12
-148482627,MANUEL AUGUSTO ZENHA DE CASTRO, Professor de Ingles e Portugues, 3-Terra da Gaga-Arrifana-3350, 1970, 6, 20
-204439833,MANUEL DO NASCIMENTO VIEGAS D ABREU RITA, Professor de Italiano, 65-Tojal-Ameal-3360, 1950, 2, 1
-117052302,MANUEL FONSECA DA SILVA, Professor de Japones, 32-Valada-Aldeia das Dez-3400, 1977, 4, 4
-141710500,MANUEL JOAQUIM CORREIA CANECA, Estudante, 21-Vale Carvalhos-Bobadela-3405, 2011, 8, 25
-114706050,MANUEL JOSE CAROCHA, Professor de Letras, 42-Vale Figueira-Azere-3420, 1970, 6, 24
-128552620,MANUEL JOSE NUNES, Professor de Libras, 88-Vale Madeiros-Berreiros-6285, 1953, 7, 2
-156311119,MANUEL LOPES MENDES, Professor de Literatura, 66-Vale Raiz-Coimbra-3004, 1989, 7, 26
-118588800,MANUEL NICOLAU FORTES, Professor de Logistica, 86-Valeiro-BotAo-3020, 1997, 9, 27
-157380726,MANUEL PEREIRA DE SOUSA, Estudante, 98-Vila Cova do Barro-Coimbra-3025, 2010, 11, 12
-160995914,MANUEL ZEFERINO PINTO FERREIRA, Professor de Manicure, 70-Bairro do Emigrante-Coimbra-3030, 1998, 5, 16
-202033295,MARCO PAULO RAIMUNDO DOS SANTOS, Professor de Maquiagem, 59-Casais-Coimbra-3034, 1950, 1, 6
-159438276,MARIA ANTONIA DE SA BARREIRA, Professor de Marketing, 40-Casal Espirito Santo-Abelheira-3040, 1973, 6, 26
-142495654,MARIA AUGUSTA RIBEIRO NUNES, Estudante, 46-CovAo-Cernache-3044, 2008, 7, 18
-214758877,MARIA CECILIA DE SOUSA MONTEIRO VEIGA, Professor de Matematica, 80-CovAo de Baixo-Ameal-3045, 1958, 5, 25
-150753519,MARIA DE FATIMA DA FONSECA PINTO, Professor de Matematica Financeira, 66-Cruz da Gandara-Coimbra-3049, 1959, 5, 18
-159482933,MARIA DO CEU CORREIA DE PAIVA, Professor de Mecanica, 79-Fiscal-AncA-3060, 2002, 9, 2
-125097786,MARIA EUGENIA DOS SANTOS RIBEIRO MARTINHO, Professor de Mecanica Aeronautica, 63-Freixo-Arneiro-3070, 1991, 7, 1
-110199022,MARIA GABRIELA ONOFRE LOPES MOURA PLACIDO, Professor de Medicina, 44-Gandara-Araujos-3080, 1950, 1, 21
-111846617,MARIA JOSE DOS SANTOS REIS CORREIA, Professor de Medicina do Trabalho, 93-Mo de Fiscal-Figueira da Foz-3084, 1979, 10, 23
-141131420,MARIA MONTEIRO LEITAO DE SOUSA FILIPE, Estudante, 95-Povoa de Fiscal-Alhadas de Baixo-3090, 2005, 4, 23
-120630486,MARIA ROSA LUCAS DO CARMO, Professor de Moda, 56-PrilhAo-Marinha das Ondas-3094, 1975, 10, 3
-180347845,MATILDE MARIA PAULA MARTINS ROCHA DIAS FORTES, Professor de Musculacao, 86-Quinta do Fiscal-Alfarelos-3130, 1963, 1, 12
-252173066,MICHAEL BRIAN CUSACK, Estudante, 15-Regadas do Vale-Abrunheira-3140, 2010, 5, 7
-146893689,MIGUEL DA SILVA MOREIRA, Professor de NatacAo, 15-Reguengo-Alvogadas-3150, 1996, 1, 5
-222518103,MOHAMED SYLLA, Professor de Noruegues, 33-Relvas do Freixo-Casal de Ermio-3200, 1965, 2, 13
-201785870,NADY ADLY BOTROS, Professor de NutricAo, 34-Ribeira dos Casais-Azenha-3220, 1985, 11, 24
-215809777,NELSON MANUEL MACHADO CARDOSO, Professor de Odontologia, 68-Ribeira Maior-Bouca-3230, 1964, 3, 5
-243208677,NELSON RICARDO CERQUEIRA DOS SANTOS, Estudante, 85-Rogela-Alagoa-3300, 2013, 1, 22
-197469663,NUNO ALEXANDRE ALVES DE OLIVEIRA, Professor de Pedagogia, 93-Sarnadinha-Anceriz-3305, 1997, 1, 6
-110749448,ODETE AIDA DA CONCEIcAO DIAS, Professor de Petroleo e Gas, 72-Tapada de Fiscal-Cabril-3320, 1983, 9, 26
-166895946,OLGA HERMINIA DE OLIVEIRA PIMENTEL TORRES, Professor de Photoshop, 79-Tapada do Tanque-Algares-3330, 1989, 4, 26
-105415600,OLGA MARIA MIRANDA BARARDO, Estudante, 70-Vale-Arrifana-3350, 2005, 6, 10
-249959062,PASCUAL DIAZ SANCHEZ, Professor de Pintura em Tela, 76-Vinhas de Fiscal-Ameal-3360, 1957, 4, 5
-188257861,PAULA CRISTINA DA CUNHA PEREIRA SILVA, Estudante, 57-ChA do Freixo-Aldeia das Dez-3400, 2008, 11, 9
-196993261,PAULO JORGE DA SILVA, Professor de Portugues, 43-Vilarinho-Bobadela-3405, 1987, 2, 12
-164575448,PAULO JORGE MENDES VENTOSA, Professor de ProgramacAo de Computadores, 77-Rascoas-Azere-3420, 1976, 5, 27
-183465032,PAULO JORGE SOUSA LOPES, Professor de ProgramacAo de Redes, 86-Vila Seca-Berreiros-6285, 2002, 10, 7
-209217316,PAULO SERGIO DA SILVA CORREIA, Professor de Protese Dentaria, 40-Varzea de Candosa-Coimbra-3004, 1995, 6, 5
-256627959,PEDRO DAVOCA ESPERANcA, Professor de Psicanalise, 52-Avelar-BotAo-3020, 1963, 11, 13
-198801157,PEDRO MANUEL COELHO BENTO, Professor de Psicologia, 81-Quinta da Barroca-Coimbra-3025, 1967, 8, 24
-206694741,PEDRO MIGUEL RAMIRO SANTOS, Estudante, 73-Valongo-Coimbra-3030, 2011, 2, 5
-108982017,POSSIDONIO LINO DOS SANTOS NOGUEIRA, Professor de Publicidade e Propaganda, 90-Vila ChA-Coimbra-3034, 1973, 4, 19
-261503103,REBECA ANTUNES LIMA BARROS, Professor de Quimica, 8-Raposeira-Abelheira-3040, 1973, 4, 13
-251040712,REGINALD FREDERICK CHARLES WEGENER, Professor de Radiologia, 93-Carragosela-Cernache-3044, 1968, 2, 6
-231943881,RICARDO JORGE FREITAS DA CUNHA, Professor de Recreacao, 63-Carvalha Maria Marques-Ameal-3045, 1998, 9, 6
-160920434,ROGERIO ARMANDO DOMINGUES DOS SANTOS, Professor de Recursos Humanos, 73-Casal Espirito Santo-Coimbra-3049, 1989, 3, 17
-134090195,ROGERIO PAULO MARTINS PEREIRA, Professor de RedacAo, 75-Devaqueira-AncA-3060, 1961, 10, 27
-246537612,ROSA MARIA FREIRE ALVAREZ, Professor de Relacoes Publicas, 12-Espariz-Arneiro-3070, 1959, 6, 16
-188617817,ROSINDA OLIVEIRA FONSECA, Professor de Robotica, 73-Gandara de Espariz-Araujos-3080, 1982, 2, 26
-198524757,ROY BRADBURY, Estudante, 29-Meda de Mouros-Figueira da Foz-3084, 2012, 9, 7
-197113087,RUI ANTONIO DE SOUSA CUNHA, Professor de Secretariado, 18-Cadoico-Alhadas de Baixo-3090, 1979, 2, 12
-129731617,RUI MANUEL DIAS FERREIRA, Estudante, 91-Casal da Senhora-Marinha das Ondas-3094, 2014, 3, 8
-220329419,SANDRA ISABEL BENTO VIEGAS CASCARRINHA, Professor de Servico Social, 39-Coito-Alfarelos-3130, 2002, 4, 22
-222903953,SECO SISSE, Professor de Sistemas de Informacao, 24-EsporAo de Baixo-Abrunheira-3140, 1954, 5, 27
-222779314,SERGIO FILIPE GOMES SOARES, Professor de Sociologia, 37-EsporAo de Cima-Alvogadas-3150, 1966, 7, 27
-216764793,SERGIO FRANCISCO CANILHAS CASCARRINHA, Professor de SQL, 52-Quinta da Ribeira-Casal de Ermio-3200, 1977, 10, 9
-222198052,SERGIO GONcALVES NOGUEIRA, Estudante, 6-Quinta da Roda-Azenha-3220, 2003, 5, 11
-153218789,SERGIO GUILHERME MENDES GOUVEIA, Professor de Teatro, 42-Quinta de Gois-Bouca-3230, 1984, 1, 20
-223128171,SERGIO MIGUEL VIEIRA FERNANDES, Professor de Tecnologia da Informacao, 50-Quinta de Sao Jacinto-Alagoa-3300, 1972, 4, 15
-229545556,SIMAO PEDRO FERNANDES DA CUNHA, Professor de Telemarketing, 67-Quinta do Pico-Anceriz-3305, 1956, 7, 18
-204806992,STEFANIA FARIAS LEANDRO, Professor de Tenis, 36-Santo Amaro-Cabril-3320, 1966, 3, 9
-262760525,TESSARI DARIO, Professor de Teologia, 60-SAo Miguel-Algares-3330, 1950, 5, 6
-194253333,USSUMANE JAMANCA, Professor de Turismo, 89-Tojais-Arrifana-3350, 1978, 5, 27
-145244628,VALDEMAR DE MATOS VIEGAS DO COUTO, Professor de Vendas, 88-Touriz-Ameal-3360, 1972, 7, 10
-185068510,VALDEMAR OLIVEIRA SANTOS, Estudante, 1-Vale Candeeiros-Aldeia das Dez-3400, 2009, 7, 7
-184150035,VALTER CONCEIcAO DANIEL ALEIXO, Professor de Violao, 4-Vale de Gaios-Bobadela-3405, 1951, 8, 18
-218452276,VICENTE ROIG PUIGTIO, Professor de Visual Basic, 96-Vasco-Azere-3420, 1983, 8, 20
-202369587,VIRIATO JOSE FERNANDES, Estudante, 45-Vila do Mato-Berreiros-6285, 2011, 7, 15
-101230664,VITOR BENTO DOS SANTOS, Professor de Windows, 73-Alvoeira-Coimbra-3004, 1951, 6, 26
-164974091,VITOR DOMINGOS DA CRUZ FERREIRA, Professor de Xadrez, 98-Canhestro-Botao-3020, 1950, 3, 15
-119941767,VITOR MANUEL SOARES DOS SANTOS, Professor de Yoga, 83-Castanheira-Coimbra-3025, 1960, 5, 15
-240319699,WALKYNER HENRIQUE ARAUJO DE PAULA, Estudante, 47-Catraia de Mouronho-Coimbra-3030, 2002, 5, 7
-255057733,ZIASHAN ASLAM, Professor Universitario, 86-Fontao-Coimbra-3034, 1973, 3, 22
+201381150,JOAO CARLOS COUTINHO PINTO,Professor de Futebol,82-Moinhos-Coimbra-3034,1962,5,18
+204583098,JOAO DUARTE FROTA BAPTISTA FERREIRA MATEUS,Professor de Gastronomia,87-Outeiro-Abelheira-3040,2001,6,8
+276822641,JOAO FERNANDO VIEIRA FILHO,Professor de Geografia,44-Passal-Cernache-3044,1981,4,2
+195448731,JOAO FILIPE JARDIM LEANDRO,Estudante,12-Pereiro-Ameal-3045,2013,10,8
+138967857,JOAO GUALBERTO SEMEDO,Professor de GestAo da Qualidade,75-Pico-Coimbra-3049,1954,10,9
+114625808,JOAO HILARIO DA TRINDADE,Professor de GestAo de Projetos,33-Ponte-AncA-3060,1966,3,2
+166578967,JOAO MANUEL PEREIRA DE SOUSA,Professor de GestAo Financeira,75-Povoa-Arneiro-3070,1991,5,7
+140770070,JOAO MARQUES BARROSO,Estudante,17-4 aguas-Araujos-3080,2013,6,16
+143620754,JOAO MOREIRA DA SILVA GONcALVES,Professor de Ginastica,35-Quinta-Figueira da Foz-3084,1980,4,6
+179344684,JULIO MANUEL DE SOUSA CUNHA,Professor de Ginastica Laboral,92-Redoica-Alhadas de Baixo-3090,1995,3,26
+267771746,KAIYAN WAN,Professor de Grego,74-Relvas-Marinha das Ondas-3094,1970,4,27
+209208325,LASSANA DJALO,Professor de Hebraico,17-Ribeira Cimeira-Alfarelos-3130,2004,10,14
+133604934,LEOPOLDO GUERRA MENDES,Professor de Hidroginastica,30-Ribeira do Conde-Abrunheira-3140,2004,5,4
+146893476,LIDIA MANUELA DOS SANTOS TEIXEIRA MOREIRA,Estudante,36-Ribeira Fundeira-Alvogadas-3150,2007,4,4
+162004087,LUIS MANUEL NUNES DA CUNHA ANTAS,Professor de Holandes,74-Rodas-Casal de Ermio-3200,1971,2,24
+171036514,LUIS MANUEL VIEIRA DE ALMEIDA,Professor de Hotelaria,96-Santo Aleixo-Azenha-3220,1971,9,14
+205094180,MADALENA MARIA DE OLIVEIRA MOREIRA MAIA,Professor de Hotelaria e Turismo,49-Santo Ovideo-Bouca-3230,1999,4,9
+210877537,MAMADOU BAH,Professor de Idiomas,72-Serobela-Alagoa-3300, 1959,2,13
+193348713,MAMADU ALIU JALO,Professor de Informatica,33-Silvares-Anceriz-3305,1981,3,11
+200484079,MAMUDO DANSO,Estudante,28-SoutelA-Cabril-3320,2005,1,8
+127634460,MANUEL ALFREDO DIAS SANTOS LEITE,Professor de Ingles e Espanhol,29-Soutelo-Algares-3330,1984,8,12
+148482627,MANUEL AUGUSTO ZENHA DE CASTRO,Professor de Ingles e Portugues,3-Terra da Gaga-Arrifana-3350,1970,6,20
+204439833,MANUEL DO NASCIMENTO VIEGAS D ABREU RITA,Professor de Italiano,65-Tojal-Ameal-3360,1950,2,1
+117052302,MANUEL FONSECA DA SILVA,Professor de Japones,32-Valada-Aldeia das Dez-3400,1977,4,4
+141710500,MANUEL JOAQUIM CORREIA CANECA,Estudante,21-Vale Carvalhos-Bobadela-3405,2011,8,25
+114706050,MANUEL JOSE CAROCHA, rofessor de Letras,42-Vale Figueira-Azere-3420,1970,6,24
+128552620,MANUEL JOSE NUNES,Professor de Libras,88-Vale Madeiros-Berreiros-6285,1953,7,2
+156311119,MANUEL LOPES MENDES,Professor de Literatura,66-Vale Raiz-Coimbra-3004,1989,7,26
+118588800,MANUEL NICOLAU FORTES,Professor de Logistica,86-Valeiro-BotAo-3020,1997,9,27
+157380726,MANUEL PEREIRA DE SOUSA,Estudante,98-Vila Cova do Barro-Coimbra-3025,2010,11,12
+160995914,MANUEL ZEFERINO PINTO FERREIRA,Professor de Manicure,70-Bairro do Emigrante-Coimbra-3030,1998,5,16
+202033295,MARCO PAULO RAIMUNDO DOS SANTOS,Professor de Maquiagem,59-Casais-Coimbra-3034,1950,1,6
+159438276,MARIA ANTONIA DE SA BARREIRA,Professor de Marketing,40-Casal Espirito Santo-Abelheira-3040,1973,6,26
+142495654,MARIA AUGUSTA RIBEIRO NUNES,Estudante,46-CovAo-Cernache-3044,2008,7,18
+214758877,MARIA CECILIA DE SOUSA MONTEIRO VEIGA,Professor de Matematica,80-CovAo de Baixo-Ameal-3045,1958,5,25
+150753519,MARIA DE FATIMA DA FONSECA PINTO,Professor de Matematica Financeira,66-Cruz da Gandara-Coimbra-3049,1959,5,18
+159482933,MARIA DO CEU CORREIA DE PAIVA,Professor de Mecanica,79-Fiscal-AncA-3060,2002,9,2
+125097786,MARIA EUGENIA DOS SANTOS RIBEIRO MARTINHO,Professor de Mecanica Aeronautica,63-Freixo-Arneiro-3070,1991,7,1
+110199022,MARIA GABRIELA ONOFRE LOPES MOURA PLACIDO,Professor de Medicina,44-Gandara-Araujos-3080,1950,1,21
+111846617,MARIA JOSE DOS SANTOS REIS CORREIA,Professor de Medicina do Trabalho,93-Mo de Fiscal-Figueira da Foz-3084,1979,10,23
+141131420,MARIA MONTEIRO LEITAO DE SOUSA FILIPE,Estudante,95-Povoa de Fiscal-Alhadas de Baixo-3090,2005,4,23
+120630486,MARIA ROSA LUCAS DO CARMO,Professor de Moda,56-PrilhAo-Marinha das Ondas-3094,1975,10,3
+180347845,MATILDE MARIA PAULA MARTINS ROCHA DIAS FORTES,Professor de Musculacao,86-Quinta do Fiscal-Alfarelos-3130,1963,1,12
+252173066,MICHAEL BRIAN CUSACK, Estudante,15-Regadas do Vale-Abrunheira-3140,2010,5,7
+146893689,MIGUEL DA SILVA MOREIRA,Professor de NatacAo,15-Reguengo-Alvogadas-3150,1996,1,5
+222518103,MOHAMED SYLLA,Professor de Noruegues,33-Relvas do Freixo-Casal de Ermio-3200,1965,2,13
+201785870,NADY ADLY BOTROS,Professor de NutricAo,34-Ribeira dos Casais-Azenha-3220,1985,11,24
+215809777,NELSON MANUEL MACHADO CARDOSO,Professor de Odontologia,68-Ribeira Maior-Bouca-3230,1964,3,5
+243208677,NELSON RICARDO CERQUEIRA DOS SANTOS,Estudante,85-Rogela-Alagoa-3300,2013,1,22
+197469663,NUNO ALEXANDRE ALVES DE OLIVEIRA,Professor de Pedagogia,93-Sarnadinha-Anceriz-3305,1997,1,6
+110749448,ODETE AIDA DA CONCEIcAO DIAS,Professor de Petroleo e Gas,72-Tapada de Fiscal-Cabril-3320,1983,9,26
+166895946,OLGA HERMINIA DE OLIVEIRA PIMENTEL TORRES,Professor de Photoshop,79-Tapada do Tanque-Algares-3330,1989,4,26
+105415600,OLGA MARIA MIRANDA BARARDO, Estudante,70-Vale-Arrifana-3350,2005,6,10
+249959062,PASCUAL DIAZ SANCHEZ,Professor de Pintura em Tela,76-Vinhas de Fiscal-Ameal-3360,1957,4,5
+188257861,PAULA CRISTINA DA CUNHA PEREIRA SILVA,Estudante,57-ChA do Freixo-Aldeia das Dez-3400,2008,11,9
+196993261,PAULO JORGE DA SILVA,Professor de Portugues,43-Vilarinho-Bobadela-3405,1987,2,12
+164575448,PAULO JORGE MENDES VENTOSA,Professor de ProgramacAo de Computadores,77-Rascoas-Azere-3420,1976,5,27
+183465032,PAULO JORGE SOUSA LOPES,Professor de ProgramacAo de Redes,86-Vila Seca-Berreiros-6285,2002,10,7
+209217316,PAULO SERGIO DA SILVA CORREIA,Professor de Protese Dentaria,40-Varzea de Candosa-Coimbra-3004,1995,6,5
+256627959,PEDRO DAVOCA ESPERANcA,Professor de Psicanalise,52-Avelar-BotAo-3020,1963,11,13
+198801157,PEDRO MANUEL COELHO BENTO,Professor de Psicologia,81-Quinta da Barroca-Coimbra-3025,1967,8,24
+206694741,PEDRO MIGUEL RAMIRO SANTOS,Estudante,73-Valongo-Coimbra-3030,2011,2,5
+108982017,POSSIDONIO LINO DOS SANTOS NOGUEIRA,Professor de Publicidade e Propaganda,90-Vila ChA-Coimbra-3034,1973,4,19
+261503103,REBECA ANTUNES LIMA BARROS,Professor de Quimica,8-Raposeira-Abelheira-3040,1973,4,13
+251040712,REGINALD FREDERICK CHARLES WEGENER,Professor de Radiologia,93-Carragosela-Cernache-3044,1968,2,6
+231943881,RICARDO JORGE FREITAS DA CUNHA,Professor de Recreacao,63-Carvalha Maria Marques-Ameal-3045,1998,9,6
+160920434,ROGERIO ARMANDO DOMINGUES DOS SANTOS,Professor de Recursos Humanos,73-Casal Espirito Santo-Coimbra-3049,1989,3,17
+134090195,ROGERIO PAULO MARTINS PEREIRA,Professor de RedacAo,75-Devaqueira-AncA-3060,1961,10,27
+246537612,ROSA MARIA FREIRE ALVAREZ,Professor de Relacoes Publicas,12-Espariz-Arneiro-3070,1959,6,16
+188617817,ROSINDA OLIVEIRA FONSECA,Professor de Robotica,73-Gandara de Espariz-Araujos-3080,1982,2,26
+198524757,ROY BRADBURY,Estudante,29-Meda de Mouros-Figueira da Foz-3084,2012,9,7
+197113087,RUI ANTONIO DE SOUSA CUNHA,Professor de Secretariado,18-Cadoico-Alhadas de Baixo-3090,1979,2,12
+129731617,RUI MANUEL DIAS FERREIRA,Estudante,91-Casal da Senhora-Marinha das Ondas-3094,2014,3,8
+220329419,SANDRA ISABEL BENTO VIEGAS CASCARRINHA,Professor de Servico Social,39-Coito-Alfarelos-3130,2002,4,22
+222903953,SECO SISSE,Professor de Sistemas de Informacao,24-EsporAo de Baixo-Abrunheira-3140,1954,5,27
+222779314,SERGIO FILIPE GOMES SOARES,Professor de Sociologia,37-EsporAo de Cima-Alvogadas-3150,1966,7,27
+216764793,SERGIO FRANCISCO CANILHAS CASCARRINHA,Professor de SQL,52-Quinta da Ribeira-Casal de Ermio-3200,1977,10,9
+222198052,SERGIO GONcALVES NOGUEIRA,Estudante,6-Quinta da Roda-Azenha-3220,2003,5,11
+153218789,SERGIO GUILHERME MENDES GOUVEIA,Professor de Teatro,42-Quinta de Gois-Bouca-3230,1984,1,20
+223128171,SERGIO MIGUEL VIEIRA FERNANDES,Professor de Tecnologia da Informacao,50-Quinta de Sao Jacinto-Alagoa-3300,1972,4,15
+229545556,SIMAO PEDRO FERNANDES DA CUNHA,Professor de Telemarketing,67-Quinta do Pico-Anceriz-3305,1956,7,18
+204806992,STEFANIA FARIAS LEANDRO,Professor de Tenis,36-Santo Amaro-Cabril-3320,1966,3,9
+262760525,TESSARI DARIO,Professor de Teologia,60-SAo Miguel-Algares-3330,1950,5,6
+194253333,USSUMANE JAMANCA,Professor de Turismo,89-Tojais-Arrifana-3350,1978,5,27
+145244628,VALDEMAR DE MATOS VIEGAS DO COUTO,Professor de Vendas,88-Touriz-Ameal-3360,1972,7,10
+185068510,VALDEMAR OLIVEIRA SANTOS, Estudante,1-Vale Candeeiros-Aldeia das Dez-3400,2009,7,7
+184150035,VALTER CONCEIcAO DANIEL ALEIXO,Professor de Violao,4-Vale de Gaios-Bobadela-3405,1951,8,18
+218452276,VICENTE ROIG PUIGTIO,Professor de Visual Basic,96-Vasco-Azere-3420,1983,8,20
+202369587,VIRIATO JOSE FERNANDES,Estudante,45-Vila do Mato-Berreiros-6285,2011,7,15
+101230664,VITOR BENTO DOS SANTOS,Professor de Windows,73-Alvoeira-Coimbra-3004,1951,6,26
+164974091,VITOR DOMINGOS DA CRUZ FERREIRA,Professor de Xadrez,98-Canhestro-Botao-3020,1950,3,15
+119941767,VITOR MANUEL SOARES DOS SANTOS,Professor de Yoga,83-Castanheira-Coimbra-3025,1960,5,15
+240319699,WALKYNER HENRIQUE ARAUJO DE PAULA,Estudante,47-Catraia de Mouronho-Coimbra-3030,2002,5,7
+255057733,ZIASHAN ASLAM,Professor Universitario,86-Fontao-Coimbra-3034,1973,3,22
