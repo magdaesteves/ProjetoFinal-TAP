@@ -112,12 +112,12 @@ public class GestorPassageiro {
     }
 
 
-    public void selecionarVoosIdPorRotas(String nf, int idRotas) throws IOException {
+    public void selecionarVoosIdPorRotas(String NomeFich, int idRotas) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         Scanner sc = new Scanner(System.in);
         int idRota = 0, idVoo = 0, hora, minuto, segundo, cont = 0;
         String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         int idVoos = 0;
         while (linha != null) {
@@ -156,12 +156,12 @@ public class GestorPassageiro {
     }
 
     //5 - Listar as rotas
-    public void lerRotaTxt(String nf) throws IOException {
+    public void lerRotaTxt(String NomeFich) throws IOException {
         HashMap<Integer,Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -186,11 +186,11 @@ public class GestorPassageiro {
     //FIM DO 5
 
     //6 - Listar os voos de uma rota;
-    public void listarVoosPorRota (String nf, int idRotas) throws IOException {
+    public void listarVoosPorRota (String NomeFich, int idRotas) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota = 0, idVoo, hora, minuto, segundo,cont=0;
         String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -280,12 +280,12 @@ public class GestorPassageiro {
     }
     //FIM DO 7
 /*
-    public void lerRotaTxt(String nf) throws IOException {
+    public void lerRotaTxt(String NomeFich) throws IOException {
         HashMap<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
         double distanciaKm;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -300,11 +300,11 @@ public class GestorPassageiro {
         f.close();
     }
 */
-    public void lerVooTxt(String nf) throws IOException {
+    public void lerVooTxt(String NomeFich) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -322,11 +322,11 @@ public class GestorPassageiro {
         f.close();
     }
 
-    public void lerPassageiroTxt(String nf) throws IOException {
+    public void lerPassageiroTxt(String NomeFich) throws IOException {
         HashMap<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
         String idPassageiro, nome, profissao, morada;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
@@ -353,12 +353,12 @@ public class GestorPassageiro {
 
 
 
-    public void lerBilheteTxt(String nf) throws IOException {
+    public void lerBilheteTxt(String NomeFich) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao;
         String idPassageiro;
         double preco;
-        BufferedReader f = new BufferedReader(new FileReader(new File(nf)));
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
