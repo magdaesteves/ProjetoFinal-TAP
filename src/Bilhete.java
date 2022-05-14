@@ -15,8 +15,9 @@ public class Bilhete {
     private int minutoAquisicao;
     private int segundoAquisicao;
     private double preco;
+    private int tipoBilhete; // 1-bilhete efetivo --- 2-bilhete suplente
 
-    public Bilhete(String idPassageiro, int idRota, int idVoo, int anoViagem, int mesViagem, int diaViagem, int horaViagem, int minutoViagem, int segundoViagem, int anoAquisicao, int mesAquisicao, int diaAquisicao, int horaAquisicao, int minutoAquisicao, int segundoAquisicao, double preco) {
+    public Bilhete(String idPassageiro, int idRota, int idVoo, int anoViagem, int mesViagem, int diaViagem, int horaViagem, int minutoViagem, int segundoViagem, int anoAquisicao, int mesAquisicao, int diaAquisicao, int horaAquisicao, int minutoAquisicao, int segundoAquisicao, double preco,int tipoBilhete) {
         this.idPassageiro = idPassageiro;
         this.idRota = idRota;
         this.idVoo = idVoo;
@@ -33,6 +34,7 @@ public class Bilhete {
         this.minutoAquisicao = minutoAquisicao;
         this.segundoAquisicao = segundoAquisicao;
         this.preco = preco;
+        this.tipoBilhete = tipoBilhete;
     }
 
     public String getIdPassageiro() {return idPassageiro;}
@@ -82,5 +84,8 @@ public class Bilhete {
 
     public double getPreco() {return preco;}
     public void setPreco(double preco) {this.preco = preco;}
+
+    public int getTipoBilhete() {return tipoBilhete;}
+    public void setTipoBilhete(int tipoBilhete) {this.tipoBilhete = tipoBilhete;}
 
 }

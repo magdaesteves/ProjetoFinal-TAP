@@ -1,7 +1,7 @@
 public class Voo {
     private int idRota;
     private int idVoo;
-       private String diaSemana;
+    private String diaSemana;
     private int horaVoo;
     private int minutoVoo;
     private int segundoVoo;
