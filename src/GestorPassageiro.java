@@ -150,15 +150,32 @@ public class GestorPassageiro {
         }
     }
 
-    public void CriarBilhete(Bilhete Bilhete) throws IOException{ //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt",true));
-        String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
-                        Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
-                        Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
-                        Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
-                        Bilhete.getTipoBilhete();
-        buffWrite.append(linha);
-        buffWrite.close();
+    public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
+        Scanner sc = new Scanner(System.in);
+        HashMap<Integer,Rota> dicRotas = lerRotasTxt("rotas.txt");
+        boolean found = false;
+        int rota = 0;
+        while(!found) {
+            System.out.println("Escolha uma das seguintes rotas:");
+            MostrarRota(dicRotas);
+            rota = sc.nextInt();
+            found = dicRotas.containsKey(rota);
+        }
+        return dicRotas.get(rota);
+    }
+
+    public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
+        Scanner sc = new Scanner(System.in);
+        HashMap<Integer,Voo> dicVoo = getVoosPorRota(idRota,"voos.txt");
+        boolean found = false;
+        int voo = 0;
+        while(!found) {
+            System.out.println("Escolha um dos seguintes voos:");
+            MostrarVoo(dicVoo);
+            voo = sc.nextInt();
+            found = dicVoo.containsKey(voo);
+        }
+        return dicVoo.get(voo);
     }
 
     public int tipoBilhete(Voo Voo, Rota Rota) throws IOException { //verifica se o bilhete é ou não efetivo
@@ -203,32 +220,15 @@ public class GestorPassageiro {
         return Preco; // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
     }
 
-    public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
-        Scanner sc = new Scanner(System.in);
-        HashMap<Integer,Rota> dicRotas = lerRotasTxt("rotas.txt");
-        boolean found = false;
-        int rota = 0;
-        while(!found) {
-            System.out.println("Escolha uma das seguintes rotas:");
-            MostrarRota(dicRotas);
-            rota = sc.nextInt();
-            found = dicRotas.containsKey(rota);
-        }
-        return dicRotas.get(rota);
-    }
-
-    public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
-        Scanner sc = new Scanner(System.in);
-        HashMap<Integer,Voo> dicVoo = getVoosPorRota(idRota,"voos.txt");
-        boolean found = false;
-        int voo = 0;
-        while(!found) {
-            System.out.println("Escolha um dos seguintes voos:");
-            MostrarVoo(dicVoo);
-            voo = sc.nextInt();
-            found = dicVoo.containsKey(voo);
-        }
-        return dicVoo.get(voo);
+    public void CriarBilhete(Bilhete Bilhete) throws IOException{ //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt",true));
+        String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
+                        Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
+                        Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
+                        Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
+                        Bilhete.getTipoBilhete();
+        buffWrite.append(linha);
+        buffWrite.close();
     }
     //Fim 2
 
