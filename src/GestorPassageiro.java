@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -123,6 +125,7 @@ public class GestorPassageiro {
         Rota Rota = EscolherRota();
         Voo Voo = EscolherVoo(Rota.getIdRota());
         int tipoBilhete = tipoBilhete(Voo,Rota);
+        double preco = 0;
         switch (tipoBilhete) {
             case 0 : {
                 System.out.println("Não há bilhetes disponíveis.");
@@ -130,18 +133,33 @@ public class GestorPassageiro {
             }
             case 1 : {
                 LocalDateTime data = LocalDateTime.now();
-                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),-,-,-, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),-,1);
+                preco = calculoPrecoBilhete(Rota,1,300,1000);
+                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,1);
+                CriarBilhete(bilhete);
                 System.out.println("Foi comprado um bilhete efetivo.");
                 break;
             }
             case 2 : {
                 LocalDateTime data = LocalDateTime.now();
-                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),-,-,-, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),-,2);
+                preco = calculoPrecoBilhete(Rota,1,300,1000);
+                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,2);
+                CriarBilhete(bilhete);
                 System.out.println("Foi comprado um bilhete suplente.");
                 break;
             }
         }
 
+    }
+
+    public void CriarBilhete(Bilhete Bilhete) throws IOException{
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt",true));
+        String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
+                Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
+                Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
+                Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
+                Bilhete.getTipoBilhete();
+        buffWrite.append(linha);
+        buffWrite.close();
     }
 
     public int tipoBilhete(Voo Voo, Rota Rota) throws IOException {
@@ -152,12 +170,21 @@ public class GestorPassageiro {
         int bilhetessuplentes = dicBilhetesSuplentes.size();
         if(bilhetesefetivos < maxbilhetes) {
             return 1;
-        } else{
+        } else {
             if(bilhetessuplentes < 4){
                 return 2;
             }
         }
         return 0;
+    }
+
+    public double calculoPrecoBilhete(Rota Rota,double precoKM,double primeiroDesconto,double segundoDesconto) throws IOException{
+        double Preco = Rota.getDistanciaKm() * precoKM;
+        if(Preco > segundoDesconto)
+            return Preco * 0.5;
+        if(Preco >primeiroDesconto)
+            return Preco * 0.25;
+        return Preco;
     }
 
     public int getMaxBilhetes(String Aviao) throws IOException {
@@ -204,7 +231,6 @@ public class GestorPassageiro {
         }
         return dicVoo.get(voo);
     }
-
     //Fim 2
 
     public void selecionarVoosIdPorRotas(String NomeFich, int idRotas) throws IOException {
