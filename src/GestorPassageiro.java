@@ -153,13 +153,13 @@ public class GestorPassageiro {
     public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
         Scanner sc = new Scanner(System.in);
         HashMap<Integer,Rota> dicRotas = lerRotasTxt("rotas.txt");
-        boolean found = false;
+        boolean encontrado = false;
         int rota = 0;
-        while(!found) {
+        while(!encontrado) {
             System.out.println("Escolha uma das seguintes rotas:");
             MostrarRota(dicRotas);
             rota = sc.nextInt();
-            found = dicRotas.containsKey(rota);
+            encontrado = dicRotas.containsKey(rota);
         }
         return dicRotas.get(rota);
     }
@@ -167,13 +167,13 @@ public class GestorPassageiro {
     public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
         Scanner sc = new Scanner(System.in);
         HashMap<Integer,Voo> dicVoo = getVoosPorRota(idRota,"voos.txt");
-        boolean found = false;
+        boolean encontrado = false;
         int voo = 0;
-        while(!found) {
+        while(!encontrado) {
             System.out.println("Escolha um dos seguintes voos:");
             MostrarVoo(dicVoo);
             voo = sc.nextInt();
-            found = dicVoo.containsKey(voo);
+            encontrado = dicVoo.containsKey(voo);
         }
         return dicVoo.get(voo);
     }
