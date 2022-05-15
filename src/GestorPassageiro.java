@@ -156,10 +156,11 @@ public class GestorPassageiro {
         boolean encontrado = false;
         int rota = 0;
         while(!encontrado) {
-            System.out.println("Escolha uma das seguintes rotas:");
+            System.out.println("\nEscolha uma das seguintes rotas:");
             MostrarRota(dicRotas);
+            System.out.print("\nEscolha uma opção: ");
             rota = sc.nextInt();
-            encontrado = dicRotas.containsKey(rota);
+            encontrado = dicRotas.containsKey(rota); //verifica se a rota escolhida existe
         }
         return dicRotas.get(rota);
     }
@@ -170,8 +171,9 @@ public class GestorPassageiro {
         boolean encontrado = false;
         int voo = 0;
         while(!encontrado) {
-            System.out.println("Escolha um dos seguintes voos:");
+            System.out.println("\nEscolha um dos seguintes voos:");
             MostrarVoo(dicVoo);
+            System.out.print("\nEscolha uma opção: ");
             voo = sc.nextInt();
             encontrado = dicVoo.containsKey(voo);
         }
@@ -560,7 +562,7 @@ public class GestorPassageiro {
         System.out.println("|  (9) - Listar bilhetes suplentes           |");
         System.out.println("|  (0) - Sair                                |");
         System.out.println("#--------------------------------------------#");
-        System.out.print("Escolha opção:");
+        System.out.print("Escolha opção: ");
         op=sc.next();
         return op;
     }
@@ -571,7 +573,7 @@ public class GestorPassageiro {
         System.out.println("|  (1) - Selecionar rotas ? 1-Sim 2-Não      |");
         System.out.println("|  (0) - Sair                                |");
         System.out.println("#--------------------------------------------#");
-        System.out.print("Escolha opção:");
+        System.out.print("Escolha opção: ");
         op=sc.next();
         return op;
     }
