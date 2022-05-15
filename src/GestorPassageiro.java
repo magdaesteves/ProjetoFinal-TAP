@@ -189,7 +189,7 @@ public class GestorPassageiro {
         if(bilhetesEfetivos < maxBilhetes) {
             return 1;
         } else {
-            if(bilhetesSuplentes < 4){
+            if(bilhetesSuplentes < 4){ //0 é menor que 4, cria o primeiro, etc etc
                 return 2;
             }
         }
