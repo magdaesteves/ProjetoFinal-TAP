@@ -132,7 +132,7 @@ public class GestorPassageiro {
             }
             case 1 : {
                 LocalDateTime data = LocalDateTime.now();
-                preco = calculoPrecoBilhete(Rota,1,300,1000);
+                preco = calculoPrecoBilhete(Rota,1,300,1000, 25,50);
                 //STOR: como é que vou buscar o ano, mês e dia da viagem sendo que no voo só temos o dia da semana, hora, minuto e segundo da mesma??
                 bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,1);
                 CriarBilhete(bilhete);
@@ -141,7 +141,7 @@ public class GestorPassageiro {
             }
             case 2 : {
                 LocalDateTime data = LocalDateTime.now();
-                preco = calculoPrecoBilhete(Rota,1,300,1000);
+                preco = calculoPrecoBilhete(Rota,1,300,1000, 25,50);
                 bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,2);
                 CriarBilhete(bilhete);
                 System.out.println("\nFoi comprado um bilhete suplente.");
@@ -213,12 +213,12 @@ public class GestorPassageiro {
         return 0;
     }
 
-    public double calculoPrecoBilhete(Rota Rota,double precoKM,double primeiroDesconto,double segundoDesconto) throws IOException{ //verifica os Km
+    public double calculoPrecoBilhete(Rota Rota,double precoKM,double primeiroPrecoDesconto,double segundoPrecoDesconto,double primeiroDescontoPercentagem, double segundoDescontoPercentagem) throws IOException{ //verifica os Km
         double Preco = Rota.getDistanciaKm() * precoKM;
-        if(Preco > segundoDesconto) //se o preço for maior que o segundo desconto então aplica os 50% de desconto
-            return Preco * 0.5;
-        if(Preco >primeiroDesconto) //se o preço for maior que o primeiro desconto então aplica os 25% de desconto
-            return Preco * 0.25;
+        if(Preco > segundoPrecoDesconto) //se o preço for maior que o segundo desconto então aplica os 50% de desconto
+            return Preco * (segundoDescontoPercentagem/100);
+        if(Preco >primeiroPrecoDesconto) //se o preço for maior que o primeiro desconto então aplica os 25% de desconto
+            return Preco * (primeiroDescontoPercentagem/100);
         return Preco; // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
     }
 
