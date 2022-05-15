@@ -114,17 +114,16 @@ public class GestorPassageiro {
                         break;
                 }
                 break;
-
             }
-        }menuExistente();
+        } menuExistente();
     }
 
-    //2-Comprar um bilhete efetivo, caso nao haja compra suplente
+    //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
     public void ComprarBilheteEfetivo(String idPassageiro) throws IOException {
         Bilhete bilhete = null;
-        Rota Rota = EscolherRota();
-        Voo Voo = EscolherVoo(Rota.getIdRota());
-        int tipoBilhete = tipoBilhete(Voo,Rota);
+        Rota Rota = EscolherRota();                 //vai à função para escolher uma rota
+        Voo Voo = EscolherVoo(Rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
+        int tipoBilhete = tipoBilhete(Voo,Rota);    //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
         double preco = 0;
         switch (tipoBilhete) {
             case 0 : {
@@ -134,6 +133,7 @@ public class GestorPassageiro {
             case 1 : {
                 LocalDateTime data = LocalDateTime.now();
                 preco = calculoPrecoBilhete(Rota,1,300,1000);
+                //STOR: como é que vou buscar o ano, mês e dia da viagem sendo que no voo só temos o dia da semana, hora, minuto e segundo da mesma??
                 bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,1);
                 CriarBilhete(bilhete);
                 System.out.println("Foi comprado um bilhete efetivo.");
@@ -148,47 +148,37 @@ public class GestorPassageiro {
                 break;
             }
         }
-
     }
 
-    public void CriarBilhete(Bilhete Bilhete) throws IOException{
+    public void CriarBilhete(Bilhete Bilhete) throws IOException{ //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt",true));
         String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
-                Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
-                Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
-                Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
-                Bilhete.getTipoBilhete();
+                        Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
+                        Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
+                        Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
+                        Bilhete.getTipoBilhete();
         buffWrite.append(linha);
         buffWrite.close();
     }
 
-    public int tipoBilhete(Voo Voo, Rota Rota) throws IOException {
-        int maxbilhetes = getMaxBilhetes(Voo.getMarcaAviao());
+    public int tipoBilhete(Voo Voo, Rota Rota) throws IOException { //verifica se o bilhete é ou não efetivo
+        int maxBilhetes = getMaxBilhetes(Voo.getMarcaAviao());
         HashMap<String,Bilhete> dicBilhetesEfetivos = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),1,Rota.getIdRota());
-        int bilhetesefetivos = dicBilhetesEfetivos.size();
+        int bilhetesEfetivos = dicBilhetesEfetivos.size();
         HashMap<String,Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),2,Rota.getIdRota());
-        int bilhetessuplentes = dicBilhetesSuplentes.size();
-        if(bilhetesefetivos < maxbilhetes) {
+        int bilhetesSuplentes = dicBilhetesSuplentes.size();
+        if(bilhetesEfetivos < maxBilhetes) {
             return 1;
         } else {
-            if(bilhetessuplentes < 4){
+            if(bilhetesSuplentes < 4){
                 return 2;
             }
         }
         return 0;
     }
 
-    public double calculoPrecoBilhete(Rota Rota,double precoKM,double primeiroDesconto,double segundoDesconto) throws IOException{
-        double Preco = Rota.getDistanciaKm() * precoKM;
-        if(Preco > segundoDesconto)
-            return Preco * 0.5;
-        if(Preco >primeiroDesconto)
-            return Preco * 0.25;
-        return Preco;
-    }
-
-    public int getMaxBilhetes(String Aviao) throws IOException {
-        switch (Aviao) {
+    public int getMaxBilhetes(String aviao) throws IOException { //diz qual o máximo de bilhetes efetivos por avião
+        switch (aviao) {
             case "Bombardier Challenger 350":
                 return 10;
 
@@ -204,7 +194,16 @@ public class GestorPassageiro {
         return 0;
     }
 
-    public Rota EscolherRota() throws IOException {
+    public double calculoPrecoBilhete(Rota Rota,double precoKM,double primeiroDesconto,double segundoDesconto) throws IOException{ //verifica os Km
+        double Preco = Rota.getDistanciaKm() * precoKM;
+        if(Preco > segundoDesconto) //se o preço for maior que o segundo desconto então aplica os 50% de desconto
+            return Preco * 0.5;
+        if(Preco >primeiroDesconto) //se o preço for maior que o primeiro desconto então aplica os 25% de desconto
+            return Preco * 0.25;
+        return Preco; // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
+    }
+
+    public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
         Scanner sc = new Scanner(System.in);
         HashMap<Integer,Rota> dicRotas = lerRotasTxt("rotas.txt");
         boolean found = false;
@@ -218,7 +217,7 @@ public class GestorPassageiro {
         return dicRotas.get(rota);
     }
 
-    public Voo EscolherVoo(int idRota) throws IOException {
+    public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
         Scanner sc = new Scanner(System.in);
         HashMap<Integer,Voo> dicVoo = getVoosPorRota(idRota,"voos.txt");
         boolean found = false;
@@ -413,65 +412,9 @@ public class GestorPassageiro {
 
 
 
+    //Auxiliares:
 
-    public HashMap<Integer,Rota> lerRotasTxt(String NomeFich) throws IOException {
-        HashMap<Integer, Rota> dicRota = new HashMap<>();
-        int idRota, quantidadeVoos;
-        String destino;
-        double distanciaKm;
-        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
-        String linha = f.readLine();
-        while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            idRota = Integer.parseInt(campos[0]);
-            quantidadeVoos = Integer.parseInt(campos[1]);
-            destino = campos[2];
-            distanciaKm = Double.parseDouble(campos[3]);
-            Rota r = new Rota(idRota, quantidadeVoos, destino, distanciaKm);
-            dicRota.put(idRota, r);
-            linha = f.readLine();
-        }
-        f.close();
-        return dicRota;
-    }
-
-    public void MostrarRota(HashMap<Integer,Rota> dicRota) throws IOException {
-        for(HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()){
-            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
-        }
-    }
-
-    public void MostrarVoo(HashMap<Integer,Voo> dicVoo) throws IOException {
-        LocalTime tempo = null;
-        for(HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()){
-            tempo = LocalTime.of(Voo.getValue().getHora(),Voo.getValue().getMinuto(),Voo.getValue().getSegundo());
-            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
-        }
-    }
-
-    public HashMap<Integer,Voo> lerVooTxt(String NomeFich) throws IOException {
-        HashMap<Integer, Voo> dicVoo = new HashMap<>();
-        int idRota, idVoo, hora, minuto, segundo;
-        String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
-        String linha = f.readLine();
-        while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            idRota = Integer.parseInt(campos[0]);
-            idVoo = Integer.parseInt(campos[1]);
-            diaSemana = campos[2];
-            hora = Integer.parseInt(campos[3]);
-            minuto = Integer.parseInt(campos[4]);
-            segundo = Integer.parseInt(campos[5]);
-            marcadoAviao = campos[6];
-            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-            dicVoo.put(idVoo, v);
-            linha = f.readLine();
-        }
-        f.close();
-        return dicVoo;
-    }
-
+    //usado na main para ver se existe o id do passageiro
     public HashMap<String,Passageiro> lerPassageiroTxt(String NomeFich) throws IOException {
         HashMap<String, Passageiro> dicPassageiro = new HashMap<>();
         int anoNascimento, mesNascimento, diaNascimento;
@@ -499,8 +442,7 @@ public class GestorPassageiro {
         return "Id: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\nProfissao: " + value.getProfissao() + "\nMorada: " + value.getMorada() + "\nAno Nascimento: " + value.getAno() + "\nMes Nascimento: " + value.getMes() + "\nDia Nascimento: " + value.getDia() +"\n";
     }
 
-
-
+    //usado no 2
     public HashMap<String,Bilhete> lerBilheteTxt(String NomeFich,int idVooFiltro,int tipoBilheteFiltro, int idRotaFiltro) throws IOException {
         HashMap<String, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete;
@@ -537,6 +479,68 @@ public class GestorPassageiro {
         return dicBilhete;
     }
 
+    //usado no 2
+    public HashMap<Integer,Rota> lerRotasTxt(String NomeFich) throws IOException {
+        HashMap<Integer, Rota> dicRota = new HashMap<>();
+        int idRota, quantidadeVoos;
+        String destino;
+        double distanciaKm;
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
+        String linha = f.readLine();
+        while (linha != null) {
+            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            idRota = Integer.parseInt(campos[0]);
+            quantidadeVoos = Integer.parseInt(campos[1]);
+            destino = campos[2];
+            distanciaKm = Double.parseDouble(campos[3]);
+            Rota r = new Rota(idRota, quantidadeVoos, destino, distanciaKm);
+            dicRota.put(idRota, r);
+            linha = f.readLine();
+        }
+        f.close();
+        return dicRota;
+    }
+
+    //usado no 2
+    public void MostrarRota(HashMap<Integer,Rota> dicRota) throws IOException {
+        for(HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()){
+            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
+        }
+    }
+
+    //usado no 2
+    public void MostrarVoo(HashMap<Integer,Voo> dicVoo) throws IOException {
+        LocalTime tempo = null;
+        for(HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()){
+            tempo = LocalTime.of(Voo.getValue().getHora(),Voo.getValue().getMinuto(),Voo.getValue().getSegundo());
+            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
+        }
+    }
+
+    /*
+    public HashMap<Integer,Voo> lerVooTxt (String NomeFich) throws IOException {
+        HashMap<Integer, Voo> dicVoo = new HashMap<>();
+        int idRota, idVoo, hora, minuto, segundo;
+        String diaSemana, marcadoAviao;
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
+        String linha = f.readLine();
+        while (linha != null) {
+            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            idRota = Integer.parseInt(campos[0]);
+            idVoo = Integer.parseInt(campos[1]);
+            diaSemana = campos[2];
+            hora = Integer.parseInt(campos[3]);
+            minuto = Integer.parseInt(campos[4]);
+            segundo = Integer.parseInt(campos[5]);
+            marcadoAviao = campos[6];
+            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
+            dicVoo.put(idVoo, v);
+            linha = f.readLine();
+        }
+        f.close();
+        return dicVoo;
+    }
+     */
 
 
 
@@ -546,7 +550,7 @@ public class GestorPassageiro {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU PASSAGEIRO------------------------#");
         System.out.println("|  (1) - Selecionar rotas                    |");
-        System.out.println("|  (2) -                                     |");
+        System.out.println("|  (2) - Comprar um bilhete efetivo          |");
         System.out.println("|  (3) -                                     |");
         System.out.println("|  (4) -                                     |");
         System.out.println("|  (5) - Listar rotas                        |");
