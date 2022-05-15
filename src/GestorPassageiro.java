@@ -127,7 +127,7 @@ public class GestorPassageiro {
         double preco = 0;
         switch (tipoBilhete) {
             case 0 : {
-                System.out.println("Não há bilhetes disponíveis.");
+                System.out.println("\nNão há bilhetes disponíveis.");
                 break;
             }
             case 1 : {
@@ -136,7 +136,7 @@ public class GestorPassageiro {
                 //STOR: como é que vou buscar o ano, mês e dia da viagem sendo que no voo só temos o dia da semana, hora, minuto e segundo da mesma??
                 bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,1);
                 CriarBilhete(bilhete);
-                System.out.println("Foi comprado um bilhete efetivo.");
+                System.out.println("\nFoi comprado um bilhete efetivo.");
                 break;
             }
             case 2 : {
@@ -144,7 +144,7 @@ public class GestorPassageiro {
                 preco = calculoPrecoBilhete(Rota,1,300,1000);
                 bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,2);
                 CriarBilhete(bilhete);
-                System.out.println("Foi comprado um bilhete suplente.");
+                System.out.println("\nFoi comprado um bilhete suplente.");
                 break;
             }
         }
