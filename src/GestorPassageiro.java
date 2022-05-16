@@ -200,13 +200,10 @@ public class GestorPassageiro {
         switch (aviao) {
             case "Bombardier Challenger 350":
                 return 10;
-
             case "Cessna Citation Latitude":
                 return 12;
-
             case "Embraer Phenom 300":
                 return 9;
-
             case "Bombardier Global 6000":
                 return 17;
         }
