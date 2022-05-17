@@ -319,8 +319,6 @@ public class GestorPassageiro {
         f.close();
         return dicVoo;
     }
-
-
     //FIM DO 6
 
 
@@ -340,7 +338,6 @@ public class GestorPassageiro {
         return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() +"\n";
     }
 
-    //Usado no 7
     public HashMap<Integer,Bilhete> lerBilheteDePassageiro(String NomeFich,String idPassageiroFiltro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
