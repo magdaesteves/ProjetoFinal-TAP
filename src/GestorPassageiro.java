@@ -280,8 +280,7 @@ public class GestorPassageiro {
 
     //6 - Listar os voos de uma rota;
     public void listarVoosPorRota (String NomeFich, int idRotas) throws IOException {
-        HashMap<Integer, Voo> dicVoo = new HashMap<>();
-        dicVoo = getVoosPorRota(idRotas,NomeFich);
+        HashMap<Integer, Voo> dicVoo = getVoosPorRota(idRotas,NomeFich);
         int cont = 0;
 
         if(dicVoo.isEmpty()){
