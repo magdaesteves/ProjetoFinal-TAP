@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class GestorPassageiro {
     private HashMap<String, Passageiro> dicFinal;
@@ -120,32 +120,48 @@ public class GestorPassageiro {
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
     public void ComprarBilheteEfetivo(String idPassageiro) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        LocalDate VerificarData;
         Bilhete bilhete = null;
         Rota Rota = EscolherRota();                 //vai à função para escolher uma rota
         Voo Voo = EscolherVoo(Rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
-        int tipoBilhete = tipoBilhete(Voo,Rota);    //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
+        int tipoBilhete = 0;    //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
         double preco = 0;
-        switch (tipoBilhete) {
-            case 0 : {
-                System.out.println("\nNão há bilhetes disponíveis.");
-                break;
-            }
-            case 1 : {
-                LocalDateTime data = LocalDateTime.now();
-                preco = calculoPrecoBilhete(Rota,1,300,1000, 25,50);
-                //STOR: como é que vou buscar o ano, mês e dia da viagem sendo que no voo só temos o dia da semana, hora, minuto e segundo da mesma??
-                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,1);
-                CriarBilhete(bilhete);
-                System.out.println("\nFoi comprado um bilhete efetivo.");
-                break;
-            }
-            case 2 : {
-                LocalDateTime data = LocalDateTime.now();
-                preco = calculoPrecoBilhete(Rota,1,300,1000, 25,50);
-                bilhete = new Bilhete(idPassageiro,Rota.getIdRota(),Voo.getIdVoo(),00,00,00, Voo.getHora(),Voo.getMinuto(),Voo.getSegundo(),data.getYear(),data.getMonth().getValue(),data.getDayOfMonth(),data.getHour(),data.getMinute(),data.getSecond(),preco,2);
-                CriarBilhete(bilhete);
-                System.out.println("\nFoi comprado um bilhete suplente.");
-                break;
+        int ano,mes,dia=0;
+        boolean diaEncontrado = false;
+        String diaSemana;
+
+        preco = calculoPrecoBilhete(Rota,1,300,1000, 25,50);
+        //A data do voo é pedida ao utilizador, onde verificamos posteriormente se o mesmo pertence ao dia de semana do voo
+        System.out.println("\nAno da viagem:");
+        ano = sc.nextInt();
+        System.out.println("\nMês da viagem:");
+        mes = sc.nextInt();
+        diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
+        while(!diaEncontrado){
+            System.out.println("\nDia da viagem:");
+            dia = sc.nextInt();
+            VerificarData = LocalDate.of(ano,mes,dia);
+            diaEncontrado = diaSemana.equals(VerificarData.getDayOfWeek().name());
+            if(!diaEncontrado){
+                System.out.println("Tem de selecionar um dia que corresponda a " + diaSemana);
+            } else{
+                tipoBilhete = tipoBilhete(Voo,Rota,ano,mes,dia);
+                if(tipoBilhete ==0){
+                    System.out.println("\nNão existem bilhetes disponíveis para o dia pretendido!");
+                    diaEncontrado = false;
+                }
+                else {
+                    LocalDateTime data = LocalDateTime.now();
+                    bilhete = new Bilhete(idPassageiro, Rota.getIdRota(), Voo.getIdVoo(), ano, mes, dia, Voo.getHora(), Voo.getMinuto(), Voo.getSegundo(), data.getYear(), data.getMonth().getValue(), data.getDayOfMonth(), data.getHour(), data.getMinute(), data.getSecond(), preco, tipoBilhete);
+                    CriarBilhete(bilhete);
+                    if (tipoBilhete == 1) {
+                        System.out.println("\nFoi comprado um bilhete efetivo.");
+                    }
+                    if (tipoBilhete == 2) {
+                        System.out.println("\nFoi comprado um bilhete suplente.");
+                    }
+                }
             }
         }
     }
@@ -180,11 +196,11 @@ public class GestorPassageiro {
         return dicVoo.get(voo);
     }
 
-    public int tipoBilhete(Voo Voo, Rota Rota) throws IOException { //verifica se o bilhete é ou não efetivo
+    public int tipoBilhete(Voo Voo, Rota Rota, int ano, int mes, int dia) throws IOException { //verifica se o bilhete é ou não efetivo
         int maxBilhetes = getMaxBilhetes(Voo.getMarcaAviao());
-        HashMap<String,Bilhete> dicBilhetesEfetivos = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),1,Rota.getIdRota());
+        HashMap<String,Bilhete> dicBilhetesEfetivos = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),1,Rota.getIdRota(),ano,mes,dia);
         int bilhetesEfetivos = dicBilhetesEfetivos.size();
-        HashMap<String,Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),2,Rota.getIdRota());
+        HashMap<String,Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt",Voo.getIdVoo(),2,Rota.getIdRota(),ano,mes,dia);
         int bilhetesSuplentes = dicBilhetesSuplentes.size();
         if(bilhetesEfetivos < maxBilhetes) {
             return 1;
@@ -223,8 +239,8 @@ public class GestorPassageiro {
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt",true));
         String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
                         Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
-                        Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaViagem() + "," +
-                        Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getPreco() + "," +
+                        Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaAquisicao() + "," +
+                        Bilhete.getHoraAquisicao() + "," + Bilhete.getMinutoAquisicao() + "," + Bilhete.getSegundoAquisicao() + "," + Bilhete.getPreco() + "," +
                         Bilhete.getTipoBilhete();
         buffWrite.append(linha);
         buffWrite.close();
@@ -442,7 +458,7 @@ public class GestorPassageiro {
     }
 
     //usado no 2
-    public HashMap<String,Bilhete> lerBilheteTxt(String NomeFich,int idVooFiltro,int tipoBilheteFiltro, int idRotaFiltro) throws IOException {
+    public HashMap<String,Bilhete> lerBilheteTxt(String NomeFich,int idVooFiltro,int tipoBilheteFiltro, int idRotaFiltro, int ano, int mes, int dia) throws IOException {
         HashMap<String, Bilhete> dicBilhete = new HashMap<>();
         int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete;
         String idPassageiro;
@@ -451,7 +467,9 @@ public class GestorPassageiro {
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            if((idVooFiltro == 0 || idVooFiltro == Integer.parseInt(campos[2]) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16])) && (idRotaFiltro == 0 || idRotaFiltro == Integer.parseInt(campos[1])))){ //se o filtro for passado a 0, vai buscar todos os registos. Se o filtro vier preenchido vai buscar apenas os bilhetes do voo pretendido
+            if((idVooFiltro == 0 || idVooFiltro == Integer.parseInt(campos[2]) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16])) &&
+                    (idRotaFiltro == 0 || idRotaFiltro == Integer.parseInt(campos[1])) && (ano == 0 || ano == Integer.parseInt(campos[3])) && (mes == 0 || mes == Integer.parseInt(campos[4])) &&
+                    (dia == 0 || dia == Integer.parseInt(campos[5])))){ //se o filtro for passado a 0, vai buscar todos os registos. Se o filtro vier preenchido vai buscar apenas os bilhetes do voo pretendido
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
                 idVoo = Integer.parseInt(campos[2]);
