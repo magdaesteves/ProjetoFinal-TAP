@@ -115,7 +115,7 @@ public class GestorPassageiro {
         Bilhete bilhete = null;
         Rota Rota = EscolherRota();                 //vai à função para escolher uma rota
         Voo Voo = EscolherVoo(Rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
-        int tipoBilhete = 0;    //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
+        int tipoBilhete = 0;                        //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
         double preco = 0;
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
