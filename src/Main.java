@@ -7,7 +7,7 @@ public class Main {
         GestorAssistente gA = new GestorAssistente();
         Scanner sc = new Scanner(System.in);
         String op, nif, curso, ficheiro, idPassageiro;
-        int tipo, idRota,idVoo;
+        int tipo, idRota, idVoo;
         op = menu();
         while (op.equals("0") == false) {
             switch (op) {
@@ -49,7 +49,7 @@ public class Main {
                                 case "7":
 
                                     break;
-                                case"8":
+                                case "8":
 
                                     break;
 
@@ -75,12 +75,12 @@ public class Main {
         System.out.println("#---------------------------------------------------------------------#");
         System.out.print("Escolha uma opção: ");
 
-        op=sc.next();
+        op = sc.next();
         return op;
     }
 
     private static String menuAssistente() {
-         String op;
+        String op;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU ASSISTENTE DE BORDO-------------------------------------------------------#");
         System.out.println("|  (1) - Listar Rotas                                                              |");
@@ -94,7 +94,7 @@ public class Main {
         System.out.println("#----------------------------------------------------------------------------------#");
         System.out.print("Escolha uma opção: ");
 
-        op=sc.next();
+        op = sc.next();
         return op;
     }
 }

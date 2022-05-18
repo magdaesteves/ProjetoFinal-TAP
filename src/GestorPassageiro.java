@@ -28,6 +28,7 @@ public class GestorPassageiro {
         if (tipo == 1) {
             System.out.println("\nQual é idPassageiro?");
             idPassageiro = sc.next();
+            //if(idPassageiro.equals(l)
             System.out.println("Qual o nome?");
             nome = sc.next();
             System.out.println("Qual é a profissão?");
@@ -48,18 +49,15 @@ public class GestorPassageiro {
             }
             op = menu();
 
-            Integer idvoo = 0;
+
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("\nQuantidade de voos");
-                        quanVoo = sc.nextInt();
-                        int idRotas = 0;
-                        for (int i = 0; i < quanVoo; i++) {
-                            ComprarBilheteEfetivo(idPassageiro);
-                        }
+                        ComprarBilheteEfetivo(idPassageiro);
                         break;
                 }
+                menu();
+                break;
             }
         } else {
             boolean passageiroExiste = false;
@@ -69,13 +67,13 @@ public class GestorPassageiro {
                 idPassageiro = sc.next();
                 passageiroExiste = dicPassageiros.containsKey(idPassageiro);
             }
-            op = menuExistente();
+            op = menu();
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
                         ComprarBilheteEfetivo(idPassageiro);
 
-break;
+                        break;
                     case "2":
 
                         break;
@@ -96,12 +94,12 @@ break;
                         lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                         break;
                     case "7":
-                       break;
+                        break;
                     case "8":
                         break;
 
                 }
-                menuExistente();
+                menu();
                 break;
 
             }
@@ -549,7 +547,7 @@ break;
      */
 
 
-    private String menuExistente() {
+    private String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU PASSAGEIRO------------------------#");
@@ -561,18 +559,6 @@ break;
         System.out.println("|  (6) - Listar historial                    |");
         System.out.println("|  (7) - Listar bilhetes efetivos            |");
         System.out.println("|  (8) - Listar bilhetes suplentes           |");
-        System.out.println("|  (0) - Sair                                |");
-        System.out.println("#--------------------------------------------#");
-        System.out.print("Escolha opção: ");
-        op = sc.next();
-        return op;
-    }
-
-    private String menu() {
-        String op;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PASSAGEIRO--------------------------#");
-        System.out.println("|  (1) - Selecionar rotas ? 1-Sim 2-Não      |");
         System.out.println("|  (0) - Sair                                |");
         System.out.println("#--------------------------------------------#");
         System.out.print("Escolha opção: ");
