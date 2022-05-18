@@ -29,17 +29,17 @@ public class GestorPassageiro {
             System.out.println("\nQual é idPassageiro?");
             idPassageiro = sc.next();
             //if(idPassageiro.equals(l)
-            System.out.println("Qual o nome?");
+            System.out.print("Qual o nome?");
             nome = sc.next();
-            System.out.println("Qual é a profissão?");
+            System.out.print("Qual é a profissão?");
             profissao = sc.next();
-            System.out.println("Qual é a morada?");
+            System.out.print("Qual é a morada?");
             morada = sc.next();
-            System.out.println("Qual é o ano de nascimento?");
+            System.out.print("Qual é o ano de nascimento?");
             anoNascimento = sc1.nextInt();
-            System.out.println("Qual é a mês de nascimento?");
+            System.out.print("Qual é a mês de nascimento?");
             mesNascimento = sc1.nextInt();
-            System.out.println("Qual é a dia de nascimento?");
+            System.out.print("Qual é a dia de nascimento?");
             diaNascimento = sc1.nextInt();
 
             Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
@@ -122,13 +122,13 @@ public class GestorPassageiro {
         String diaSemana;
         preco = calculoPrecoBilhete(Rota, 1, 300, 1000, 25, 50);
         //A data do voo é pedida ao utilizador, onde verificamos posteriormente se o mesmo pertence ao dia de semana do voo
-        System.out.println("\nAno da viagem:");
+        System.out.print("\nAno da viagem: ");
         ano = sc.nextInt();
-        System.out.println("\nMês da viagem:");
+        System.out.print("Mês da viagem: ");
         mes = sc.nextInt();
         diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
-            System.out.println("\nDia da viagem:");
+            System.out.print("Dia da viagem: ");
             dia = sc.nextInt();
             VerificarData = LocalDate.of(ano, mes, dia);
             diaEncontrado = diaSemana.equals(VerificarData.getDayOfWeek().name());

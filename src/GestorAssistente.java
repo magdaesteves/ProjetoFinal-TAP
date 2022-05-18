@@ -139,7 +139,7 @@ public class GestorAssistente {
                 System.out.println("Tem de selecionar um dia que corresponda a " + diaSemana);
             }
         }
-        HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 0, Rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
+        HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 1, Rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich); //lê os passageiros todos
         if (dicBilhete.isEmpty()) { //se não existirem bilhetes diz que o voo não tem passageiros
             System.out.println("O voo " + Voo.getIdVoo() + " ainda não têm passageiros.");
