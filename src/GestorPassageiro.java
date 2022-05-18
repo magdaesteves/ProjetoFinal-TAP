@@ -44,9 +44,8 @@ public class GestorPassageiro {
 
             Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
             dicFinal.put(idPassageiro, A);
-            for (HashMap.Entry<String, Passageiro> passageiro : dicFinal.entrySet()) {
-                System.out.println(passageiro.getKey() + ": " + toStringP(passageiro.getValue()));
-            }
+            CriarPassageiro(A);
+
             op = menu();
 
 
@@ -106,6 +105,15 @@ public class GestorPassageiro {
 
         }
 
+    }
+
+    //1 - Registar-se como passageiro
+    public void CriarPassageiro(Passageiro Passageiro) throws IOException { //esta função vai escrever no txt do passageiro
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("passageiros.txt", true));
+        String linha = "\n" + Passageiro.getIdPassageiro() + "," + Passageiro.getNome() + "," + Passageiro.getProfissao() + "," + Passageiro.getMorada() + "," +
+                Passageiro.getAno() + "," + Passageiro.getMes() + "," + Passageiro.getDia();
+        buffWrite.append(linha);
+        buffWrite.close();
     }
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
@@ -380,7 +388,7 @@ public class GestorPassageiro {
         String linha = f.readLine();
         int idVoos = 0;
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(","); //dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
             if (Integer.parseInt(campos[0]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
                 idRota = Integer.parseInt(campos[0]);
                 idVoo = Integer.parseInt(campos[1]);
@@ -550,7 +558,7 @@ public class GestorPassageiro {
     private String menu() {
         String op;
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PASSAGEIRO------------------------#");
+        System.out.println("\n#---MENU PASSAGEIRO--------------------------#");
         System.out.println("|  (1) - Comprar um bilhete efetivo          |");
         System.out.println("|  (2) - Cancelar um bilhete efetivo         |");
         System.out.println("|  (3) - Cancelar um bilhete suplente        |");
