@@ -48,7 +48,6 @@ public class GestorPassageiro {
 
             op = menu();
 
-
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
@@ -71,7 +70,6 @@ public class GestorPassageiro {
                 switch (op) {
                     case "1":
                         ComprarBilheteEfetivo(idPassageiro);
-
                         break;
                     case "2":
 
@@ -96,15 +94,11 @@ public class GestorPassageiro {
                         break;
                     case "8":
                         break;
-
                 }
                 menu();
                 break;
-
             }
-
         }
-
     }
 
     //1 - Registar-se como passageiro
