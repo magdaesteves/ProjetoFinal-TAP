@@ -19,7 +19,7 @@ public class GestorPassageiro {
     //1 - Registar-se como passageiro
     public void addPassageiro(int tipo) throws IOException {
         String idPassageiro = "", nome, profissao, morada, op;
-        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo, idRota;
+        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         System.out.println("\n1-Criar novo  2-Existe");
@@ -56,15 +56,10 @@ public class GestorPassageiro {
                         quanVoo = sc.nextInt();
                         int idRotas = 0;
                         for (int i = 0; i < quanVoo; i++) {
-                            System.out.println("Destino a selecionar 1-Viseu 2-Porto");
-                            idRotas = sc.nextInt();
-                            System.out.println("Informação do voo");
-                            selecionarVoosIdPorRotas("voos.txt", idRotas);
+                            ComprarBilheteEfetivo(idPassageiro);
                         }
-                        System.out.println("Informação do bilhete");
-
+                        break;
                 }
-                break;
             }
         } else {
             boolean passageiroExiste = false;
@@ -78,45 +73,41 @@ public class GestorPassageiro {
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        System.out.println("\nQuantidade de Voos: ");
-                        quanVoo = sc.nextInt();
-                        for (int i = 0; i < quanVoo; i++) {
-                            System.out.print("Destino a Selecionar: ");
-                            destVoo = sc.nextInt();
-                        }
-                        System.out.println("Informação do voo: ");
-                        System.out.println("Informação do bilhete: ");
-                        break;
-                    case "2":
                         ComprarBilheteEfetivo(idPassageiro);
+
+break;
+                    case "2":
+
                         break;
                     case "3":
-                        System.out.println("blablabla1231231231231231");
+
                         break;
                     case "4":
-                        break;
-                    case "5":
                         System.out.println("\nRotas: ");
                         lerRotaTxt("rotas.txt");
                         break;
-                    case "6":
+                    case "5":
                         System.out.print("\nQual o id da rota que pretende listar os voos: ");
                         idRota = sc.nextInt();
                         listarVoosPorRota("voos.txt", idRota);
                         break;
-                    case "7":
+                    case "6":
                         System.out.println("\nHistorial: ");
                         lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                         break;
+                    case "7":
+                       break;
                     case "8":
                         break;
-                    case "9":
-                        break;
+
                 }
+                menuExistente();
                 break;
+
             }
+
         }
-        menuExistente();
+
     }
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
@@ -131,7 +122,6 @@ public class GestorPassageiro {
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
-
         preco = calculoPrecoBilhete(Rota, 1, 300, 1000, 25, 50);
         //A data do voo é pedida ao utilizador, onde verificamos posteriormente se o mesmo pertence ao dia de semana do voo
         System.out.println("\nAno da viagem:");
@@ -563,15 +553,14 @@ public class GestorPassageiro {
         String op;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU PASSAGEIRO------------------------#");
-        System.out.println("|  (1) - Selecionar rotas                    |");
-        System.out.println("|  (2) - Comprar um bilhete efetivo          |");
-        System.out.println("|  (3) -                                     |");
-        System.out.println("|  (4) -                                     |");
-        System.out.println("|  (5) - Listar rotas                        |");
-        System.out.println("|  (6) - Listar os voos de uma rota;         |");
-        System.out.println("|  (7) - Listar historial                    |");
-        System.out.println("|  (8) - Listar bilhetes efetivos            |");
-        System.out.println("|  (9) - Listar bilhetes suplentes           |");
+        System.out.println("|  (1) - Comprar um bilhete efetivo          |");
+        System.out.println("|  (2) - Cancelar um bilhete efetivo         |");
+        System.out.println("|  (3) - Cancelar um bilhete suplente        |");
+        System.out.println("|  (4) - Listar rotas                        |");
+        System.out.println("|  (5) - Listar os voos de uma rota;         |");
+        System.out.println("|  (6) - Listar historial                    |");
+        System.out.println("|  (7) - Listar bilhetes efetivos            |");
+        System.out.println("|  (8) - Listar bilhetes suplentes           |");
         System.out.println("|  (0) - Sair                                |");
         System.out.println("#--------------------------------------------#");
         System.out.print("Escolha opção: ");
