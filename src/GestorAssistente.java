@@ -154,7 +154,6 @@ public class GestorAssistente {
         }
     }
 
-
     public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
         Scanner sc = new Scanner(System.in);
         HashMap<Integer, Rota> dicRotas = lerRotasTxt("rotas.txt");
