@@ -18,7 +18,7 @@ public class GestorPassageiro {
 
     //1 - Registar-se como passageiro
     public void addPassageiro(int tipo) throws IOException {
-        String idPassageiro = "", nome, profissao, morada, op;
+        String idPassageiro = "", nome, profissao, morada, op,op2=null;
         int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
@@ -47,19 +47,47 @@ public class GestorPassageiro {
             for (HashMap.Entry<String, Passageiro> passageiro : dicFinal.entrySet()) {
                 System.out.println(passageiro.getKey() + ": " + toStringP(passageiro.getValue()));
             }
-            op = menu();
+            op2= menu1();
 
 
-            while (op.equals("0") == false) {
-                switch (op) {
-                    case "1":
-                        ComprarBilheteEfetivo(idPassageiro);
-                        break;
-                }
-                menu();
-                break;
-            }
-        } else {
+       while (op2.equals("0") ==false) {
+
+           switch (op2) {
+               case "1":
+                   ComprarBilheteEfetivo(idPassageiro);
+                   break;
+               case "2":
+                   break;
+               case "3":
+                   break;
+               case "4":
+                   System.out.println("Celso");
+                   break;
+               case "5":
+                   break;
+               case "6":
+                   break;
+               case "7":
+                   System.out.println("Listar bilhetes efetivos :");
+                   listarbilheteefetivos("bilhetes.txt", idPassageiro);
+                   break;
+               case "8":
+                   break;
+
+
+           }
+
+
+
+           op2=menu1();
+       }
+
+
+
+        }
+
+
+        else {
             boolean passageiroExiste = false;
             HashMap<String, Passageiro> dicPassageiros = lerPassageiroTxt("passageiros.txt");
             while (!passageiroExiste) {
@@ -67,6 +95,7 @@ public class GestorPassageiro {
                 idPassageiro = sc.next();
                 passageiroExiste = dicPassageiros.containsKey(idPassageiro);
             }
+
             op = menu();
             while (op.equals("0") == false) {
                 switch (op) {
@@ -309,9 +338,9 @@ public class GestorPassageiro {
     //FIM DO 6
 
 
-    //7 - Listar o historial do passageiro (lista de viagens já realizadas)
+    //6- Listar o historial do passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilheteDePassageiro(nomeFich, idPassageiro);
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetepassageirohistorial(nomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
@@ -321,11 +350,10 @@ public class GestorPassageiro {
         }
     }
 
-    private String toStringB(Bilhete value) {
-        return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\n";
-    }
 
-    public HashMap<Integer, Bilhete> lerBilheteDePassageiro(String NomeFich, String idPassageiroFiltro) throws IOException {
+
+
+    public HashMap<Integer, Bilhete> lerBilhetepassageirohistorial(String NomeFich, String idPassageiroFiltro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
@@ -365,9 +393,65 @@ public class GestorPassageiro {
         f.close();
         return dicBilhete;
     }
-    //FIM DO 7
+    //FIM DO 6
 
 
+    //7- Listar o efetivos do passageiro (lista de viagens por realizar)
+    public void listarbilheteefetivos(String nomeFich, String idPassageiro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetepassageiroefetivos(nomeFich, idPassageiro);
+        if (dicBilhete.isEmpty()) {
+            System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
+        } else {
+            for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
+                System.out.println(toStringB(dicBilhete.get(bilhete.getKey())));
+            }
+        }
+    }
+    private String toStringB(Bilhete value) {
+        return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\n";
+    }
+
+    public HashMap<Integer, Bilhete> lerBilhetepassageiroefetivos(String NomeFich, String idPassageiroFiltro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
+        LocalDateTime data = null;
+        LocalDateTime dataAtual = LocalDateTime.now();
+        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete;
+        String idPassageiro;
+        double preco;
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
+        String linha = f.readLine();
+        while (linha != null) {
+            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            if (idPassageiroFiltro == null || idPassageiroFiltro.equals(campos[0])) {
+                idPassageiro = campos[0];
+                idRota = Integer.parseInt(campos[1]);
+                idVoo = Integer.parseInt(campos[2]);
+                anoViagem = Integer.parseInt(campos[3]);
+                mesViagem = Integer.parseInt(campos[4]);
+                diaViagem = Integer.parseInt(campos[5]);
+                horaViagem = Integer.parseInt(campos[6]);
+                minViagem = Integer.parseInt(campos[7]);
+                segViagem = Integer.parseInt(campos[8]);
+                anoAquisicao = Integer.parseInt(campos[9]);
+                mesAquisicao = Integer.parseInt(campos[10]);
+                diaAquisicao = Integer.parseInt(campos[11]);
+                horaAquisicao = Integer.parseInt(campos[12]);
+                minAquisicao = Integer.parseInt(campos[13]);
+                segAquisicao = Integer.parseInt(campos[14]);
+                preco = Double.parseDouble(campos[15]);
+                tipoBilhete = Integer.parseInt(campos[16]);
+                data = LocalDateTime.of(anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem);
+                if (data.isAfter(dataAtual)) {
+                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                    dicBilhete.put(idVoo, b);
+                }
+            }
+            linha = f.readLine();
+        }
+        f.close();
+        return dicBilhete;
+    }
+//FIM DO 7
     //Auxiliares:
 
     //Usado no 1
@@ -549,6 +633,7 @@ public class GestorPassageiro {
 
     private String menu() {
         String op;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU PASSAGEIRO------------------------#");
         System.out.println("|  (1) - Comprar um bilhete efetivo          |");
@@ -563,6 +648,28 @@ public class GestorPassageiro {
         System.out.println("#--------------------------------------------#");
         System.out.print("Escolha opção: ");
         op = sc.next();
-        return op;
+
+       return op ;
+    }
+    private String menu1() {
+        String op2;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n#---MENU PASSAGEIRO------------------------#");
+        System.out.println("|  (1) - Comprar um bilhete efetivo          |");
+        System.out.println("|  (2) - Cancelar um bilhete efetivo         |");
+        System.out.println("|  (3) - Cancelar um bilhete suplente        |");
+        System.out.println("|  (4) - Listar rotas                        |");
+        System.out.println("|  (5) - Listar os voos de uma rota;         |");
+        System.out.println("|  (6) - Listar historial                    |");
+        System.out.println("|  (7) - Listar bilhetes efetivos            |");
+        System.out.println("|  (8) - Listar bilhetes suplentes           |");
+        System.out.println("|  (0) - Sair                                |");
+        System.out.println("#--------------------------------------------#");
+        System.out.print("Escolha opção: ");
+        op2 = sc.next();
+
+
+        return op2 ;
     }
 }
