@@ -18,7 +18,7 @@ public class GestorPassageiro {
 
     //1 - Registar-se como passageiro
     public void addPassageiro(int tipo) throws IOException {
-        String idPassageiro = "", nome, profissao, morada, op,op2=null;
+        String idPassageiro = "", nome, profissao, morada, op, op2 = null;
         int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
@@ -45,47 +45,42 @@ public class GestorPassageiro {
             Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
             dicFinal.put(idPassageiro, A);
             CriarPassageiro(A);
-            op2= menu1();
+            op2 = menu1();
 
 
-       while (op2.equals("0") ==false) {
+            while (op2.equals("0") == false) {
 
-           switch (op2) {
-               case "1":
-                   ComprarBilheteEfetivo(idPassageiro);
-                   break;
-               case "2":
-                   break;
-               case "3":
-                   break;
-               case "4":
-                   System.out.println("Celso");
-                   break;
-               case "5":
-                   break;
-               case "6":
-                   break;
-               case "7":
-                   System.out.println("Listar bilhetes efetivos :");
-                   listarbilheteefetivos("bilhetes.txt", idPassageiro);
-                   break;
-               case "8":
-                   break;
-
-
-           }
+                switch (op2) {
+                    case "1":
+                        ComprarBilheteEfetivo(idPassageiro);
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        System.out.println("Celso");
+                        break;
+                    case "5":
+                        break;
+                    case "6":
+                        break;
+                    case "7":
+                        System.out.println("Listar bilhetes efetivos :");
+                        listarBilheteEfetivos("bilhetes.txt", idPassageiro);
+                        break;
+                    case "8":
+                        break;
 
 
-
-           op2=menu1();
-       }
+                }
 
 
+                op2 = menu1();
+            }
 
-        }
 
-
-        else {
+        } else {
             boolean passageiroExiste = false;
             HashMap<String, Passageiro> dicPassageiros = lerPassageiroTxt("passageiros.txt");
             while (!passageiroExiste) {
@@ -135,6 +130,7 @@ public class GestorPassageiro {
 
     }
 
+    //1 - Registar-se como passageiro
     public void CriarPassageiro(Passageiro Passageiro) throws IOException { //esta função vai escrever no txt do passageiro
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("passageiro.txt", true));
         String linha = "\n" + Passageiro.getIdPassageiro() + "," + Passageiro.getNome() + "," + Passageiro.getProfissao() + "," + Passageiro.getMorada() + "," +
@@ -344,9 +340,9 @@ public class GestorPassageiro {
     //FIM DO 6
 
 
-    //6- Listar o historial do passageiro (lista de viagens já realizadas)
+    //7- Listar o historial do passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetepassageirohistorial(nomeFich, idPassageiro);
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(nomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
@@ -356,10 +352,7 @@ public class GestorPassageiro {
         }
     }
 
-
-
-
-    public HashMap<Integer, Bilhete> lerBilhetepassageirohistorial(String NomeFich, String idPassageiroFiltro) throws IOException {
+    public HashMap<Integer, Bilhete> lerBilhetePassageiroHistorial(String NomeFich, String idPassageiroFiltro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
@@ -399,12 +392,12 @@ public class GestorPassageiro {
         f.close();
         return dicBilhete;
     }
-    //FIM DO 6
+    //FIM DO 7
 
 
-    //7- Listar o efetivos do passageiro (lista de viagens por realizar)
-    public void listarbilheteefetivos(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetepassageiroefetivos(nomeFich, idPassageiro);
+    //8 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
+    public void listarBilheteEfetivos(String nomeFich, String idPassageiro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivos(nomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
@@ -413,11 +406,12 @@ public class GestorPassageiro {
             }
         }
     }
+
     private String toStringB(Bilhete value) {
         return "Id: " + value.getIdPassageiro() + "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\n";
     }
 
-    public HashMap<Integer, Bilhete> lerBilhetepassageiroefetivos(String NomeFich, String idPassageiroFiltro) throws IOException {
+    public HashMap<Integer, Bilhete> lerBilhetePassageiroEfetivos(String NomeFich, String idPassageiroFiltro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
@@ -457,7 +451,10 @@ public class GestorPassageiro {
         f.close();
         return dicBilhete;
     }
-//FIM DO 7
+    //FIM DO 8
+
+
+
     //Auxiliares:
 
     //Usado no 1
@@ -504,7 +501,6 @@ public class GestorPassageiro {
     private String toStringV(Voo value) {
         return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
-
 
     //usado na main para ver se existe o id do passageiro
     public HashMap<String, Passageiro> lerPassageiroTxt(String NomeFich) throws IOException {
@@ -655,8 +651,9 @@ public class GestorPassageiro {
         System.out.print("Escolha opção: ");
         op = sc.next();
 
-       return op ;
+        return op;
     }
+
     private String menu1() {
         String op2;
 
@@ -675,7 +672,6 @@ public class GestorPassageiro {
         System.out.print("Escolha opção: ");
         op2 = sc.next();
 
-
-        return op2 ;
+        return op2;
     }
 }
