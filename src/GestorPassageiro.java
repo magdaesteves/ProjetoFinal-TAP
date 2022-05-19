@@ -44,9 +44,7 @@ public class GestorPassageiro {
 
             Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
             dicFinal.put(idPassageiro, A);
-            for (HashMap.Entry<String, Passageiro> passageiro : dicFinal.entrySet()) {
-                System.out.println(passageiro.getKey() + ": " + toStringP(passageiro.getValue()));
-            }
+            CriarPassageiro(A);
             op2= menu1();
 
 
@@ -135,6 +133,14 @@ public class GestorPassageiro {
 
         }
 
+    }
+
+    public void CriarPassageiro(Passageiro Passageiro) throws IOException { //esta função vai escrever no txt do passageiro
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("passageiro.txt", true));
+        String linha = "\n" + Passageiro.getIdPassageiro() + "," + Passageiro.getNome() + "," + Passageiro.getProfissao() + "," + Passageiro.getMorada() + "," +
+                Passageiro.getAno() + "," + Passageiro.getMes() + "," + Passageiro.getDia();
+        buffWrite.append(linha);
+        buffWrite.close();
     }
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
