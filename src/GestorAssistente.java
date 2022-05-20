@@ -125,24 +125,24 @@ public class GestorAssistente {
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
-        System.out.println("\nAno da viagem:");
+        System.out.println("\nAno da viagem: ");
         ano = sc.nextInt();
-        System.out.println("\nMês da viagem:");
+        System.out.println("Mês da viagem: ");
         mes = sc.nextInt();
         diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
-            System.out.println("\nDia da viagem:");
+            System.out.println("Dia da viagem: ");
             dia = sc.nextInt();
             VerificarData = LocalDate.of(ano, mes, dia);
             diaEncontrado = diaSemana.equals(VerificarData.getDayOfWeek().name());
             if (!diaEncontrado) {
-                System.out.println("Tem de selecionar um dia que corresponda a " + diaSemana);
+                System.out.println("\nTem de selecionar um dia que corresponda a " + diaSemana);
             }
         }
         HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 1, Rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich); //lê os passageiros todos
         if (dicBilhete.isEmpty()) { //se não existirem bilhetes diz que o voo não tem passageiros
-            System.out.println("O voo " + Voo.getIdVoo() + " ainda não têm passageiros.");
+            System.out.println("\nO voo " + Voo.getIdVoo() + " ainda não tem passageiros.");
         } else {
             for (HashMap.Entry<String, Bilhete> bilhete : dicBilhete.entrySet()) { //senão corre os bilhetes
                 if (dicPassageiro.get(bilhete.getKey()) == null) { //vê se o passageiro existe no ficheiro dos passageiros
@@ -245,12 +245,47 @@ public class GestorAssistente {
     }
 
     private String toStringP(Passageiro value) {
-        return "Id: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\n";
+        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\n";
     }
 
 
     //5 - Listar os passageiros suplentes de um voo (o nome e o ID do passageiro)
-
+    public void lerPassageiroSuplenteNomeIdTxtPorVoo(String NomeFich) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        LocalDate VerificarData;
+        Rota Rota = EscolherRota();
+        Voo Voo = EscolherVoo(Rota.getIdRota());
+        int ano, mes, dia = 0;
+        boolean diaEncontrado = false;
+        String diaSemana;
+        System.out.print("\nAno da viagem: ");
+        ano = sc.nextInt();
+        System.out.print("Mês da viagem: ");
+        mes = sc.nextInt();
+        diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
+        while (!diaEncontrado) {
+            System.out.print("Dia da viagem: ");
+            dia = sc.nextInt();
+            VerificarData = LocalDate.of(ano, mes, dia);
+            diaEncontrado = diaSemana.equals(VerificarData.getDayOfWeek().name());
+            if (!diaEncontrado) {
+                System.out.println("\nTem de selecionar um dia que corresponda a " + diaSemana);
+            }
+        }
+        HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 2, Rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
+        HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich); //lê os passageiros todos
+        if (dicBilhete.isEmpty()) { //se não existirem bilhetes diz que o voo não tem passageiros
+            System.out.println("\nO voo " + Voo.getIdVoo() + " ainda não tem passageiros.");
+        } else {
+            for (HashMap.Entry<String, Bilhete> bilhete : dicBilhete.entrySet()) { //senão corre os bilhetes
+                if (dicPassageiro.get(bilhete.getKey()) == null) { //vê se o passageiro existe no ficheiro dos passageiros
+                    System.out.println("\nPassageiro " + bilhete.getKey() + " sem registo!"); //se não existe, diz que não tem registo
+                } else {
+                    System.out.println(toStringP(dicPassageiro.get(bilhete.getKey()))); //senão printamos o passageiro
+                }
+            }
+        }
+    }
 
     //6 - Listar o historial de um passageiro (lista de viagens já realizadas)
     public HashMap<Integer, Bilhete> lerBilheteDePassageiro(String NomeFich, String idPassageiroFiltro) throws

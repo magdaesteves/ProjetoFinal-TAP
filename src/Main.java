@@ -36,10 +36,7 @@ public class Main {
                                     gA.lerPassageiroNomeIdTxtPorVoo("passageiros.txt");
                                     break;
                                 case "5":
-                                    //perguntar a rota que quer ver
-                                    //perguntar qual o voo
-                                    //e a data
-                                    //mostrar
+                                    gA.lerPassageiroSuplenteNomeIdTxtPorVoo("passageiros.txt");
                                     break;
                                 case "6":
                                     System.out.print("\nQual o id do passageiro que pretende listar o historial de viagens: ");
