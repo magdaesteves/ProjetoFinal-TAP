@@ -276,7 +276,6 @@ public class GestorPassageiro {
     public void FazerCancelamento(Bilhete bilhete) throws IOException {
         Bilhete bilheteSubstituto = EncontrarBilheteParaSubstituir(bilhete.getIdVoo(), bilhete.getIdRota(), bilhete.getAnoViagem(), bilhete.getMesViagem(), bilhete.getDiaViagem());
         HashMap<Integer, Bilhete> bilhetes = lerBilheteTxt("bilhetes.txt", 0, 0, 0, 0, 0, 0);
-        System.out.println("NumeroBilhetes: " + bilhetes.size());
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt"));
         String linha = "";
         for (Map.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) {
@@ -305,22 +304,28 @@ public class GestorPassageiro {
     public Bilhete EncontrarBilheteParaSubstituir(int idVoo, int idRota, int anoViagem, int mesViagem, int diaViagem) throws IOException {
         HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", idVoo, 2, idRota, anoViagem, mesViagem, diaViagem);
         LocalDateTime ultimadata = LocalDateTime.now();
-        Bilhete BilheteParaReturnar = null;
+        Bilhete BilheteParaRetornar = null;
         LocalDateTime databilhete = null;
         for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhetesSuplentes.entrySet()) {
             databilhete = LocalDateTime.of(bilhete.getValue().getAnoAquisicao(), bilhete.getValue().getMesAquisicao(), bilhete.getValue().getDiaAquisicao(), bilhete.getValue().getHoraAquisicao(), bilhete.getValue().getMinutoAquisicao(), bilhete.getValue().getSegundoAquisicao());
             if (databilhete.isBefore(ultimadata)) {
-                BilheteParaReturnar = bilhete.getValue();
+                BilheteParaRetornar = bilhete.getValue();
             }
         }
-        return BilheteParaReturnar;
+        return BilheteParaRetornar;
     }
     //Fim 3
 
 
     //4 - Cancelar um bilhete suplente
     public void CancelarBilheteSuplente(String idPassageiro) throws IOException {
-
+        HashMap<Integer,Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt",0,2,0,0,0,0);
+        /*for (Map.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) {
+            if (Bilhete.getValue().getIdVoo() == bilhete.getIdVoo() && Bilhete.getValue().getIdRota() == bilhete.getIdRota() && Bilhete.getValue().getIdPassageiro().equals(bilhete.getIdPassageiro()) &&
+                    Bilhete.getValue().getAnoViagem() == bilhete.getAnoViagem() && Bilhete.getValue().getMesViagem() == bilhete.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilhete.getDiaViagem()) {
+                System.out.println("Bilhete Apagado");
+            }
+        }*/
     }
     //Fim do 4
 
@@ -452,10 +457,9 @@ public class GestorPassageiro {
     }
     //FIM DO 7
 
-
     //8 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
     public void listarBilheteEfetivos(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfeitvoOuSuplente(nomeFich, idPassageiro, 1);
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(nomeFich, idPassageiro, 1);
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes efetivos.");
         } else {
@@ -472,7 +476,7 @@ public class GestorPassageiro {
 
     //9 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
     public void listarBilheteSuplentes(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfeitvoOuSuplente(nomeFich, idPassageiro, 2);
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(nomeFich, idPassageiro, 2);
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes.");
         } else {
@@ -489,7 +493,7 @@ public class GestorPassageiro {
                 value.getSegundoAquisicao() + "," + value.getPreco();
     }
 
-    public HashMap<Integer, Bilhete> lerBilhetePassageiroEfeitvoOuSuplente(String NomeFich, String idPassageiroFiltro, int tipoBilheteFiltro) throws IOException {
+    public HashMap<Integer, Bilhete> lerBilhetePassageiroEfetivoOuSuplente(String NomeFich, String idPassageiroFiltro, int tipoBilheteFiltro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
