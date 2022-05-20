@@ -459,7 +459,7 @@ public class GestorPassageiro {
     public void listarBilheteSuplentes(String nomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroSuplentes(nomeFich, idPassageiro, 2);
         if (dicBilhete.isEmpty()) {
-            System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes.");
+            System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes por realizar.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringS(dicBilhete.get(bilhete.getKey())));
