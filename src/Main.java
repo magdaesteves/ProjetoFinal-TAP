@@ -44,12 +44,15 @@ public class Main {
                                     gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
                                     break;
                                 case "7":
-
+                                    System.out.print("\nQual o id do passageiro que pretende listar os bilhetes efetivos de viagens por realizar: ");
+                                    idPassageiro = sc.next();
+                                    gA.listarBilheteEfetivos("bilhetes.txt", idPassageiro);
                                     break;
                                 case "8":
-
+                                    System.out.print("\nQual o id do passageiro que pretende listar os bilhetes suplentes de viagens por realizar: ");
+                                    idPassageiro = sc.next();
+                                    gA.listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                                     break;
-
                             }
                             break;
                         }
