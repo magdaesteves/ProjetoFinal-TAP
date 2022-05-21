@@ -19,31 +19,33 @@ public class GestorPassageiro {
     //1 - Registar-se como passageiro
     public void addPassageiro(int tipo) throws IOException {
         String idPassageiro = "", nome, profissao, morada, op, op2 = null;
-        int anoNascimento, mesNascimento, diaNascimento, quanVoo, destVoo, idRota = 0;
+        int anoNascimento, mesNascimento, diaNascimento, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         System.out.println("\n1-Criar novo  2-Existe");
         System.out.print("Escolha uma opção: ");
         tipo = sc.nextInt();
         if (tipo == 1) {
-            System.out.println("\nQual é idPassageiro?");
+            System.out.print("\nQual é idPassageiro? ");
             idPassageiro = sc.next();
             //if(idPassageiro.equals(l)
-            System.out.print("Qual o nome?");
+            System.out.print("Qual o nome? ");
             nome = sc.next();
-            System.out.print("Qual é a profissão?");
+            System.out.print("Qual é a profissão? ");
             profissao = sc.next();
-            System.out.print("Qual é a morada?");
+            System.out.print("Qual é a morada? ");
             morada = sc.next();
-            System.out.print("Qual é o ano de nascimento?");
+            System.out.print("Qual é o ano de nascimento? ");
             anoNascimento = sc1.nextInt();
-            System.out.print("Qual é a mês de nascimento?");
+            System.out.print("Qual é a mês de nascimento? ");
             mesNascimento = sc1.nextInt();
-            System.out.print("Qual é a dia de nascimento?");
+            System.out.print("Qual é a dia de nascimento? ");
             diaNascimento = sc1.nextInt();
+
             Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
             dicFinal.put(idPassageiro, A);
             CriarPassageiro(A);
+
             op2 = menu1();
             while (op2.equals("0") == false) {
                 switch (op2) {
@@ -110,7 +112,8 @@ public class GestorPassageiro {
                         break;
                     case "8":
                         System.out.println("\nBilhetes suplentes: ");
-                        listarBilheteSuplentes("bilhetes.txt", idPassageiro);
+                        //Ver isto!!
+                        //listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                         break;
                 }
                 menu();
@@ -529,7 +532,7 @@ public class GestorPassageiro {
         f.close();
         return dicBilhete;
     }
-    //FIM DO 9
+
 
 
     //Auxiliares:
