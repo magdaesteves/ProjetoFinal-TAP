@@ -354,7 +354,7 @@ public class GestorPassageiro {
     }
 
 
-    //6 - Listar os voos de uma rota;
+    //6 - Listar os voos de uma rota
     public void listarVoosPorRota(String NomeFich, int idRotas) throws IOException {
         HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRotas, NomeFich);
         int cont = 0;
