@@ -259,7 +259,6 @@ public class GestorAssistente {
     private String toStringX(Voo value) {
         return "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\nDia da Semana: " + value.getDiaSemana() + "\nHora: " + value.getHora() +
                 ":" + value.getMinuto() + ":" + value.getSegundo() + "\nMarca do Avião: " + value.getMarcaAviao();
-
     }
     //FIM DO 7
 
