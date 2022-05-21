@@ -220,3 +220,5 @@
 119941767,VITOR MANUEL SOARES DOS SANTOS,Professor de Yoga,83-Castanheira-Coimbra-3025,1960,5,15
 240319699,WALKYNER HENRIQUE ARAUJO DE PAULA,Estudante,47-Catraia de Mouronho-Coimbra-3030,2002,5,7
 255057733,ZIASHAN ASLAM,Professor Universitario,86-Fontao-Coimbra-3034,1973,3,22
+235770752,Magda,Estudante,Viseu,1999,6,6
+123456789,ines,professora,lisboa,2000,1,12

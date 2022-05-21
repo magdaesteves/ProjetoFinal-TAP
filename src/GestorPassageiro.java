@@ -36,7 +36,7 @@ public class GestorPassageiro {
             morada = sc.next();
             System.out.print("Qual é o ano de nascimento? ");
             anoNascimento = sc1.nextInt();
-            System.out.print("Qual é a mês de nascimento? ");
+            System.out.print("Qual é o mês de nascimento (número)? ");
             mesNascimento = sc1.nextInt();
             System.out.print("Qual é a dia de nascimento? ");
             diaNascimento = sc1.nextInt();
