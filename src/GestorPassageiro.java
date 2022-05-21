@@ -27,7 +27,6 @@ public class GestorPassageiro {
         if (tipo == 1) {
             System.out.print("\nQual é idPassageiro? ");
             idPassageiro = sc.next();
-            //if(idPassageiro.equals(l)
             System.out.print("Qual o nome? ");
             nome = sc.next();
             System.out.print("Qual é a profissão? ");
