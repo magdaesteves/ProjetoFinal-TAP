@@ -689,32 +689,6 @@ public class GestorPassageiro {
         }
     }
 
-    /*
-    public HashMap<Integer,Voo> lerVooTxt (String NomeFich) throws IOException {
-        HashMap<Integer, Voo> dicVoo = new HashMap<>();
-        int idRota, idVoo, hora, minuto, segundo;
-        String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
-        String linha = f.readLine();
-        while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            idRota = Integer.parseInt(campos[0]);
-            idVoo = Integer.parseInt(campos[1]);
-            diaSemana = campos[2];
-            hora = Integer.parseInt(campos[3]);
-            minuto = Integer.parseInt(campos[4]);
-            segundo = Integer.parseInt(campos[5]);
-            marcadoAviao = campos[6];
-            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-            dicVoo.put(idVoo, v);
-            linha = f.readLine();
-        }
-        f.close();
-        return dicVoo;
-    }
-     */
-
-
     private String menu() {
         String op;
 

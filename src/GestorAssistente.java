@@ -39,7 +39,6 @@ public class GestorAssistente {
         return "Id: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
     }
 
-
     //2 - Listar os voos de uma rota
     public void listarVoosPorRota(String NomeFich, int idRotas) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
@@ -78,30 +77,6 @@ public class GestorAssistente {
     private String toStringV(Voo value) {
         return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
-
-    /*Usado no 2
-    public void lerVooTxt(String NomeFich) throws IOException {
-        HashMap<Integer, Voo> dicVoo = new HashMap<>();
-        int idRota, idVoo, hora, minuto, segundo;
-        String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File("voos.txt")));
-        String linha = f.readLine();
-        while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            idRota = Integer.parseInt(campos[0]);
-            idVoo = Integer.parseInt(campos[1]);
-            diaSemana = campos[2];
-            hora = Integer.parseInt(campos[3]);
-            minuto = Integer.parseInt(campos[4]);
-            segundo = Integer.parseInt(campos[5]);
-            marcadoAviao = campos[6];
-            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-            dicVoo.put(idVoo, v);
-            linha = f.readLine();
-        }
-        f.close();
-    }*/
-
 
     //3 - Listar todos os passageiros (o nome e o ID do passageiro)
     public void lerPassageiroNomeIdTxt(String NomeFich) throws IOException {
