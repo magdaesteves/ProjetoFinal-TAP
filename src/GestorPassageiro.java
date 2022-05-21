@@ -135,7 +135,7 @@ public class GestorPassageiro {
         Bilhete bilhete = null;
         Rota Rota = EscolherRota();                 //vai à função para escolher uma rota
         Voo Voo = EscolherVoo(Rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
-        int tipoBilhete = 0;    //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
+        int tipoBilhete = 0;                        //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
         double preco = 0;
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
@@ -191,7 +191,7 @@ public class GestorPassageiro {
 
     public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
         Scanner sc = new Scanner(System.in);
-        HashMap<Integer, Voo> dicVoo = getVoosPorRota(idRota, "voos.txt");
+        HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRota, "voos.txt");
         boolean encontrado = false;
         int voo = 0;
         while (!encontrado) {
@@ -234,13 +234,14 @@ public class GestorPassageiro {
         return 0;
     }
 
-    public double calculoPrecoBilhete(Rota Rota, double precoKM, double primeiroPrecoDesconto, double segundoPrecoDesconto, double primeiroDescontoPercentagem, double segundoDescontoPercentagem) throws IOException { //verifica os Km
+    public double calculoPrecoBilhete(Rota Rota, double precoKM, double primeiroPrecoDesconto, double segundoPrecoDesconto, double primeiroDescontoPercentagem, double segundoDescontoPercentagem) throws IOException {
+        //verifica os Km
         double Preco = Rota.getDistanciaKm() * precoKM;
-        if (Preco > segundoPrecoDesconto) //se o preço for maior que o segundo desconto então aplica os 50% de desconto
+        if (Preco > segundoPrecoDesconto)                       //se o preço for maior que o segundo desconto então aplica os 50% de desconto
             return Preco * (segundoDescontoPercentagem / 100);
-        if (Preco > primeiroPrecoDesconto) //se o preço for maior que o primeiro desconto então aplica os 25% de desconto
+        if (Preco > primeiroPrecoDesconto)                      //se o preço for maior que o primeiro desconto então aplica os 25% de desconto
             return Preco * (primeiroDescontoPercentagem / 100);
-        return Preco; // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
+        return Preco;                                           // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
     }
 
     public void CriarBilhete(Bilhete Bilhete) throws IOException { //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
@@ -338,7 +339,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             idRota = Integer.parseInt(campos[0]);
             quantidadeVoos = Integer.parseInt(campos[1]);
             destino = campos[2];
@@ -357,7 +358,7 @@ public class GestorPassageiro {
 
     //6 - Listar os voos de uma rota;
     public void listarVoosPorRota(String NomeFich, int idRotas) throws IOException {
-        HashMap<Integer, Voo> dicVoo = getVoosPorRota(idRotas, NomeFich);
+        HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRotas, NomeFich);
         int cont = 0;
 
         if (dicVoo.isEmpty()) {
@@ -374,8 +375,8 @@ public class GestorPassageiro {
 
 
     //7- Listar o historial do passageiro (lista de viagens já realizadas)
-    public void lerBilheteTxtPorPassageiro(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(nomeFich, idPassageiro, true, false);
+    public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false);
         HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
@@ -388,8 +389,8 @@ public class GestorPassageiro {
     //FIM DO 7
 
     //8 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
-    public void listarBilheteEfetivos(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(nomeFich, idPassageiro, 1);
+    public void listarBilheteEfetivos(String NomeFich, String idPassageiro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 1);
         HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes efetivos.");
@@ -402,8 +403,8 @@ public class GestorPassageiro {
     //FIM DO 8
 
     //9 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
-    public void listarBilheteSuplentes(String nomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(nomeFich, idPassageiro, 2);
+    public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 2);
         HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes.");
@@ -416,10 +417,7 @@ public class GestorPassageiro {
 
 
 
-
-
-
-    //Auxiliares - leitura de ficheiros:
+    //Auxiliares - leitura de ficheiros e ler strings:
 
     //usado na main para ver se existe o Id do passageiro
     public HashMap<String, Passageiro> lerPassageiroTxt(String NomeFich) throws IOException {
@@ -429,7 +427,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             idPassageiro = campos[0];
             nome = campos[1];
             profissao = campos[2];
@@ -445,52 +443,10 @@ public class GestorPassageiro {
         return dicPassageiro;
     }
 
-    //Usado no 1
-    public void selecionarVoosIdPorRotas(String NomeFich, int idRotas) throws IOException {
-        HashMap<Integer, Voo> dicVoo = new HashMap<>();
-        Scanner sc = new Scanner(System.in);
-        int idRota = 0, idVoo = 0, hora, minuto, segundo, cont = 0;
-        String diaSemana, marcadoAviao;
-        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
-        String linha = f.readLine();
-        int idVoos = 0;
-        while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            if (Integer.parseInt(campos[0]) == idRotas) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
-                idRota = Integer.parseInt(campos[0]);
-                idVoo = Integer.parseInt(campos[1]);
-                diaSemana = campos[2];
-                hora = Integer.parseInt(campos[3]);
-                minuto = Integer.parseInt(campos[4]);
-                segundo = Integer.parseInt(campos[5]);
-                marcadoAviao = campos[6];
-                Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-                dicVoo.put(idVoo, v);
-                cont++;
-            }
-            linha = f.readLine();
-        }
-
-        f.close();
-
-        if (dicVoo.isEmpty()) {
-            System.out.println("Erro! Não existem voos nesta rota.");
-        } else {
-            for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
-                System.out.println(toStringV(voo.getValue()));
-            }
-            System.out.println("Existem " + cont + " voos com a rota " + idRota + ".");
-            System.out.println("Selecione um voo: ");
-            idVoos = sc.nextInt();
-            System.out.println(toStringV(dicVoo.get(idVoos)));
-        }
-    }
-
     //usado no 1 e no 6
     private String toStringV(Voo value) {
         return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
-
 
     //usado no 2
     public HashMap<Integer, Bilhete> lerBilheteTxt(String NomeFich, int idVooFiltro, int tipoBilheteFiltro, int idRotaFiltro, int ano, int mes, int dia) throws IOException {
@@ -501,10 +457,11 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
-            if ((idVooFiltro == 0 || idVooFiltro == Integer.parseInt(campos[2]) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16])) &&
-                    (idRotaFiltro == 0 || idRotaFiltro == Integer.parseInt(campos[1])) && (ano == 0 || ano == Integer.parseInt(campos[3])) && (mes == 0 || mes == Integer.parseInt(campos[4])) &&
-                    (dia == 0 || dia == Integer.parseInt(campos[5])))) { //se o filtro for passado a 0, vai buscar todos os registos. Se o filtro vier preenchido vai buscar apenas os bilhetes do voo pretendido
+            String[] campos = linha.split(",");
+            if ((idVooFiltro == 0 || idVooFiltro == Integer.parseInt(campos[2]) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16]))
+                    && (idRotaFiltro == 0 || idRotaFiltro == Integer.parseInt(campos[1])) && (ano == 0 || ano == Integer.parseInt(campos[3]))
+                    && (mes == 0 || mes == Integer.parseInt(campos[4])) && (dia == 0 || dia == Integer.parseInt(campos[5])))) {
+                //se o filtro for passado a 0, vai buscar todos os registos. Se o filtro vier preenchido vai buscar apenas os bilhetes do voo pretendido
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
                 idVoo = Integer.parseInt(campos[2]);
@@ -541,7 +498,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             idRota = Integer.parseInt(campos[0]);
             quantidadeVoos = Integer.parseInt(campos[1]);
             destino = campos[2];
@@ -576,14 +533,14 @@ public class GestorPassageiro {
     }
 
     //usado no 6
-    public HashMap<Integer, Voo> getVoosPorRota(int idRota, String NomeFich) throws IOException {
+    public HashMap<Integer, Voo> lerVoosPorRota(int idRota, String NomeFich) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRotas, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             if (Integer.parseInt(campos[0]) == idRota) { //ver se a rota do voo é a rota pedida (se for adiciona ao hashmap, senão lê a próxima linha)
                 idRotas = Integer.parseInt(campos[0]);
                 idVoo = Integer.parseInt(campos[1]);
@@ -612,7 +569,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             if (idPassageiroFiltro == null || idPassageiroFiltro.equals(campos[0])) {
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
@@ -652,7 +609,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             idRota = Integer.parseInt(campos[0]);
             idVoo = Integer.parseInt(campos[1]);
             diaSemana = campos[2];
@@ -685,7 +642,7 @@ public class GestorPassageiro {
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
         String linha = f.readLine();
         while (linha != null) {
-            String[] campos = linha.split(",");//dividir os campos pelo tab; o ficheiro está assim <código>\t<nome>\t<tipo>\t<nºUnidades>\t<nºUnidadesMínimo>\t<preço>\t<fornecedor>
+            String[] campos = linha.split(",");
             if ((idPassageiroFiltro == null || idPassageiroFiltro.equals(campos[0])) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16]))) {
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
