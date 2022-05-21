@@ -90,8 +90,8 @@ public class GestorAssistente {
     public void lerPassageiroNomeIdTxtPorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
-        Rota Rota = EscolherRota();
-        Voo Voo = EscolherVoo(Rota.getIdRota());
+        Rota rota = escolherRota();
+        Voo voo = escolherVoo(rota.getIdRota());
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
@@ -99,7 +99,7 @@ public class GestorAssistente {
         ano = sc.nextInt();
         System.out.println("Mês da viagem: ");
         mes = sc.nextInt();
-        diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
+        diaSemana = voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
             System.out.println("Dia da viagem: ");
             dia = sc.nextInt();
@@ -109,10 +109,10 @@ public class GestorAssistente {
                 System.out.println("\nTem de selecionar um dia que corresponda a " + diaSemana);
             }
         }
-        HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 1, Rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
+        HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", voo.getIdVoo(), 1, rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);                         //lê os passageiros todos
         if (dicBilhete.isEmpty()) {                                                                     //se não existirem bilhetes diz que o voo não tem passageiros
-            System.out.println("\nO voo " + Voo.getIdVoo() + " ainda não tem passageiros.");
+            System.out.println("\nO voo " + voo.getIdVoo() + " ainda não tem passageiros.");
         } else {
             for (HashMap.Entry<String, Bilhete> bilhete : dicBilhete.entrySet()) {                      //senão corre os bilhetes
                 if (dicPassageiro.get(bilhete.getKey()) == null) {                                      //vê se o passageiro existe no ficheiro dos passageiros
@@ -124,57 +124,13 @@ public class GestorAssistente {
         }
     }
 
-    public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
-        Scanner sc = new Scanner(System.in);
-        HashMap<Integer, Rota> dicRotas = lerRotasTxt("rotas.txt");
-        boolean encontrado = false;
-        int rota = 0;
-        while (!encontrado) {
-            System.out.println("\nEscolha uma das seguintes rotas:");
-            MostrarRota(dicRotas);
-            System.out.print("\nEscolha uma opção: ");
-            rota = sc.nextInt();
-            encontrado = dicRotas.containsKey(rota); //verifica se a rota escolhida existe
-        }
-        return dicRotas.get(rota);
-    }
-
-    public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
-        Scanner sc = new Scanner(System.in);
-        HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRota, "voos.txt");
-        boolean encontrado = false;
-        int voo = 0;
-        while (!encontrado) {
-            System.out.println("\nEscolha um dos seguintes voos:");
-            MostrarVoo(dicVoo);
-            System.out.print("\nEscolha uma opção: ");
-            voo = sc.nextInt();
-            encontrado = dicVoo.containsKey(voo);
-        }
-        return dicVoo.get(voo);
-    }
-
-    public void MostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
-        for (HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()) {
-            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
-        }
-    }
-
-    public void MostrarVoo(HashMap<Integer, Voo> dicVoo) throws IOException {
-        LocalTime tempo = null;
-        for (HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()) {
-            tempo = LocalTime.of(Voo.getValue().getHora(), Voo.getValue().getMinuto(), Voo.getValue().getSegundo());
-            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
-        }
-    }
-
 
     //5 - Listar os passageiros suplentes de um voo (o nome e o ID do passageiro)
     public void lerPassageiroSuplenteNomeIdTxtPorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
-        Rota Rota = EscolherRota();
-        Voo Voo = EscolherVoo(Rota.getIdRota());
+        Rota Rota = escolherRota();
+        Voo Voo = escolherVoo(Rota.getIdRota());
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
@@ -206,6 +162,7 @@ public class GestorAssistente {
             }
         }
     }
+
 
     //6 - Listar o historial de um passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
@@ -245,7 +202,6 @@ public class GestorAssistente {
         return "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\nDia da Semana: " + value.getDiaSemana() + "\nHora: " + value.getHora() +
                 ":" + value.getMinuto() + ":" + value.getSegundo() + "\nMarca do Avião: " + value.getMarcaAviao();
     }
-    //FIM DO 7
 
 
     //8 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
@@ -260,9 +216,6 @@ public class GestorAssistente {
             }
         }
     }
-    //FIM DO 8
-
-
 
 
     //Auxiliares - leitura de ficheiros e ler strings:
@@ -393,6 +346,55 @@ public class GestorAssistente {
     private String toStringP(Passageiro value) {
         return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\n";
     }
+
+    //usado no 4 e no 5
+    public Rota escolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
+        Scanner sc = new Scanner(System.in);
+        HashMap<Integer, Rota> dicRotas = lerRotasTxt("rotas.txt");
+        boolean encontrado = false;
+        int rota = 0;
+        while (!encontrado) {
+            System.out.println("\nEscolha uma das seguintes rotas:");
+            mostrarRota(dicRotas);
+            System.out.print("\nEscolha uma opção: ");
+            rota = sc.nextInt();
+            encontrado = dicRotas.containsKey(rota); //verifica se a rota escolhida existe
+        }
+        return dicRotas.get(rota);
+    }
+
+    //usado no 4 e no 5
+    public Voo escolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
+        Scanner sc = new Scanner(System.in);
+        HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRota, "voos.txt");
+        boolean encontrado = false;
+        int voo = 0;
+        while (!encontrado) {
+            System.out.println("\nEscolha um dos seguintes voos:");
+            mostrarVoo(dicVoo);
+            System.out.print("\nEscolha uma opção: ");
+            voo = sc.nextInt();
+            encontrado = dicVoo.containsKey(voo);
+        }
+        return dicVoo.get(voo);
+    }
+
+    //usado no 4 e no 5
+    public void mostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
+        for (HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()) {
+            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
+        }
+    }
+
+    //usado no 4 e no 5
+    public void mostrarVoo(HashMap<Integer, Voo> dicVoo) throws IOException {
+        LocalTime tempo = null;
+        for (HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()) {
+            tempo = LocalTime.of(Voo.getValue().getHora(), Voo.getValue().getMinuto(), Voo.getValue().getSegundo());
+            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
+        }
+    }
+
 
     //usado no 6
     public HashMap<Integer, Bilhete> lerBilheteDePassageiro(String NomeFich, String idPassageiroFiltro) throws IOException {

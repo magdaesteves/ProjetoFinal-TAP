@@ -48,7 +48,7 @@ public class GestorPassageiro {
             while (op2.equals("0") == false) {
                 switch (op2) {
                     case "1":
-                        ComprarBilheteEfetivo(idPassageiro);
+                        comprarBilheteEfetivo(idPassageiro);
                         break;
                     case "2":
                         break;
@@ -82,13 +82,13 @@ public class GestorPassageiro {
             while (op.equals("0") == false) {
                 switch (op) {
                     case "1":
-                        ComprarBilheteEfetivo(idPassageiro);
+                        comprarBilheteEfetivo(idPassageiro);
                         break;
                     case "2":
-                        CancelarBilheteEfetivo(idPassageiro);
+                        cancelarBilheteEfetivo(idPassageiro);
                         break;
                     case "3":
-                        CancelarBilheteSuplente(idPassageiro);
+                        cancelarBilheteSuplente(idPassageiro);
                         break;
                     case "4":
                         System.out.println("\nRotas: ");
@@ -109,8 +109,7 @@ public class GestorPassageiro {
                         break;
                     case "8":
                         System.out.println("\nBilhetes suplentes: ");
-                        //Ver isto!!
-                        //listarBilheteSuplentes("bilhetes.txt", idPassageiro);
+                        listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                         break;
                 }
                 menu();
@@ -129,24 +128,24 @@ public class GestorPassageiro {
     }
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
-    public void ComprarBilheteEfetivo(String idPassageiro) throws IOException {
+    public void comprarBilheteEfetivo(String idPassageiro) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
         Bilhete bilhete = null;
-        Rota Rota = EscolherRota();                 //vai à função para escolher uma rota
-        Voo Voo = EscolherVoo(Rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
+        Rota rota = escolherRota();                 //vai à função para escolher uma rota
+        Voo voo = escolherVoo(rota.getIdRota());    //dependendo da rota vai dizer quais os voos que existem relacionados com a mesma
         int tipoBilhete = 0;                        //vai ver a função onde vai indicar se é suplente, efetivo ou se não existe (switch abaixo)
         double preco = 0;
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
-        preco = calculoPrecoBilhete(Rota, 1, 300, 1000, 25, 50);
+        preco = calculoPrecoBilhete(rota, 1, 300, 1000, 25, 50);
         //A data do voo é pedida ao utilizador, onde verificamos posteriormente se o mesmo pertence ao dia de semana do voo
         System.out.print("\nAno da viagem: ");
         ano = sc.nextInt();
         System.out.print("Mês da viagem: ");
         mes = sc.nextInt();
-        diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
+        diaSemana = voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
             System.out.print("Dia da viagem: ");
             dia = sc.nextInt();
@@ -155,14 +154,14 @@ public class GestorPassageiro {
             if (!diaEncontrado) {
                 System.out.println("Tem de selecionar um dia que corresponda a " + diaSemana);
             } else {
-                tipoBilhete = tipoBilhete(Voo, Rota, ano, mes, dia);
+                tipoBilhete = tipoBilhete(voo, rota, ano, mes, dia);
                 if (tipoBilhete == 0) {
                     System.out.println("\nNão existem bilhetes disponíveis para o dia pretendido!");
                     diaEncontrado = false;
                 } else {
                     LocalDateTime data = LocalDateTime.now();
-                    bilhete = new Bilhete(idPassageiro, Rota.getIdRota(), Voo.getIdVoo(), ano, mes, dia, Voo.getHora(), Voo.getMinuto(), Voo.getSegundo(), data.getYear(), data.getMonth().getValue(), data.getDayOfMonth(), data.getHour(), data.getMinute(), data.getSecond(), preco, tipoBilhete);
-                    CriarBilhete(bilhete);
+                    bilhete = new Bilhete(idPassageiro, rota.getIdRota(), voo.getIdVoo(), ano, mes, dia, voo.getHora(), voo.getMinuto(), voo.getSegundo(), data.getYear(), data.getMonth().getValue(), data.getDayOfMonth(), data.getHour(), data.getMinute(), data.getSecond(), preco, tipoBilhete);
+                    criarBilhete(bilhete);
                     if (tipoBilhete == 1) {
                         System.out.println("\nFoi comprado um bilhete efetivo.");
                     }
@@ -174,14 +173,14 @@ public class GestorPassageiro {
         }
     }
 
-    public Rota EscolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
+    public Rota escolherRota() throws IOException { //mostra todas as rotas para escolher uma que esteja válida, ex. Lisboa, Leiria, Porto, etc
         Scanner sc = new Scanner(System.in);
         HashMap<Integer, Rota> dicRotas = lerRotasTxt("rotas.txt");
         boolean encontrado = false;
         int rota = 0;
         while (!encontrado) {
             System.out.println("\nEscolha uma das seguintes rotas:");
-            MostrarRota(dicRotas);
+            mostrarRota(dicRotas);
             System.out.print("\nEscolha uma opção: ");
             rota = sc.nextInt();
             encontrado = dicRotas.containsKey(rota); //verifica se a rota escolhida existe
@@ -189,14 +188,14 @@ public class GestorPassageiro {
         return dicRotas.get(rota);
     }
 
-    public Voo EscolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
+    public Voo escolherVoo(int idRota) throws IOException { //após escolher a rota, aparecem os voos programados para essa rota, e tem de se escolher uma
         Scanner sc = new Scanner(System.in);
         HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRota, "voos.txt");
         boolean encontrado = false;
         int voo = 0;
         while (!encontrado) {
             System.out.println("\nEscolha um dos seguintes voos:");
-            MostrarVoo(dicVoo);
+            mostrarVoo(dicVoo);
             System.out.print("\nEscolha uma opção: ");
             voo = sc.nextInt();
             encontrado = dicVoo.containsKey(voo);
@@ -205,7 +204,7 @@ public class GestorPassageiro {
     }
 
     public int tipoBilhete(Voo Voo, Rota Rota, int ano, int mes, int dia) throws IOException { //verifica se o bilhete é ou não efetivo
-        int maxBilhetes = getMaxBilhetes(Voo.getMarcaAviao());
+        int maxBilhetes = lerMaxBilhetes(Voo.getMarcaAviao());
         HashMap<Integer, Bilhete> dicBilhetesEfetivos = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 1, Rota.getIdRota(), ano, mes, dia);
         int bilhetesEfetivos = dicBilhetesEfetivos.size();
         HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 2, Rota.getIdRota(), ano, mes, dia);
@@ -220,7 +219,7 @@ public class GestorPassageiro {
         return 0;
     }
 
-    public int getMaxBilhetes(String aviao) throws IOException { //diz qual o máximo de bilhetes efetivos por avião
+    public int lerMaxBilhetes(String aviao) throws IOException { //diz qual o máximo de bilhetes efetivos por avião
         switch (aviao) {
             case "Bombardier Challenger 350":
                 return 10;
@@ -244,7 +243,7 @@ public class GestorPassageiro {
         return Preco;                                           // senão ele vai dar o preço que é 1€ (neste caso em concreto, pois pode ser alterado o preço por km) por km
     }
 
-    public void CriarBilhete(Bilhete Bilhete) throws IOException { //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
+    public void criarBilhete(Bilhete Bilhete) throws IOException { //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt", true));
         String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
                 Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
@@ -254,10 +253,10 @@ public class GestorPassageiro {
         buffWrite.append(linha);
         buffWrite.close();
     }
-    //Fim 2
+
 
     //3 - Cancelar um bilhete efetivo e promover automaticamente um bilhete suplente a bilhete efetivo;
-    public void CancelarBilheteEfetivo(String idPassageiro) throws IOException {
+    public void cancelarBilheteEfetivo(String idPassageiro) throws IOException {
         Scanner sc = new Scanner(System.in);
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial("bilhetes.txt", idPassageiro, false, true);
         int keyCancelar;
@@ -270,12 +269,12 @@ public class GestorPassageiro {
             }
             System.out.println("Id para cancelar:");
             keyCancelar = sc.nextInt();
-            FazerCancelamento(dicBilhete.get(keyCancelar));
+            fazerCancelamento(dicBilhete.get(keyCancelar));
         }
     }
 
-    public void FazerCancelamento(Bilhete bilhete) throws IOException {
-        Bilhete bilheteSubstituto = EncontrarBilheteParaSubstituir(bilhete.getIdVoo(), bilhete.getIdRota(), bilhete.getAnoViagem(), bilhete.getMesViagem(), bilhete.getDiaViagem());
+    public void fazerCancelamento(Bilhete bilhete) throws IOException {
+        Bilhete bilheteSubstituto = encontrarBilheteParaSubstituir(bilhete.getIdVoo(), bilhete.getIdRota(), bilhete.getAnoViagem(), bilhete.getMesViagem(), bilhete.getDiaViagem());
         HashMap<Integer, Bilhete> bilhetes = lerBilheteTxt("bilhetes.txt", 0, 0, 0, 0, 0, 0);
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt"));
         String linha = "";
@@ -302,7 +301,7 @@ public class GestorPassageiro {
         buffWrite.close();
     }
 
-    public Bilhete EncontrarBilheteParaSubstituir(int idVoo, int idRota, int anoViagem, int mesViagem, int diaViagem) throws IOException {
+    public Bilhete encontrarBilheteParaSubstituir(int idVoo, int idRota, int anoViagem, int mesViagem, int diaViagem) throws IOException {
         HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", idVoo, 2, idRota, anoViagem, mesViagem, diaViagem);
         LocalDateTime ultimadata = LocalDateTime.now();
         Bilhete BilheteParaRetornar = null;
@@ -315,11 +314,10 @@ public class GestorPassageiro {
         }
         return BilheteParaRetornar;
     }
-    //Fim 3
 
 
     //4 - Cancelar um bilhete suplente
-    public void CancelarBilheteSuplente(String idPassageiro) throws IOException {
+    public void cancelarBilheteSuplente(String idPassageiro) throws IOException {
         HashMap<Integer,Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt",0,2,0,0,0,0);
         /*for (Map.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) {
             if (Bilhete.getValue().getIdVoo() == bilhete.getIdVoo() && Bilhete.getValue().getIdRota() == bilhete.getIdRota() && Bilhete.getValue().getIdPassageiro().equals(bilhete.getIdPassageiro()) &&
@@ -328,7 +326,7 @@ public class GestorPassageiro {
             }
         }*/
     }
-    //Fim do 4
+
 
     //5 - Listar as rotas
     public void lerRotaTxt(String NomeFich) throws IOException {
@@ -354,7 +352,7 @@ public class GestorPassageiro {
             System.out.println(toStringR(rotas.getValue()));
         }
     }
-    //FIM DO 5
+
 
     //6 - Listar os voos de uma rota;
     public void listarVoosPorRota(String NomeFich, int idRotas) throws IOException {
@@ -371,7 +369,6 @@ public class GestorPassageiro {
             System.out.println("Existem " + cont + " voos com a rota " + idRotas + ".");
         }
     }
-    //FIM DO 6
 
 
     //7- Listar o historial do passageiro (lista de viagens já realizadas)
@@ -386,7 +383,7 @@ public class GestorPassageiro {
             }
         }
     }
-    //FIM DO 7
+
 
     //8 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
     public void listarBilheteEfetivos(String NomeFich, String idPassageiro) throws IOException {
@@ -400,7 +397,7 @@ public class GestorPassageiro {
             }
         }
     }
-    //FIM DO 8
+
 
     //9 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
     public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
@@ -414,7 +411,6 @@ public class GestorPassageiro {
             }
         }
     }
-
 
 
     //Auxiliares - leitura de ficheiros e ler strings:
@@ -512,14 +508,14 @@ public class GestorPassageiro {
     }
 
     //usado no 2
-    public void MostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
+    public void mostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
         for (HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()) {
             System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
         }
     }
 
     //usado no 2
-    public void MostrarVoo(HashMap<Integer, Voo> dicVoo) throws IOException {
+    public void mostrarVoo(HashMap<Integer, Voo> dicVoo) throws IOException {
         LocalTime tempo = null;
         for (HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()) {
             tempo = LocalTime.of(Voo.getValue().getHora(), Voo.getValue().getMinuto(), Voo.getValue().getSegundo());
