@@ -71,7 +71,7 @@ public class GestorPassageiro {
             }
         } else {
             boolean passageiroExiste = false;
-            HashMap<String, Passageiro> dicPassageiros = lerPassageiroTxt("passageiros.txt");
+            HashMap<String, Passageiro> dicPassageiros = lerPassageiroTxt("passageiro.txt");
             while (!passageiroExiste) {
                 System.out.print("\nInsira um id: ");
                 idPassageiro = sc.next();
@@ -244,11 +244,10 @@ public class GestorPassageiro {
 
     public void criarBilhete(Bilhete Bilhete) throws IOException { //esta função vai escrever no txt do bilhete, efetivo (1) ou suplente (2)
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt", true));
-        String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," +
-                Bilhete.getMesViagem() + "," + Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," +
-                Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," + Bilhete.getMesAquisicao() + "," + Bilhete.getDiaAquisicao() + "," +
-                Bilhete.getHoraAquisicao() + "," + Bilhete.getMinutoAquisicao() + "," + Bilhete.getSegundoAquisicao() + "," + Bilhete.getPreco() + "," +
-                Bilhete.getTipoBilhete();
+        String linha = "\n" + Bilhete.getIdPassageiro() + "," + Bilhete.getIdRota() + "," + Bilhete.getIdVoo() + "," + Bilhete.getAnoViagem() + "," + Bilhete.getMesViagem() + "," +
+                Bilhete.getDiaViagem() + "," + Bilhete.getHoraViagem() + "," + Bilhete.getMinutoViagem() + "," + Bilhete.getSegundoViagem() + "," + Bilhete.getAnoAquisicao() + "," +
+                Bilhete.getMesAquisicao() + "," + Bilhete.getDiaAquisicao() + "," + Bilhete.getHoraAquisicao() + "," + Bilhete.getMinutoAquisicao() + "," + Bilhete.getSegundoAquisicao() + "," +
+                Bilhete.getPreco() + "," + Bilhete.getTipoBilhete();
         buffWrite.append(linha);
         buffWrite.close();
     }
@@ -258,72 +257,38 @@ public class GestorPassageiro {
     public void cancelarBilheteEfetivo(String idPassageiro) throws IOException {
         Scanner sc = new Scanner(System.in);
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial("bilhetes.txt", idPassageiro, false, true);
-        int keyCancelar;
+        int cancelar;
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes para cancelar.");
         } else {
-            System.out.println("Voos que podem ser cancelados:");
+            System.out.println("\nBilhetes que podem ser cancelados:");
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println("Id: " + bilhete.getKey() + "\nId Rota: " + bilhete.getValue().getIdRota() + "\nId Voo: " + bilhete.getValue().getIdVoo());
+                System.out.println("Bilhete: " + bilhete.getKey() + "\nId Rota: " + bilhete.getValue().getIdRota() + "\nId Voo: " + bilhete.getValue().getIdVoo());
             }
-            System.out.println("Id para cancelar:");
-            keyCancelar = sc.nextInt();
-            fazerCancelamento(dicBilhete.get(keyCancelar));
+            System.out.print("\nEscolha o bilhete que pretende apagar: ");
+            cancelar = sc.nextInt();
+            fazerCancelamento(dicBilhete.get(cancelar),true);
         }
-    }
-
-    public void fazerCancelamento(Bilhete bilhete) throws IOException {
-        Bilhete bilheteSubstituto = encontrarBilheteParaSubstituir(bilhete.getIdVoo(), bilhete.getIdRota(), bilhete.getAnoViagem(), bilhete.getMesViagem(), bilhete.getDiaViagem());
-        HashMap<Integer, Bilhete> bilhetes = lerBilheteTxt("bilhetes.txt", 0, 0, 0, 0, 0, 0);
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt"));
-        String linha = "";
-        for (Map.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) {
-            if (Bilhete.getValue().getIdVoo() == bilhete.getIdVoo() && Bilhete.getValue().getIdRota() == bilhete.getIdRota() && Bilhete.getValue().getIdPassageiro().equals(bilhete.getIdPassageiro()) &&
-                    Bilhete.getValue().getAnoViagem() == bilhete.getAnoViagem() && Bilhete.getValue().getMesViagem() == bilhete.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilhete.getDiaViagem()) {
-                System.out.println("Bilhete Apagado");
-            } else {
-                if (bilheteSubstituto != null) {
-                    if (Bilhete.getValue().getIdVoo() == bilheteSubstituto.getIdVoo() && Bilhete.getValue().getIdRota() == bilheteSubstituto.getIdRota() && Bilhete.getValue().getIdPassageiro().equals(bilheteSubstituto.getIdPassageiro())
-                            && Bilhete.getValue().getAnoViagem() == bilheteSubstituto.getAnoViagem() && Bilhete.getValue().getMesViagem() == bilheteSubstituto.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilheteSubstituto.getDiaViagem()) {
-                        Bilhete.getValue().setTipoBilhete(1);
-                    }
-                }
-                linha = linha + Bilhete.getValue().getIdPassageiro() + "," + Bilhete.getValue().getIdRota() + "," + Bilhete.getValue().getIdVoo() + "," + Bilhete.getValue().getAnoViagem() + "," +
-                        Bilhete.getValue().getMesViagem() + "," + Bilhete.getValue().getDiaViagem() + "," + Bilhete.getValue().getHoraViagem() + "," + Bilhete.getValue().getMinutoViagem() + "," +
-                        Bilhete.getValue().getSegundoViagem() + "," + Bilhete.getValue().getAnoAquisicao() + "," + Bilhete.getValue().getMesAquisicao() + "," + Bilhete.getValue().getDiaAquisicao() + "," +
-                        Bilhete.getValue().getHoraAquisicao() + "," + Bilhete.getValue().getMinutoAquisicao() + "," + Bilhete.getValue().getSegundoAquisicao() + "," + Bilhete.getValue().getPreco() + "," +
-                        Bilhete.getValue().getTipoBilhete();
-                buffWrite.append(linha);
-                linha = "\n";
-            }
-        }
-        buffWrite.close();
-    }
-
-    public Bilhete encontrarBilheteParaSubstituir(int idVoo, int idRota, int anoViagem, int mesViagem, int diaViagem) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", idVoo, 2, idRota, anoViagem, mesViagem, diaViagem);
-        LocalDateTime ultimadata = LocalDateTime.now();
-        Bilhete BilheteParaRetornar = null;
-        LocalDateTime databilhete = null;
-        for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhetesSuplentes.entrySet()) {
-            databilhete = LocalDateTime.of(bilhete.getValue().getAnoAquisicao(), bilhete.getValue().getMesAquisicao(), bilhete.getValue().getDiaAquisicao(), bilhete.getValue().getHoraAquisicao(), bilhete.getValue().getMinutoAquisicao(), bilhete.getValue().getSegundoAquisicao());
-            if (databilhete.isBefore(ultimadata)) {
-                BilheteParaRetornar = bilhete.getValue();
-            }
-        }
-        return BilheteParaRetornar;
     }
 
 
     //4 - Cancelar um bilhete suplente
     public void cancelarBilheteSuplente(String idPassageiro) throws IOException {
-        HashMap<Integer,Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt",0,2,0,0,0,0);
-        /*for (Map.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) {
-            if (Bilhete.getValue().getIdVoo() == bilhete.getIdVoo() && Bilhete.getValue().getIdRota() == bilhete.getIdRota() && Bilhete.getValue().getIdPassageiro().equals(bilhete.getIdPassageiro()) &&
-                    Bilhete.getValue().getAnoViagem() == bilhete.getAnoViagem() && Bilhete.getValue().getMesViagem() == bilhete.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilhete.getDiaViagem()) {
-                System.out.println("Bilhete Apagado");
+        Scanner sc = new Scanner(System.in);
+        HashMap<Integer,Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente("bilhetes.txt",idPassageiro,2);//buscar os bilhetes suplentes do passageiro por acontecer
+        Bilhete cancelar = null;
+        if (dicBilhete.isEmpty()) {
+            System.out.println("O passageiro " + idPassageiro + " não tem bilhetes para cancelar.");
+        } else {
+            System.out.println("\nBilhetes que podem ser cancelados:");
+            for (HashMap.Entry<Integer, Bilhete> bilheteSuplente : dicBilhete.entrySet()) {  //fazer o utilizador escolher um dos bilhetes suplentes
+                System.out.println("\nBilhete: " + bilheteSuplente.getKey() + "\nIdRota: " + bilheteSuplente.getValue().getIdRota() + "\nIdVoo: " + bilheteSuplente.getValue().getIdVoo() +
+                        "\nData da viagem: " + bilheteSuplente.getValue().getAnoViagem() + "/" + bilheteSuplente.getValue().getMesViagem() + "/" + bilheteSuplente.getValue().getDiaViagem());
             }
-        }*/
+        }
+        System.out.print("\nEscolha o bilhete que pretende apagar: ");
+        cancelar = dicBilhete.get(sc.nextInt());
+        fazerCancelamento(cancelar,false); //escrever no ficheiro sem esse incluido
     }
 
 
@@ -373,12 +338,11 @@ public class GestorPassageiro {
     //7- Listar o historial do passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
         }
     }
@@ -387,12 +351,11 @@ public class GestorPassageiro {
     //8 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
     public void listarBilheteEfetivos(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 1);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes efetivos.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
         }
     }
@@ -401,12 +364,11 @@ public class GestorPassageiro {
     //9 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
     public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 2);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
         }
     }
@@ -440,13 +402,15 @@ public class GestorPassageiro {
 
     //usado no 1 e no 6
     private String toStringV(Voo value) {
-        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " +
+                value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
 
     //usado no 2
     public HashMap<Integer, Bilhete> lerBilheteTxt(String NomeFich, int idVooFiltro, int tipoBilheteFiltro, int idRotaFiltro, int ano, int mes, int dia) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
-        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete, cont = 1;
+        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao,
+                minAquisicao, segAquisicao, tipoBilhete, cont = 1;
         String idPassageiro;
         double preco;
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
@@ -474,7 +438,8 @@ public class GestorPassageiro {
                 segAquisicao = Integer.parseInt(campos[14]);
                 preco = Double.parseDouble(campos[15]);
                 tipoBilhete = Integer.parseInt(campos[16]);
-                Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao,
+                        horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
                 dicBilhete.put(cont, b);
                 cont++;
             }
@@ -522,6 +487,58 @@ public class GestorPassageiro {
         }
     }
 
+    //usado no 3
+    public Bilhete encontrarBilheteParaSubstituir(int idVoo, int idRota, int anoViagem, int mesViagem, int diaViagem) throws IOException { //encontra o bilhete para substituir
+        HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", idVoo, 2, idRota, anoViagem, mesViagem, diaViagem);
+        //vai buscar os bilhetes suplentes daquele voo cujo bilhete vai ser cancelado
+        LocalDateTime ultimaData = LocalDateTime.now();
+        Bilhete bilheteParaRetornar = null;
+        LocalDateTime dataBilhete = null;
+        for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhetesSuplentes.entrySet()) { //percorre os bilhetes suplentes
+            dataBilhete = LocalDateTime.of(bilhete.getValue().getAnoAquisicao(), bilhete.getValue().getMesAquisicao(), bilhete.getValue().getDiaAquisicao(),
+                    bilhete.getValue().getHoraAquisicao(), bilhete.getValue().getMinutoAquisicao(), bilhete.getValue().getSegundoAquisicao()); //recebe a data de aquisição do bilhete
+            if (dataBilhete.isBefore(ultimaData)) { //verifica se é o primeiro bilhete adquirido como suplente para não ser sempre o último
+                bilheteParaRetornar = bilhete.getValue();
+            }
+        }
+        return bilheteParaRetornar;
+    }
+
+    //usado no 3 e no 4
+    public void fazerCancelamento(Bilhete bilhete, boolean paraSubstituir) throws IOException {
+        Bilhete bilheteSubstituto = null;
+        if(paraSubstituir){ //se for necessário substituir para efetivo
+            bilheteSubstituto = encontrarBilheteParaSubstituir(bilhete.getIdVoo(), bilhete.getIdRota(), bilhete.getAnoViagem(), bilhete.getMesViagem(), bilhete.getDiaViagem());
+        }
+        HashMap<Integer, Bilhete> bilhetes = lerBilheteTxt("bilhetes.txt", 0, 0, 0, 0, 0, 0);
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("bilhetes.txt")); //refaz o ficheiro, porque não dá para apagar uma linha
+        String linha = "";
+        for (HashMap.Entry<Integer, Bilhete> Bilhete : bilhetes.entrySet()) { //corre os bilhetes todos
+            if (Bilhete.getValue().getIdVoo() == bilhete.getIdVoo() && Bilhete.getValue().getIdRota() == bilhete.getIdRota() &&
+                    Bilhete.getValue().getIdPassageiro().equals(bilhete.getIdPassageiro()) && Bilhete.getValue().getAnoViagem() == bilhete.getAnoViagem() &&
+                    Bilhete.getValue().getMesViagem() == bilhete.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilhete.getDiaViagem()) { //vê se é o bilhete para cancelar, se for não escreve
+                System.out.println("Bilhete apagado");
+            } else {
+                if (bilheteSubstituto != null) { //ver se existe bilhete suplente
+                    if (Bilhete.getValue().getIdVoo() == bilheteSubstituto.getIdVoo() && Bilhete.getValue().getIdRota() == bilheteSubstituto.getIdRota() &&
+                            Bilhete.getValue().getIdPassageiro().equals(bilheteSubstituto.getIdPassageiro()) && Bilhete.getValue().getAnoViagem() == bilheteSubstituto.getAnoViagem() &&
+                            Bilhete.getValue().getMesViagem() == bilheteSubstituto.getMesViagem() && Bilhete.getValue().getDiaViagem() == bilheteSubstituto.getDiaViagem()) {
+                            //vai comparar o que entra no for, se tudo for igual, o substituto muda para efetivo -> setTipoBilhete
+                        Bilhete.getValue().setTipoBilhete(1);
+                    }
+                }
+                linha = linha + Bilhete.getValue().getIdPassageiro() + "," + Bilhete.getValue().getIdRota() + "," + Bilhete.getValue().getIdVoo() + "," + Bilhete.getValue().getAnoViagem() + "," +
+                        Bilhete.getValue().getMesViagem() + "," + Bilhete.getValue().getDiaViagem() + "," + Bilhete.getValue().getHoraViagem() + "," + Bilhete.getValue().getMinutoViagem() + "," +
+                        Bilhete.getValue().getSegundoViagem() + "," + Bilhete.getValue().getAnoAquisicao() + "," + Bilhete.getValue().getMesAquisicao() + "," + Bilhete.getValue().getDiaAquisicao() + "," +
+                        Bilhete.getValue().getHoraAquisicao() + "," + Bilhete.getValue().getMinutoAquisicao() + "," + Bilhete.getValue().getSegundoAquisicao() + "," + Bilhete.getValue().getPreco() + "," +
+                        Bilhete.getValue().getTipoBilhete(); //adiciona um bilhete (sempre que entra neste ramo do else, ao percorrer o for)
+                buffWrite.append(linha);
+                linha = "\n";
+            }
+        } //o for vai adicionar bilhete a bilhete
+        buffWrite.close();
+    }
+
     //usado no 5
     private String toStringR(Rota value) {
         return "Id: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
@@ -555,10 +572,11 @@ public class GestorPassageiro {
 
     //usado no 7
     public HashMap<Integer, Bilhete> lerBilhetePassageiroHistorial(String NomeFich, String idPassageiroFiltro, boolean BilheteAnterior, boolean BilhetePosterior) throws IOException {
+        //antes a true vai buscar os bilhetes antes da data atual, depois a true vai buscar os bilhetes depois da data atual, ambos a true vai buscar antes e depois da data atual
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
-        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete, cont = 1;
+        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete,cont=0;
         String idPassageiro;
         double preco;
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
@@ -566,6 +584,7 @@ public class GestorPassageiro {
         while (linha != null) {
             String[] campos = linha.split(",");
             if (idPassageiroFiltro == null || idPassageiroFiltro.equals(campos[0])) {
+                //se o filtro for passado a 0, vai buscar todos os registos. Se o filtro vier preenchido vai buscar apenas os bilhetes do voo pretendido
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
                 idVoo = Integer.parseInt(campos[2]);
@@ -584,10 +603,11 @@ public class GestorPassageiro {
                 preco = Double.parseDouble(campos[15]);
                 tipoBilhete = Integer.parseInt(campos[16]);
                 data = LocalDateTime.of(anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem);
-                if ((data.isBefore(dataAtual) && BilheteAnterior) || (data.isAfter(dataAtual) && BilhetePosterior)) {
-                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
-                    dicBilhete.put(cont, b);
+                if (data.isBefore(dataAtual)) {
+                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao,
+                            diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
                     cont++;
+                    dicBilhete.put(cont, b);
                 }
             }
             linha = f.readLine();
@@ -597,7 +617,7 @@ public class GestorPassageiro {
     }
 
     //usado no 7, 8 e 9
-    public HashMap<Integer,Voo> lerVooTxt (String NomeFich) throws IOException {
+    public HashMap<Integer,Voo> lerVooTxt (String NomeFich,int FiltroIdVoo, int FiltroIdRota) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
@@ -605,15 +625,17 @@ public class GestorPassageiro {
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");
-            idRota = Integer.parseInt(campos[0]);
-            idVoo = Integer.parseInt(campos[1]);
-            diaSemana = campos[2];
-            hora = Integer.parseInt(campos[3]);
-            minuto = Integer.parseInt(campos[4]);
-            segundo = Integer.parseInt(campos[5]);
-            marcadoAviao = campos[6];
-            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-            dicVoo.put(idVoo, v);
+            if(FiltroIdRota == Integer.parseInt(campos[0]) && FiltroIdVoo == Integer.parseInt(campos[1])) {
+                idRota = Integer.parseInt(campos[0]);
+                idVoo = Integer.parseInt(campos[1]);
+                diaSemana = campos[2];
+                hora = Integer.parseInt(campos[3]);
+                minuto = Integer.parseInt(campos[4]);
+                segundo = Integer.parseInt(campos[5]);
+                marcadoAviao = campos[6];
+                Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
+                dicVoo.put(idVoo, v);
+            }
             linha = f.readLine();
         }
         f.close();
@@ -621,9 +643,14 @@ public class GestorPassageiro {
     }
 
     //usado no 7, 8 e 9
-    private String toStringX(Voo value) {
-        return "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\nDia da Semana: " + value.getDiaSemana() + "\nHora: " + value.getHora() +
-                ":" + value.getMinuto() + ":" + value.getSegundo() + "\nMarca do Avião: " + value.getMarcaAviao();
+    private String toStringX(int IdRota,int IdVoo) throws IOException{
+        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt",IdVoo,IdRota);
+        String resposta="";
+        for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
+            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora: " + voo.getValue().getHora() +
+                    ":" + voo.getValue().getMinuto() + ":" + voo.getValue().getSegundo() + "\nMarca do Avião: " + voo.getValue().getMarcaAviao();
+        }
+        return resposta;
     }
 
     //usado no 8 e no 9
@@ -631,7 +658,7 @@ public class GestorPassageiro {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
-        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete;
+        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete, cont=0;
         String idPassageiro;
         double preco;
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
@@ -658,8 +685,10 @@ public class GestorPassageiro {
                 tipoBilhete = Integer.parseInt(campos[16]);
                 data = LocalDateTime.of(anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem);
                 if (data.isAfter(dataAtual)) {
-                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
-                    dicBilhete.put(idVoo, b);
+                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao,
+                            horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                    cont++;
+                    dicBilhete.put(cont, b);
                 }
             }
             linha = f.readLine();

@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.time.LocalDateTime;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GestorAssistente {
@@ -167,12 +166,11 @@ public class GestorAssistente {
     //6 - Listar o historial de um passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilheteDePassageiro(NomeFich, idPassageiro);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
         }
     }
@@ -181,38 +179,24 @@ public class GestorAssistente {
     //7 - Listar os bilhetes efetivos do passageiro (lista de viagens por realizar)
     public void listarBilheteEfetivos(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 1);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("O passageiro " + idPassageiro + " não tem bilhetes efetivos.");
         } else {
-            for (Map.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                if (dicVoo.get(bilhete.getKey()) == null) {
-                    System.out.println("\nPassageiro " + bilhete.getKey() + " sem registo!");
-                } else {
-                    System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
-                }
+            for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
-            /*for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringB(dicBilhete.get(bilhete.getKey())));
-            } */
         }
-    }
-
-    private String toStringX(Voo value) {
-        return "\nId Rota: " + value.getIdRota() + "\nId Voo: " + value.getIdVoo() + "\nDia da Semana: " + value.getDiaSemana() + "\nHora: " + value.getHora() +
-                ":" + value.getMinuto() + ":" + value.getSegundo() + "\nMarca do Avião: " + value.getMarcaAviao();
     }
 
 
     //8 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
     public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 2);
-        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt");
         if (dicBilhete.isEmpty()) {
             System.out.println("\nO passageiro " + idPassageiro + " não tem bilhetes suplentes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
-                System.out.println(toStringX(dicVoo.get(bilhete.getKey())));
+                System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
             }
         }
     }
@@ -227,7 +211,8 @@ public class GestorAssistente {
 
     //usado no 2
     private String toStringV(Voo value) {
-        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " + value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " +
+                value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
 
     //Usado no 2 no 4
@@ -285,7 +270,8 @@ public class GestorAssistente {
                 segAquisicao = Integer.parseInt(campos[14]);
                 preco = Double.parseDouble(campos[15]);
                 tipoBilhete = Integer.parseInt(campos[16]);
-                Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao,
+                        horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
                 dicBilhete.put(idPassageiro, b);
             }
             linha = f.readLine();
@@ -401,7 +387,7 @@ public class GestorAssistente {
         HashMap<Integer, Bilhete> dicBilhete = new HashMap<>();
         LocalDateTime data = null;
         LocalDateTime dataAtual = LocalDateTime.now();
-        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete;
+        int idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, tipoBilhete,cont=0;
         String idPassageiro;
         double preco;
         BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
@@ -429,8 +415,10 @@ public class GestorAssistente {
                 tipoBilhete = Integer.parseInt(campos[16]);
                 data = LocalDateTime.of(anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem);
                 if (data.isBefore(dataAtual)) {
-                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
-                    dicBilhete.put(idVoo, b);
+                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao,
+                            horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                    cont++;
+                    dicBilhete.put(cont, b);
                 }
             }
             linha = f.readLine();
@@ -439,8 +427,8 @@ public class GestorAssistente {
         return dicBilhete;
     }
 
-    //usado no 7 e no 8
-    public HashMap<Integer,Voo> lerVooTxt (String NomeFich) throws IOException {
+    //usado no 6, 7 e no 8
+    public HashMap<Integer,Voo> lerVooTxt (String NomeFich,int FiltroIdVoo, int FiltroIdRota) throws IOException {
         HashMap<Integer, Voo> dicVoo = new HashMap<>();
         int idRota, idVoo, hora, minuto, segundo;
         String diaSemana, marcadoAviao;
@@ -448,20 +436,34 @@ public class GestorAssistente {
         String linha = f.readLine();
         while (linha != null) {
             String[] campos = linha.split(",");
-            idRota = Integer.parseInt(campos[0]);
-            idVoo = Integer.parseInt(campos[1]);
-            diaSemana = campos[2];
-            hora = Integer.parseInt(campos[3]);
-            minuto = Integer.parseInt(campos[4]);
-            segundo = Integer.parseInt(campos[5]);
-            marcadoAviao = campos[6];
-            Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
-            dicVoo.put(idVoo, v);
+            if(FiltroIdRota == Integer.parseInt(campos[0]) && FiltroIdVoo == Integer.parseInt(campos[1])) {
+                idRota = Integer.parseInt(campos[0]);
+                idVoo = Integer.parseInt(campos[1]);
+                diaSemana = campos[2];
+                hora = Integer.parseInt(campos[3]);
+                minuto = Integer.parseInt(campos[4]);
+                segundo = Integer.parseInt(campos[5]);
+                marcadoAviao = campos[6];
+                Voo v = new Voo(idRota, idVoo, diaSemana, hora, minuto, segundo, marcadoAviao);
+                dicVoo.put(idVoo, v);
+            }
             linha = f.readLine();
         }
         f.close();
         return dicVoo;
     }
+
+    //usado no 6, 7 e 8
+    private String toStringX(int IdRota,int IdVoo) throws IOException{
+        HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt",IdVoo,IdRota);
+        String resposta="";
+        for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
+            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora: " +
+                    voo.getValue().getHora() + ":" + voo.getValue().getMinuto() + ":" + voo.getValue().getSegundo() + "\nMarca do Avião: " + voo.getValue().getMarcaAviao();
+        }
+        return resposta;
+    }
+
 
     //usado no 7 e no 8
     public HashMap<Integer, Bilhete> lerBilhetePassageiroEfetivoOuSuplente(String NomeFich, String idPassageiroFiltro, int tipoBilheteFiltro) throws IOException {
@@ -495,7 +497,8 @@ public class GestorAssistente {
                 tipoBilhete = Integer.parseInt(campos[16]);
                 data = LocalDateTime.of(anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem);
                 if (data.isAfter(dataAtual)) {
-                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao, horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
+                    Bilhete b = new Bilhete(idPassageiro, idRota, idVoo, anoViagem, mesViagem, diaViagem, horaViagem, minViagem, segViagem, anoAquisicao, mesAquisicao, diaAquisicao,
+                            horaAquisicao, minAquisicao, segAquisicao, preco, tipoBilhete);
                     dicBilhete.put(idVoo, b);
                 }
             }
