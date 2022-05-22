@@ -21,8 +21,10 @@ public class GestorPassageiro {
         int anoNascimento, mesNascimento, diaNascimento, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
-        System.out.print("\nQual é idPassageiro? ");
-        idPassageiro = sc.next();
+        do { //eu quero que ele peça o NIF e este tem obrigatoriamente de ter 9 números
+            System.out.print("\nQual é idPassageiro? Tem de inserir 9 números: ");
+            idPassageiro = sc.next();
+        } while (idPassageiro.length() != 9);
         System.out.print("Qual o nome? ");
         nome = sc.next();
         System.out.print("Qual é a profissão? ");

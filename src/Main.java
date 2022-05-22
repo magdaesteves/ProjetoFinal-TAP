@@ -185,14 +185,6 @@ public class Main {
         }//fim do if do meni inicial
     }//fim do psvm
 
-
-    /*
-    do { //eu quero que ele peça o NIF e este tem obrigatoriamente de ter 9 números
-         System.out.print("Insira o NIF: ");
-         NIF = sc.nextLine();
-     } while (NIF.length() != 9);
-     break;
-     */
     private static String menuInicio() {
         String operacao;
         Scanner sc = new Scanner(System.in);
@@ -202,7 +194,6 @@ public class Main {
         System.out.println("|  (0) - Não                                                          |");
         System.out.println("#---------------------------------------------------------------------#");
         System.out.print("Escolha uma opção: ");
-
         operacao = sc.next();
         return operacao;
     }
