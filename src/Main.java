@@ -10,7 +10,7 @@ public class Main {
         String operacao, menu, idPassageiro = "";
         int tipo, idRota;
         menu = menuInicio();
-        if(menu.equals("1")) {
+        if (menu.equals("1")) {
             /* ESCOLHER SE É PASSAGEITO OU ASSISTENTE DE BORDO */
             do {
                 System.out.println("\nQue tipo de pessoa é? 1-Passageiro; 2-Assistente de Bordo");
@@ -170,7 +170,8 @@ public class Main {
                                 e.printStackTrace();
                             }
                             break;
-                        case "8": ;
+                        case "8":
+                            ;
                             try {
                                 System.out.print("\nQual o id do passageiro que pretende listar os bilhetes suplentes de viagens por realizar: ");
                                 idPassageiro = sc.next();
@@ -181,9 +182,9 @@ public class Main {
                             break;
                     }
                 } while (!operacao.equals("0"));
-            }//fim do else
-        }//fim do if do meni inicial
-    }//fim do psvm
+            }
+        }
+    }
 
     private static String menuInicio() {
         String operacao;
