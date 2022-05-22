@@ -94,13 +94,13 @@ public class GestorAssistente {
         int ano, mes, dia = 0;
         boolean diaEncontrado = false;
         String diaSemana;
-        System.out.println("\nAno da viagem: ");
+        System.out.print("\nAno da viagem: ");
         ano = sc.nextInt();
-        System.out.println("Mês da viagem: ");
+        System.out.print("Mês da viagem (número): ");
         mes = sc.nextInt();
         diaSemana = voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
-            System.out.println("Dia da viagem: ");
+            System.out.print("Dia da viagem: ");
             dia = sc.nextInt();
             VerificarData = LocalDate.of(ano, mes, dia);
             diaEncontrado = diaSemana.equals(VerificarData.getDayOfWeek().name());
@@ -135,7 +135,7 @@ public class GestorAssistente {
         String diaSemana;
         System.out.print("\nAno da viagem: ");
         ano = sc.nextInt();
-        System.out.print("Mês da viagem: ");
+        System.out.print("Mês da viagem (número): ");
         mes = sc.nextInt();
         diaSemana = Voo.getDiaSemana().toUpperCase(Locale.ROOT);
         while (!diaEncontrado) {
@@ -180,7 +180,7 @@ public class GestorAssistente {
     public void listarBilheteEfetivos(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 1);
         if (dicBilhete.isEmpty()) {
-            System.out.println("O passageiro " + idPassageiro + " não tem bilhetes efetivos.");
+            System.out.println("\nO passageiro " + idPassageiro + " não tem bilhetes efetivos.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
@@ -206,13 +206,13 @@ public class GestorAssistente {
 
     //usado no 1
     private String toStringR(Rota value) {
-        return "Id: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm() + "\n";
+        return "\nId: " + value.getIdRota() + "\nQuantidade de Voos: " + value.getQuantidadeHorarios() + "\nDestino: " + value.getDestino() + "\nDistancia (km): " + value.getDistanciaKm();
     }
 
     //usado no 2
     private String toStringV(Voo value) {
-        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " +
-                value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao() + "\n";
+        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " +
+                value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao();
     }
 
     //Usado no 2 no 4
@@ -330,7 +330,7 @@ public class GestorAssistente {
 
     //usado no 4
     private String toStringP(Passageiro value) {
-        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome() + "\n";
+        return "\nId: " + value.getIdPassageiro() + "\nNome: " + value.getNome();
     }
 
     //usado no 4 e no 5
