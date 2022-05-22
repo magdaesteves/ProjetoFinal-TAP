@@ -10,11 +10,6 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class GestorPassageiro {
-    private HashMap<String, Passageiro> dicFinal;
-    public GestorPassageiro() {
-        dicFinal = new HashMap<>();
-    }
-
     //1 - Registar-se como passageiro
     public String adicionarPassageiro() throws IOException {
         String idPassageiro = "", nome, profissao, morada, op, op2 = null;
@@ -38,13 +33,10 @@ public class GestorPassageiro {
         System.out.print("Qual é a dia de nascimento? ");
         diaNascimento = sc1.nextInt();
         Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
-        dicFinal.put(idPassageiro, A);
         criarPassageiro(A);
         return idPassageiro;
     }
 
-
-    //1 - Registar-se como passageiro
     public void criarPassageiro(Passageiro Passageiro) throws IOException { //esta função vai escrever no txt do passageiro
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("passageiro.txt", true));
         String linha = "\n" + Passageiro.getIdPassageiro() + "," + Passageiro.getNome() + "," + Passageiro.getProfissao() + "," + Passageiro.getMorada() + "," +
@@ -52,6 +44,7 @@ public class GestorPassageiro {
         buffWrite.append(linha);
         buffWrite.close();
     }
+
 
     //2 - Comprar um bilhete efetivo - não havendo vaga será um bilhete suplente (só há 4 bilhetes suplentes em cada voo);
     public void comprarBilheteEfetivo(String idPassageiro) throws IOException {
@@ -299,6 +292,7 @@ public class GestorPassageiro {
             }
         }
     }
+
 
 
     //Auxiliares - leitura de ficheiros e ler strings:
