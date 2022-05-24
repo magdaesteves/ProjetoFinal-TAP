@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Passageiro {
     private String idPassageiro;
     private String nome;
