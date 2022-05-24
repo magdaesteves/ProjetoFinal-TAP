@@ -135,10 +135,10 @@ public class GestorPassageiro {
     }
 
     public int tipoBilhete(Voo Voo, Rota Rota, int ano, int mes, int dia) throws IOException { //verifica se o bilhete é ou não efetivo
-        int maxBilhetes = lerMaxBilhetes(Voo.getMarcaAviao());
         HashMap<Integer, Bilhete> dicBilhetesEfetivos = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 1, Rota.getIdRota(), ano, mes, dia);
-        int bilhetesEfetivos = dicBilhetesEfetivos.size();
         HashMap<Integer, Bilhete> dicBilhetesSuplentes = lerBilheteTxt("bilhetes.txt", Voo.getIdVoo(), 2, Rota.getIdRota(), ano, mes, dia);
+        int maxBilhetes = lerMaxBilhetes(Voo.getMarcaAviao());
+        int bilhetesEfetivos = dicBilhetesEfetivos.size();
         int bilhetesSuplentes = dicBilhetesSuplentes.size();
         if (bilhetesEfetivos < maxBilhetes) {
             return 1;
