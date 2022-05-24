@@ -272,7 +272,7 @@ public class GestorPassageiro {
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false); //queremos os bilhetes do passado, daí o true no anterior
         if (dicBilhete.isEmpty()) {
-            System.out.println("\nO passageiro " + idPassageiro + " ainda não tem bilhetes.");
+            System.out.println("\nO passageiro " + idPassageiro + " não tem histórico de bilhetes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));

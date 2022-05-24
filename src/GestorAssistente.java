@@ -167,7 +167,7 @@ public class GestorAssistente {
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilheteDePassageiro(NomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
-            System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
+            System.out.println("O passageiro " + idPassageiro + " não tem histórico de bilhetes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
