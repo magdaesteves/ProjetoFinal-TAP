@@ -240,7 +240,6 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
-
         for (HashMap.Entry<Integer, Rota> rotas : dicRota.entrySet()) {
             System.out.println(toStringR(rotas.getValue()));
         }

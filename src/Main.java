@@ -94,7 +94,7 @@ public class Main {
                             break;
                         case "7":
                             try {
-                                System.out.println("\nBilhetes efetivos: ");
+                                System.out.println("\nBilhetes efetivos por realizar: ");
                                 gP.listarBilheteEfetivos("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -102,7 +102,7 @@ public class Main {
                             break;
                         case "8":
                             try {
-                                System.out.println("\nBilhetes suplentes: ");
+                                System.out.println("\nBilhetes suplentes por realizar: ");
                                 gP.listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
                                 e.printStackTrace();
