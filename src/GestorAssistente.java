@@ -111,7 +111,7 @@ public class GestorAssistente {
         HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", voo.getIdVoo(), 1, rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);                         //lê os passageiros todos
         if (dicBilhete.isEmpty()) {                                                                     //se não existirem bilhetes diz que o voo não tem passageiros
-            System.out.println("\nO voo " + voo.getIdVoo() + " ainda não tem passageiros.");
+            System.out.println("\nO voo " + voo.getIdVoo() + " ainda não tem passageiros suplentes.");
         } else {
             for (HashMap.Entry<String, Bilhete> bilhete : dicBilhete.entrySet()) {                      //senão corre os bilhetes
                 if (dicPassageiro.get(bilhete.getKey()) == null) {                                      //vê se o passageiro existe no ficheiro dos passageiros
