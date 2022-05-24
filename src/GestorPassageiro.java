@@ -21,7 +21,7 @@ public class GestorPassageiro {
             System.out.print("\nQual é idPassageiro? Tem de inserir 9 números: ");
             idPassageiro = sc.next();
         } while (idPassageiro.length() != 9);
-        if(dicPassageiroId.containsKey(idPassageiro)) {
+        if(dicPassageiroId.containsKey(idPassageiro)) { //confirmar se já existe aquele id
             System.out.println("Este id já existe");
             menu = menuVoltar();
             switch (menu){
@@ -637,7 +637,7 @@ public class GestorPassageiro {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---MENU PASSAGEIRO--------------------------------#");
         System.out.println("|  (1) - Pretende continuar a criar passageiro?    |");
-        System.out.println("|  (2) - Voltar para o menu inicial?               |");
+        System.out.println("|  (2) - Voltar para o menu inicial                |");
         System.out.println("#--------------------------------------------------#");
         System.out.print("Escolha opção: ");
         op = sc.next();
