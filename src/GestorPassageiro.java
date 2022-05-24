@@ -13,17 +13,23 @@ public class GestorPassageiro {
     //1 - Registar-se como passageiro
     public String adicionarPassageiro() throws IOException {
         HashMap<String, Passageiro> dicPassageiroId = this.lerPassageiroTxt("passageiro.txt");
-        String idPassageiro = "", nome, profissao, morada, op, op2 = null;
-        int anoNascimento, mesNascimento, diaNascimento, idRota = 0;
+        String idPassageiro = "", nome, profissao, menu, morada= null;
+        int anoNascimento, mesNascimento, diaNascimento;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
         do { //eu quero que ele peça o NIF e este tem obrigatoriamente de ter 9 números
             System.out.print("\nQual é idPassageiro? Tem de inserir 9 números: ");
             idPassageiro = sc.next();
         } while (idPassageiro.length() != 9);
-        if (dicPassageiroId.containsKey(idPassageiro)) {
-            System.out.println("O id do Passageiro já existe!");
-            this.adicionarPassageiro();
+        if(dicPassageiroId.containsKey(idPassageiro)) {
+            System.out.println("Este id já existe");
+            menu = menuVoltar();
+            switch (menu){
+                case "1":
+                    adicionarPassageiro();
+                case  "2":
+                    Main.main(null);
+            }
         }else{
             System.out.print("Qual o nome? ");
             nome = sc.next();
@@ -251,7 +257,7 @@ public class GestorPassageiro {
         HashMap<Integer, Voo> dicVoo = lerVoosPorRota(idRotas, NomeFich);
         int cont = 0;
         if (dicVoo.isEmpty()) {
-            System.out.println("Erro! Não existem voos nesta rota.");
+            System.out.println("\nErro! Não existem voos nesta rota.");
         } else {
             for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
                 System.out.println(toStringV(voo.getValue()));
@@ -292,7 +298,7 @@ public class GestorPassageiro {
     public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 2);
         if (dicBilhete.isEmpty()) {
-            System.out.println("O passageiro " + idPassageiro + " não tem bilhetes suplentes.");
+            System.out.println("\nO passageiro " + idPassageiro + " não tem bilhetes suplentes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
@@ -626,24 +632,16 @@ public class GestorPassageiro {
     }
 
 
-    private String menu() {
+    private String menuVoltar() {
         String op;
-
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n#---MENU PASSAGEIRO------------------------#");
-        System.out.println("|  (1) - Comprar um bilhete efetivo          |");
-        System.out.println("|  (2) - Cancelar um bilhete efetivo         |");
-        System.out.println("|  (3) - Cancelar um bilhete suplente        |");
-        System.out.println("|  (4) - Listar rotas                        |");
-        System.out.println("|  (5) - Listar os voos de uma rota;         |");
-        System.out.println("|  (6) - Listar historial                    |");
-        System.out.println("|  (7) - Listar bilhetes efetivos            |");
-        System.out.println("|  (8) - Listar bilhetes suplentes           |");
-        System.out.println("|  (0) - Sair                                |");
-        System.out.println("#--------------------------------------------#");
+        System.out.println("\n#---MENU PASSAGEIRO--------------------------------#");
+        System.out.println("|  (1) - Pretende continuar a criar passageiro?    |");
+        System.out.println("|  (2) - Voltar para o menu inicial?               |");
+        System.out.println("#--------------------------------------------------#");
         System.out.print("Escolha opção: ");
         op = sc.next();
-
         return op;
     }
 }
+
