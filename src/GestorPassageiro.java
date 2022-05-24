@@ -403,7 +403,7 @@ public class GestorPassageiro {
     //usado no 2
     public void mostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
         for (HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()) {
-            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
+            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " | Km:" + Rota.getValue().getDistanciaKm());
         }
     }
 
@@ -412,7 +412,7 @@ public class GestorPassageiro {
         LocalTime tempo = null;
         for (HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()) {
             tempo = LocalTime.of(Voo.getValue().getHora(), Voo.getValue().getMinuto(), Voo.getValue().getSegundo());
-            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
+            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " | Hora: " + tempo);
         }
     }
 
