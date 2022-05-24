@@ -13,7 +13,7 @@ public class Main {
         if (menu.equals("1")) {
             /* ESCOLHER SE É PASSAGEITO OU ASSISTENTE DE BORDO */
             do {
-                System.out.println("\nQue tipo de pessoa é? 1-Passageiro; 2-Assistente de Bordo");
+                System.out.println("\nQue tipo de pessoa é?  1-Passageiro  2-Assistente de Bordo");
                 System.out.print("Escolha uma opção: ");
                 tipo = sc.nextInt();
             } while (tipo != 1 && tipo != 2);
