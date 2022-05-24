@@ -600,6 +600,7 @@ public class GestorPassageiro {
         while (linha != null) {
             String[] campos = linha.split(",");
             if ((idPassageiroFiltro == null || idPassageiroFiltro.equals(campos[0])) && (tipoBilheteFiltro == 0 || tipoBilheteFiltro == Integer.parseInt(campos[16]))) {
+                //se o passageiro estiver a null, mostra todos, senão mostra apenas o inserido E se tipoBilheteFiltro = 0, mostra todos senão mostra apenas daquele tipo (efetivo ou suplente)
                 idPassageiro = campos[0];
                 idRota = Integer.parseInt(campos[1]);
                 idVoo = Integer.parseInt(campos[2]);
