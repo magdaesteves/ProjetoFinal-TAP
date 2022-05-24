@@ -270,7 +270,7 @@ public class GestorPassageiro {
 
     //7- Listar o historial do passageiro (lista de viagens já realizadas)
     public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
-        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false);
+        HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false); //queremos os bilhetes do passado, daí o true no anterior
         if (dicBilhete.isEmpty()) {
             System.out.println("\nO passageiro " + idPassageiro + " ainda não tem bilhetes.");
         } else {
@@ -581,8 +581,8 @@ public class GestorPassageiro {
         HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt",IdVoo,IdRota);
         String resposta="";
         for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
-            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora: " + voo.getValue().getHora() +
-                    ":" + voo.getValue().getMinuto() + ":" + voo.getValue().getSegundo() + "\nMarca do Avião: " + voo.getValue().getMarcaAviao();
+            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora do Voo: " + voo.getValue().getHora() +
+                    "h " + voo.getValue().getMinuto() + "m " + voo.getValue().getSegundo() + "s\nMarca do Avião: " + voo.getValue().getMarcaAviao();
         }
         return resposta;
     }
