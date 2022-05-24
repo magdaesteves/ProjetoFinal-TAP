@@ -211,8 +211,8 @@ public class GestorAssistente {
 
     //usado no 2
     private String toStringV(Voo value) {
-        return "\nId Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora Voo: " + value.getHora() + "\nMinuto Voo: " +
-                value.getMinuto() + "\nSegundo Voo: " + value.getSegundo() + "\nMarca Avião: " + value.getMarcaAviao();
+        return "Id Voo: " + value.getIdVoo() + "\nId Rota: " + value.getIdRota() + "\nDia Semana: " + value.getDiaSemana() + "\nHora do Voo: " + value.getHora() + "h " +
+                value.getMinuto() + "m " + value.getSegundo() + "s\nMarca Avião: " + value.getMarcaAviao() + "\n";
     }
 
     //Usado no 2 no 4
