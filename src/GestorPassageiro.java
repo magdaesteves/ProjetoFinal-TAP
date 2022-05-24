@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,7 +13,10 @@ import java.util.*;
 public class GestorPassageiro {
     //1 - Registar-se como passageiro
     public String adicionarPassageiro() throws IOException {
+        HashMap<String, Passageiro> dicPassageiroid = lerPassageiroTxt("passageiro.txt");
         String idPassageiro = "", nome, profissao, morada, op, op2 = null;
+
+
         int anoNascimento, mesNascimento, diaNascimento, idRota = 0;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
@@ -20,22 +24,29 @@ public class GestorPassageiro {
             System.out.print("\nQual é idPassageiro? Tem de inserir 9 números: ");
             idPassageiro = sc.next();
         } while (idPassageiro.length() != 9);
-        System.out.print("Qual o nome? ");
-        nome = sc.next();
-        System.out.print("Qual é a profissão? ");
-        profissao = sc.next();
-        System.out.print("Qual é a morada? ");
-        morada = sc.next();
-        System.out.print("Qual é o ano de nascimento? ");
-        anoNascimento = sc1.nextInt();
-        System.out.print("Qual é o mês de nascimento (número)? ");
-        mesNascimento = sc1.nextInt();
-        System.out.print("Qual é a dia de nascimento? ");
-        diaNascimento = sc1.nextInt();
-        Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
-        criarPassageiro(A);
-        return idPassageiro;
-    }
+        if (dicPassageiroid.containsKey(idPassageiro)) {
+            System.out.println("O Nif ja existe");
+            adicionarPassageiro();
+        } else {
+            System.out.print("Qual o nome? ");
+            nome = sc.next();
+            System.out.print("Qual é a profissão? ");
+            profissao = sc.next();
+            System.out.print("Qual é a morada? ");
+            morada = sc.next();
+            System.out.print("Qual é o ano de nascimento? ");
+            anoNascimento = sc1.nextInt();
+            System.out.print("Qual é o mês de nascimento (número)? ");
+            mesNascimento = sc1.nextInt();
+            System.out.print("Qual é a dia de nascimento? ");
+            diaNascimento = sc1.nextInt();
+
+            Passageiro A = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
+            criarPassageiro(A);
+        }
+            return idPassageiro;
+        }
+
 
     public void criarPassageiro(Passageiro Passageiro) throws IOException { //esta função vai escrever no txt do passageiro
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter("passageiro.txt", true));
@@ -318,6 +329,34 @@ public class GestorPassageiro {
             linha = f.readLine();
         }
         f.close();
+        return dicPassageiro;
+    }
+    //comparar id para ver se já existe
+    public HashMap<String, Passageiro> lerPassageiroTxtid(String NomeFich ,String idpassageiro) throws IOException {
+        HashMap<String, Passageiro> dicPassageiro = new HashMap<>();
+        int anoNascimento, mesNascimento, diaNascimento;
+        String idPassageiro = null, nome, profissao, morada;
+        BufferedReader f = new BufferedReader(new FileReader(new File(NomeFich)));
+        String linha = f.readLine();
+        String[] campos = new String[0];
+        while (linha != null) {
+            campos = linha.split(",");
+            idPassageiro = campos[0];
+            nome = campos[1];
+            profissao = campos[2];
+            morada = campos[3];
+            anoNascimento = Integer.parseInt(campos[4]);
+            mesNascimento = Integer.parseInt(campos[5]);
+            diaNascimento = Integer.parseInt(campos[6]);
+            Passageiro p = new Passageiro(idPassageiro, nome, profissao, morada, anoNascimento, mesNascimento, diaNascimento);
+            dicPassageiro.put(idPassageiro, p);
+            linha = f.readLine();
+        }
+        f.close();
+        if (idpassageiro.equals(campos[0])) {
+            System.out.println("Nif ja existe");
+
+        }
         return dicPassageiro;
     }
 
