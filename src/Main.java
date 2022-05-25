@@ -9,7 +9,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String operacao, menu, idPassageiro = "";
         int tipo, idRota;
-        menu = menuInicio();
+        do {
+            menu = menuInicio();
+        }while(!menu.equals("1"));
         if (menu.equals("1")) {
             /* ESCOLHER SE É PASSAGEITO OU ASSISTENTE DE BORDO */
             do {
