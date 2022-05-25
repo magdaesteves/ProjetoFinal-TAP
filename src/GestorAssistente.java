@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class GestorAssistente {
     //1 - Listar Rotas
-    public void lerRotaTxt(String NomeFich) throws IOException {
+    public void listarRotasTxt(String NomeFich) throws IOException {
         HashMap<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
@@ -73,7 +73,7 @@ public class GestorAssistente {
 
 
     //3 - Listar todos os passageiros (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxt(String NomeFich) throws IOException {
+    public void listarPassageiros(String NomeFich) throws IOException {
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);
         if (dicPassageiro.isEmpty()) {
             System.out.println("Não existem passageiros.");
@@ -86,7 +86,7 @@ public class GestorAssistente {
 
 
     //4 - Listar os passageiros de um voo (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxtPorVoo(String NomeFich) throws IOException {
+    public void listarPassageirosPorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
         Rota rota = escolherRota();
@@ -111,7 +111,7 @@ public class GestorAssistente {
         HashMap<String, Bilhete> dicBilhete = lerBilheteTxt("bilhetes.txt", voo.getIdVoo(), 1, rota.getIdRota(), ano, mes, dia); //lê os bilhetes com o filtro do id do voo
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);                         //lê os passageiros todos
         if (dicBilhete.isEmpty()) {                                                                     //se não existirem bilhetes diz que o voo não tem passageiros
-            System.out.println("\nO voo " + voo.getIdVoo() + " ainda não tem passageiros.");
+            System.out.println("\nO voo " + voo.getIdVoo() + " ainda não tem passageiros suplentes.");
         } else {
             for (HashMap.Entry<String, Bilhete> bilhete : dicBilhete.entrySet()) {                      //senão corre os bilhetes
                 if (dicPassageiro.get(bilhete.getKey()) == null) {                                      //vê se o passageiro existe no ficheiro dos passageiros
@@ -125,7 +125,7 @@ public class GestorAssistente {
 
 
     //5 - Listar os passageiros suplentes de um voo (o nome e o ID do passageiro)
-    public void lerPassageiroSuplenteNomeIdTxtPorVoo(String NomeFich) throws IOException {
+    public void lerPassageiroSuplentePorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
         Rota Rota = escolherRota();
@@ -164,10 +164,10 @@ public class GestorAssistente {
 
 
     //6 - Listar o historial de um passageiro (lista de viagens já realizadas)
-    public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
+    public void listarHistorialBilhetes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilheteDePassageiro(NomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
-            System.out.println("O passageiro " + idPassageiro + " ainda não tem bilhetes.");
+            System.out.println("\nO passageiro " + idPassageiro + " não tem histórico de bilhetes.");
         } else {
             for (HashMap.Entry<Integer, Bilhete> bilhete : dicBilhete.entrySet()) {
                 System.out.println(toStringX(bilhete.getValue().getIdRota(),bilhete.getValue().getIdVoo()));
@@ -368,7 +368,7 @@ public class GestorAssistente {
     //usado no 4 e no 5
     public void mostrarRota(HashMap<Integer, Rota> dicRota) throws IOException {
         for (HashMap.Entry<Integer, Rota> Rota : dicRota.entrySet()) {
-            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " " + Rota.getValue().getDistanciaKm());
+            System.out.println(Rota.getKey() + ": Destino: " + Rota.getValue().getDestino() + " | Km:" + Rota.getValue().getDistanciaKm());
         }
     }
 
@@ -377,7 +377,7 @@ public class GestorAssistente {
         LocalTime tempo = null;
         for (HashMap.Entry<Integer, Voo> Voo : dicVoo.entrySet()) {
             tempo = LocalTime.of(Voo.getValue().getHora(), Voo.getValue().getMinuto(), Voo.getValue().getSegundo());
-            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " " + tempo);
+            System.out.println(Voo.getKey() + ": Dia da semana: " + Voo.getValue().getDiaSemana() + " | Hora: " + tempo);
         }
     }
 
@@ -458,8 +458,8 @@ public class GestorAssistente {
         HashMap<Integer, Voo> dicVoo = lerVooTxt("voos.txt",IdVoo,IdRota);
         String resposta="";
         for (HashMap.Entry<Integer, Voo> voo : dicVoo.entrySet()) {
-            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora: " +
-                    voo.getValue().getHora() + ":" + voo.getValue().getMinuto() + ":" + voo.getValue().getSegundo() + "\nMarca do Avião: " + voo.getValue().getMarcaAviao();
+            resposta = "\nId Rota: " + voo.getValue().getIdRota() + "\nId Voo: " + voo.getValue().getIdVoo() + "\nDia da Semana: " + voo.getValue().getDiaSemana() + "\nHora do Voo: " +
+                    voo.getValue().getHora() + "h " + voo.getValue().getMinuto() + "m " + voo.getValue().getSegundo() + "s\nMarca do Avião: " + voo.getValue().getMarcaAviao();
         }
         return resposta;
     }
