@@ -21,8 +21,8 @@ public class GestorPassageiro {
             System.out.print("\nQual é idPassageiro? Tem de inserir 9 números: ");
             idPassageiro = sc.next();
         } while (idPassageiro.length() != 9);
-        if(dicPassageiroId.containsKey(idPassageiro)) { //confirmar se já existe aquele id
-            System.out.println("Este id já existe");
+        if(dicPassageiroId.containsKey(idPassageiro)||!idPassageiro.matches(("[0-9]*"))) { //confirmar se já existe aquele id
+            System.out.println("\nErro! Este id já existe ou então está a inserir letras ou símbolos");
             menu = menuVoltar();
             switch (menu){
                 case "1":
