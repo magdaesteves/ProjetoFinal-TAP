@@ -8,7 +8,6 @@ public class Passageiro {
     private int anoNascimento;
     private int mesNascimento;
     private int diaNascimento;
-    private ArrayList<Bilhete> bilhetes;
 
     public Passageiro(String idPassageiro, String nome, String profissao, String morada, int anoNascimento, int mesNascimento, int diaNascimento) {
         this.idPassageiro = idPassageiro;
@@ -18,12 +17,6 @@ public class Passageiro {
         this.anoNascimento = anoNascimento;
         this.mesNascimento = mesNascimento;
         this.diaNascimento = diaNascimento;
-        bilhetes = new ArrayList<Bilhete>();
-    }
-
-    public Passageiro(String idPassageiro, String nome) {
-        this.idPassageiro = idPassageiro;
-        this.nome = nome;
     }
 
     public String getIdPassageiro() {return idPassageiro;}
@@ -45,7 +38,4 @@ public class Passageiro {
 
     public int getDia() {return diaNascimento;}
     public void setDia(int diaNascimento) {this.diaNascimento = diaNascimento;}
-
-    public ArrayList<Bilhete> getBilhetes() {return bilhetes;}
-    public void setBilhetes(ArrayList<Bilhete> bilhetes) {this.bilhetes = bilhetes;}
 }
