@@ -30,7 +30,8 @@ public class Main {
                     try {
                         idPassageiro = gP.adicionarPassageiro();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                        //e.printStackTrace();
                     }
                 } else {
                     boolean passageiroExiste = false;
@@ -38,7 +39,8 @@ public class Main {
                     try {
                         dicPassageiros = gP.lerPassageiroTxt("passageiro.txt");
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                        //e.printStackTrace();
                     }
                     while (!passageiroExiste) {
                         System.out.print("\nInsira um id: ");
@@ -53,21 +55,24 @@ public class Main {
                             try {
                                 gP.comprarBilheteEfetivo(idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "2":
                             try {
                                 gP.cancelarBilheteEfetivo(idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "3":
                             try {
                                 gP.cancelarBilheteSuplente(idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "4":
@@ -75,7 +80,8 @@ public class Main {
                                 System.out.println("\nRotas: ");
                                 gP.listarRotasTxt("rotas.txt");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "5":
@@ -84,7 +90,8 @@ public class Main {
                                 idRota = sc.nextInt();
                                 gP.listarVoosPorRota("voos.txt", idRota);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "6":
@@ -92,7 +99,8 @@ public class Main {
                                 System.out.println("\nHistorial: ");
                                 gP.listarHistorialBilhetes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "7":
@@ -100,7 +108,8 @@ public class Main {
                                 System.out.println("\nBilhetes efetivos por realizar: ");
                                 gP.listarBilheteEfetivos("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "8":
@@ -108,7 +117,8 @@ public class Main {
                                 System.out.println("\nBilhetes suplentes por realizar: ");
                                 gP.listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                     }
@@ -122,7 +132,8 @@ public class Main {
                             try {
                                 gA.listarRotasTxt("rotas.txt");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "2":
@@ -131,28 +142,32 @@ public class Main {
                                 idRota = sc.nextInt();
                                 gA.listarVoosPorRota("voos.txt", idRota);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "3":
                             try {
                                 gA.listarPassageiros("passageiro.txt");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "4":
                             try {
                                 gA.listarPassageirosPorVoo("passageiro.txt");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "5":
                             try {
                                 gA.lerPassageiroSuplentePorVoo("passageiro.txt");
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "6":
@@ -161,7 +176,8 @@ public class Main {
                                 idPassageiro = sc.next();
                                 gA.listarHistorialBilhetes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "7":
@@ -170,7 +186,8 @@ public class Main {
                                 idPassageiro = sc.next();
                                 gA.listarBilheteEfetivos("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                         case "8":
@@ -180,7 +197,8 @@ public class Main {
                                 idPassageiro = sc.next();
                                 gA.listarBilheteSuplentes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("\nDe momento não foi possível atender ao seu pedido");
+                                //e.printStackTrace();
                             }
                             break;
                     }
