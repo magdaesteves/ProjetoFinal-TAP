@@ -295,7 +295,7 @@ public class GestorPassageiro {
 
 
     //9 - Listar os bilhetes suplentes do passageiro (lista de voos em espera)
-    public void listarBilheteSuplentes(String NomeFich, String idPassageiro) throws IOException {
+    public void listarBilhetesSuplentes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroEfetivoOuSuplente(NomeFich, idPassageiro, 2);
         if (dicBilhete.isEmpty()) {
             System.out.println("\nO passageiro " + idPassageiro + " não tem bilhetes suplentes.");

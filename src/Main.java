@@ -115,7 +115,7 @@ public class Main {
                         case "8":
                             try {
                                 System.out.println("\nBilhetes suplentes por realizar: ");
-                                gP.listarBilheteSuplentes("bilhetes.txt", idPassageiro);
+                                gP.listarBilhetesSuplentes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
                                 System.out.println("\nDe momento não foi possível atender ao seu pedido");
                                 //e.printStackTrace();
