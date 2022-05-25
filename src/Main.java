@@ -20,9 +20,12 @@ public class Main {
 
             /* MENU DO PASSAGEIRO */
             if (tipo == 1) {
-                System.out.println("\n1-Criar novo  2-Existe");
-                System.out.print("Escolha uma opção: ");
-                tipo = sc.nextInt();
+                do{
+                    System.out.println("\n1-Criar novo  2-Existe");
+                    System.out.print("Escolha uma opção: ");
+                    tipo = sc.nextInt();
+                }while(tipo != 1 && tipo != 2);
+
                 if (tipo == 1) {
                     try {
                         idPassageiro = gP.adicionarPassageiro();
@@ -186,7 +189,7 @@ public class Main {
         }
     }
 
-    private static String menuInicio() {
+    public static String menuInicio() {
         String operacao;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n#---------------------------------------------------------------------#");
