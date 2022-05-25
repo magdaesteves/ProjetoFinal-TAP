@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class GestorAssistente {
     //1 - Listar Rotas
-    public void lerRotaTxt(String NomeFich) throws IOException {
+    public void listarRotasTxt(String NomeFich) throws IOException {
         HashMap<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
@@ -73,7 +73,7 @@ public class GestorAssistente {
 
 
     //3 - Listar todos os passageiros (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxt(String NomeFich) throws IOException {
+    public void listarPassageiros(String NomeFich) throws IOException {
         HashMap<String, Passageiro> dicPassageiro = lerPassageiroTxt(NomeFich);
         if (dicPassageiro.isEmpty()) {
             System.out.println("Não existem passageiros.");
@@ -86,7 +86,7 @@ public class GestorAssistente {
 
 
     //4 - Listar os passageiros de um voo (o nome e o ID do passageiro)
-    public void lerPassageiroNomeIdTxtPorVoo(String NomeFich) throws IOException {
+    public void listarPassageirosPorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
         Rota rota = escolherRota();
@@ -125,7 +125,7 @@ public class GestorAssistente {
 
 
     //5 - Listar os passageiros suplentes de um voo (o nome e o ID do passageiro)
-    public void lerPassageiroSuplenteNomeIdTxtPorVoo(String NomeFich) throws IOException {
+    public void lerPassageiroSuplentePorVoo(String NomeFich) throws IOException {
         Scanner sc = new Scanner(System.in);
         LocalDate VerificarData;
         Rota Rota = escolherRota();
@@ -164,7 +164,7 @@ public class GestorAssistente {
 
 
     //6 - Listar o historial de um passageiro (lista de viagens já realizadas)
-    public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
+    public void listarHistorialBilhetes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilheteDePassageiro(NomeFich, idPassageiro);
         if (dicBilhete.isEmpty()) {
             System.out.println("\nO passageiro " + idPassageiro + " não tem histórico de bilhetes.");

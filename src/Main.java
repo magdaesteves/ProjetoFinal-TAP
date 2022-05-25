@@ -70,7 +70,7 @@ public class Main {
                         case "4":
                             try {
                                 System.out.println("\nRotas: ");
-                                gP.lerRotaTxt("rotas.txt");
+                                gP.listarRotasTxt("rotas.txt");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -87,7 +87,7 @@ public class Main {
                         case "6":
                             try {
                                 System.out.println("\nHistorial: ");
-                                gP.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
+                                gP.listarHistorialBilhetes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -117,7 +117,7 @@ public class Main {
                     switch (operacao) {
                         case "1":
                             try {
-                                gA.lerRotaTxt("rotas.txt");
+                                gA.listarRotasTxt("rotas.txt");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -133,21 +133,21 @@ public class Main {
                             break;
                         case "3":
                             try {
-                                gA.lerPassageiroNomeIdTxt("passageiro.txt");
+                                gA.listarPassageiros("passageiro.txt");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                             break;
                         case "4":
                             try {
-                                gA.lerPassageiroNomeIdTxtPorVoo("passageiro.txt");
+                                gA.listarPassageirosPorVoo("passageiro.txt");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                             break;
                         case "5":
                             try {
-                                gA.lerPassageiroSuplenteNomeIdTxtPorVoo("passageiro.txt");
+                                gA.lerPassageiroSuplentePorVoo("passageiro.txt");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -156,7 +156,7 @@ public class Main {
                             try {
                                 System.out.print("\nQual o id do passageiro que pretende listar o historial de viagens: ");
                                 idPassageiro = sc.next();
-                                gA.lerBilheteTxtPorPassageiro("bilhetes.txt", idPassageiro);
+                                gA.listarHistorialBilhetes("bilhetes.txt", idPassageiro);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

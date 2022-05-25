@@ -228,7 +228,7 @@ public class GestorPassageiro {
 
 
     //5 - Listar as rotas
-    public void lerRotaTxt(String NomeFich) throws IOException {
+    public void listarRotasTxt(String NomeFich) throws IOException {
         HashMap<Integer, Rota> dicRota = new HashMap<>();
         int idRota, quantidadeVoos;
         String destino;
@@ -269,7 +269,7 @@ public class GestorPassageiro {
 
 
     //7- Listar o historial do passageiro (lista de viagens já realizadas)
-    public void lerBilheteTxtPorPassageiro(String NomeFich, String idPassageiro) throws IOException {
+    public void listarHistorialBilhetes(String NomeFich, String idPassageiro) throws IOException {
         HashMap<Integer, Bilhete> dicBilhete = lerBilhetePassageiroHistorial(NomeFich, idPassageiro, true, false); //queremos os bilhetes do passado, daí o true no anterior
         if (dicBilhete.isEmpty()) {
             System.out.println("\nO passageiro " + idPassageiro + " não tem histórico de bilhetes.");
